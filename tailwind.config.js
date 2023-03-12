@@ -2,7 +2,12 @@
 module.exports = {
     content: ["./src/**/*.{html,js,php}"],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                primary: ["Plus Jakarta Sans", "sans-serif"],
+                secondary: ["Cormorant Unicase", "serif"],
+            },
+        },
     },
     plugins: [],
 };
