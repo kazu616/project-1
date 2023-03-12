@@ -1,57 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Login Page</title>
-        <link rel="stylesheet" href="../../css/output.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="bg-body" style="background-color: #ffe6c9">
-        <div class="bg-white mx-10 my-10 flex rounded-[34px]">
-            <!-- khoi trai -->
-            <div>
-                <div>
-                    <img
-                        class="w-10 h-10 object-cover"
-                        src="../../img/login.png"
-                        alt=""
-                    />
-                    <h1>Turn your ideas into reality</h1>
-                    <p>Start shopping for free and get great booksaw deals</p>
-                </div>
+    <body>
+        <div
+            class="w-[1650px] h-[800px] relative overflow-hidden rounded-[34px] bg-white border-[10px] border-white transsform translate-x-[10%] translate-y-[10%]"
+            style="box-shadow: 0px 0px 45px 0 #e1c2a8"
+        >
+            <!-- LOGO -->
+            <div
+                class="absolute left-[1211px] top-[105px] text-left uppercase text-[#0a0a0a]"
+            >
+                <p>
+                    <span
+                        class="text-[36px] font-bold text-left uppercase text-[#0a0a0a]"
+                        >Book</span
+                    ><span
+                        class="text-[36px] font-light text-left uppercase text-[#0a0a0a]"
+                        >saw</span
+                    >
+                </p>
             </div>
-            <!-- khoi phai -->
-            <div>
-                <h1>BOOKSAW</h1>
-                <!-- tieu de nho -->
-                <div>
-                    <h1>Login to your Account</h1>
-                    <p>See what is going on with your business</p>
+            <!-- đăng ký footer -->
+            <div
+                class="flex justify-center items-center absolute left-[1362px] top-[980px] gap-2.5"
+            >
+                <p class="text-lg text-left text-[#828282]">
+                    Not Registered Yet?
+                </p>
+                <a href="" class="text-lg font-semibold text-left text-[#7f265b]">
+                    Create an account
+                </a>
+            </div>
+            <!-- khoi trong -->
+            <div class="w-[1000] h-[800px]">
+                <!-- khối ảnh -->
+                <div
+                    class="w-[1000px] h-[800px] absolute left-[-0.5px] top-[-0.5px] bg-[#ffe6c9]"
+                >
+                <img
+                src="../../img/backgound-1.png"
+                class="w-[502px] h-[530px] absolute left-[298.5px] top-[227.5px] object-cover"
+            /><img
+                src="../../img/rectangle.png"
+                class="w-[593.6px] h-[596.94px] absolute left-[262.77px] top-[178.77px] opacity-10 rounded-[100px] object-none"
+            />
                 </div>
-                <!-- nut google -->
-                <div>
-                    <img src="" />
-                    <p>Continue with Google</p>
+            
+                <!-- khối form-->
+                <div
+                    class="flex flex-col justify-center items-center absolute left-[1117px] top-[255px] gap-9"
+                >
+                    <!-- tiêu đề form -->
+                    <div class="flex flex-col justify-start items-start gap-8">
+                        <div
+                            class="flex flex-col justify-center items-start relative gap-[2px]"
+                        >
+                            <p
+                                class="text-2xl font-bold text-left text-neutral-600"
+                            >
+                                Login to your Account
+                            </p>
+                            <p class="text-base text-left text-neutral-600">
+                                See what is going on with your business
+                            </p>
+                        </div>
+                        <!-- nút google -->
+                        <button
+                            class="flex justify-center items-center w-[420px] relative gap-[13px] p-2.5 rounded-[5px] border border-[#e8e8e8]"
+                        >
+                            <span>
+                                <img
+                                    src="../../img/image-2.png"
+                                    class="w-[25px] h-[25px] rounded-[10px] object-cover"
+                                />
+                            </span>
+                            <span
+                                ><p
+                                    class="text-sm font-bold text-left text-[#828282]"
+                                >
+                                    Continue with Google
+                                </p></span
+                            >
+                        </button>
+                    </div>
+                    <p
+                        href=""
+                        class="text-xs font-semibold text-left text-[#ddd]"
+                    >
+                        ------------- or Sign in with Email -------------
+                    </p>
+
+                    <!-- form nhập -->
+                    <form class="flex flex-col justify-start items-start gap-8">
+                        <!-- khối email -->
+                        <div
+                            class="flex flex-col justify-start items-start gap-2"
+                        >
+                            <label for="emai"
+                                class="text-sm font-semibold text-left text-[#828282]"
+                            >
+                            Email
+                            </label>
+                            <input type="email" name="email" placeholder="abc@mail.com"
+                                    class="flex justify-start items-center w-[420px] relative gap-[13px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] "
+                                >
+                                </input>
+                        </div>
+                        <!-- khối password -->
+                        <div
+                            class="flex flex-col justify-start items-start gap-2"
+                        >
+                            <label for="passowrd"
+                                class="text-sm font-semibold text-left text-[#828282]"
+                            >
+                            Passowrd
+                            </label>
+                            <input type="password" name="password" placeholder="***************"
+                                    class="flex justify-start items-center w-[420px] relative gap-[13px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] "
+                                >
+                                </input>
+                        </div>
+                        <!-- nút -->
+                        <input type="submit"
+                            class="text-white w-[420px] relative gap-[13px] px-2.5 pt-[13px] pb-3 rounded-md bg-[#7f265b] cursor-pointer"
+                            name="login" value="Login"
+                        >
+                        </input>
+                    </form>
                 </div>
-                <form action="">
-                    <div>
-                        <label for="email">Username</label>
-                        <input type="text" name="email" />
-                    </div>
-                    <div>
-                        <label for="password">Password</label>
-                        <input type="password" name="password" />
-                    </div>
-                    <div>
-                        <input type="checkbox" name="remember" />
-                        <label for="remem">Remember Me</label>
-                        <a href="">Forgot Password?</a>
-                    </div>
-                    <button name="login">Login</button>
-                </form>
-                <label for="sign_up">Not Registered Yet?</label>
-                <a href="" name="sign_up">Create an account</a>
             </div>
         </div>
     </body>
