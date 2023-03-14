@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Preview</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-[#161E31]">
+        <div
+            class="w-[1920px] h-[1080px] relative overflow-hidden rounded-[34px] bg-white border-[10px] border-white mx-auto transform translate-y-[3.5%]"
+            style="box-shadow: 0px 0px 45px 0 #e1c2a8"
+        >
+            <!-- khoi form -->
+            <div
+                class="flex flex-col justify-center items-center w-[904px] h-[921.91px] absolute left-0 top-0 gap-9"
+            >
+                <!-- logo -->
+                <p class="text-[46px] text-left uppercase text-[#0a0a0a]">
+                    <span
+                        class="text-[46px] font-bold text-left uppercase text-[#0a0a0a]"
+                        >Book</span
+                    ><span
+                        class="text-[46px] font-light text-left uppercase text-[#0a0a0a]"
+                        >saw</span
+                    >
+                </p>
+
+                <div class="flex flex-col justify-start items-start gap-8">
+                    <div
+                        class="flex flex-col justify-center items-start relative gap-[3px]"
+                    >
+                        <p
+                            class="w-[422px] text-4xl font-bold text-center text-neutral-600"
+                        >
+                            Create an Account
+                        </p>
+                    </div>
+                    <!-- nút google -->
+                    <button
+                        class="flex justify-center items-center w-[420px] relative gap-[13px] p-2.5 rounded-[5px] border border-[#e8e8e8] text-sm font-bold text-left text-[#828282]"
+                    >
+                        <span
+                            ><img
+                                src="../../img/image-2.png"
+                                class="w-[25px] h-[25px] rounded-[10px] object-cover" /></span
+                        >Continue with Google
+                    </button>
+                </div>
+
+                <p class="text-xs font-semibold text-left text-[#ddd]">
+                    ------------- or Sign in with Email -------------
+                </p>
+                <div
+                    class="flex flex-col justify-start items-start h-[306px] gap-8"
+                >
+                    <div class="flex flex-col justify-start items-start gap-6">
+                        <!-- email -->
+                        <div
+                            class="flex flex-col justify-start items-start relative gap-1"
+                        >
+                            <label
+                                for="email_signup"
+                                class="text-sm font-semibold text-left text-[#828282]"
+                            >
+                                Email
+                            </label>
+                            <input
+                                type="text"
+                                name="email_signup"
+                                placeholder=" mail@abc.com"
+                                class="flex justify-start items-center w-[420px] relative gap-[13px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-sm text-left text-[#000000]"
+                            />
+                        </div>
+                        <!-- phone -->
+                        <div
+                            class="flex flex-col justify-start items-start relative gap-1"
+                        >
+                            <label
+                                for="phone_signup"
+                                class="text-sm font-semibold text-left text-[#828282]"
+                            >
+                                Phone Number
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="+84"
+                                name="phone_signup"
+                                class="flex justify-start items-center w-[420px] relative gap-[13px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-sm text-left text-black"
+                            />
+                        </div>
+                        <!-- password -->
+                        <div
+                            class="flex flex-col justify-start items-start relative gap-1"
+                        >
+                            <label
+                                for="password_signup"
+                                class="text-sm font-semibold text-left text-[#828282]"
+                            >
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                placeholder="******************"
+                                name="password_signup"
+                                class="flex justify-start items-center w-[420px] relative gap-[13px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-sm text-left text-black"
+                            />
+                        </div>
+                        <!-- password again -->
+                        <div
+                            class="flex flex-col justify-start items-start relative gap-1"
+                        >
+                            <label
+                                for="password_signup_check"
+                                class="text-sm font-semibold text-left text-[#828282]"
+                            >
+                                Enter The Password
+                            </label>
+                            <input
+                                type="password"
+                                placeholder="******************"
+                                name="password_signup_check"
+                                class="flex justify-start items-center w-[420px] relative gap-[13px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-sm text-left text-black"
+                            />
+                        </div>
+                    </div>
+                    <!-- btn -->
+                    <input
+                        name="signup"
+                        type="submit"
+                        class="flex justify-center items-center w-[420px] relative gap-[13px] px-2.5 pt-[13px] pb-3 rounded-md bg-[#7f265b] text-lg font-bold text-white cursor-pointer hover:bg-black"
+                        value="Sign Up"
+                    />
+                </div>
+            </div>
+            <!-- footer -->
+            <div class="w-[904px] h-[1029.2px]">
+                <label
+                    class="absolute left-[298px] top-[1003px] text-lg text-left text-[#828282]"
+                >
+                    You have a account?
+                </label>
+                <a
+                    href=""
+                    class="w-[111px] h-[26.2px] absolute left-[463px] top-[1003px] text-lg font-semibold text-left text-[#7f265b]"
+                >
+                    Sing in here
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
