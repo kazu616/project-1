@@ -12,8 +12,8 @@
 </head>
 
 <body>
-  <?php include '../layouts/header1.php' ?>
-  <?php include '../layouts/header2.php' ?>
+  <?php require_once '../layouts/header1.php' ?>
+  <?php require_once '../layouts/header2.php' ?>
   <div class="mt-10 swiper mySwiper">
     <div class="swiper-wrapper">
       <?php for ($i = 1; $i <= 5; $i++) { ?>
@@ -31,29 +31,112 @@
         </div>
       <?php } ?>
     </div>
-    <div class="swiper-button-next1 right-16">
+    <div class="swiper-button-next1 py-[18px] rounded-full border border-[#797676] top-1/2 -translate-y-1/2 px-3 right-16 flex justify-center items-center cursor-pointer z-10 absolute">
       <svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20.1324 0.445312L18.4832 1.88002L23.4999 6.14724H0V8.14127H23.4999L18.4843 12.4095L20.1324 13.8432L28 7.14425L20.1324 0.445312Z" fill="#333333" />
       </svg>
     </div>
-    <div class="swiper-button-prev1 left-16">
+    <div class="swiper-button-prev1 py-[18px] rounded-full border border-[#797676] top-1/2 -translate-y-1/2 px-3 left-16 flex justify-center items-center cursor-pointer z-10 absolute">
       <svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7.8705 0.445312L0 7.14425L7.8705 13.8432L9.51721 12.4095L4.50328 8.14127H28V6.14724H4.50211L9.51721 1.87902L7.8705 0.445312Z" fill="#333333" />
       </svg>
     </div>
-    <div class="swiper-pagination"></div>
+    <div class="swiper-pagination !-translate-x-[440px]"></div>
   </div>
-  <div class="mt-20"></div>
-  <div class="bg-[#EDEBE4] w-full min-h-[200px] flex justify-center items-center">
+  <div class="bg-[#EDEBE4] w-full min-h-[150px] flex justify-center items-center mt-20">
     <div class="container flex items-center gap-x-[80px] justify-center">
-      <img src="../../../public/imgs/associate1.png" class="w-[225px] object-cover" alt="">
-      <img src="../../../public/imgs/associate2.png" class="w-[225px] object-cover" alt="">
-      <img src="../../../public/imgs/associate3.png" class="w-[225px] object-cover" alt="">
-      <img src="../../../public/imgs/associate4.png" class="w-[225px] object-cover" alt="">
-      <img src="../../../public/imgs/associate5.png" class="w-[225px] object-cover" alt="">
+      <img src="../../../public/imgs/associate1.png" class="w-[150px] object-cover" alt="">
+      <img src="../../../public/imgs/associate2.png" class="w-[150px] object-cover" alt="">
+      <img src="../../../public/imgs/associate3.png" class="w-[150px] object-cover" alt="">
+      <img src="../../../public/imgs/associate4.png" class="w-[150px] object-cover" alt="">
+      <img src="../../../public/imgs/associate5.png" class="w-[150px] object-cover" alt="">
     </div>
   </div>
-  <div class="mt-40"></div>
+  <div class="mt-36"></div>
+  <div class="container">
+    <div class="flex items-end mb-14 gap-x-20">
+      <div class="line w-[400px] h-[1px] bg-[#E0E0E0] -translate-y-5"></div>
+      <div class="flex flex-col items-center gap-y-2">
+        <span class="font-medium text-[#7A7A7A]">Some quality items</span>
+        <h2 class="text-5xl font-secondary">Featured Books</h2>
+      </div>
+      <div class="line w-[400px] h-[1px] bg-[#E0E0E0] -translate-y-5"></div>
+    </div>
+    <div class="w-full swiper slider-product">
+      <div class="swiper-wrapper">
+        <?php for ($i = 1; $i <= 8; $i++) { ?>
+          <div class="swiper-slide min-h-[466px]">
+            <div class="group px-5 py-3 bg-[#EFEEE8] relative">
+              <img src="../../../public/imgs/bookdemo.png" alt="">
+              <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
+            </div>
+            <div class="text-center">
+              <h4 class="text-[#74642F] text-[22px]">Simple way of piece life</h4>
+              <p class="text-[#888888] text-sm mb-3">Armor Ramsey</p>
+              <span class="text-[#74642F] text-lg">$ 40.00</span>
+            </div>
+          </div><?php  } ?>
+      </div>
+      <div class="mt-10">
+        <div class="swiper-pagination"></div>
+        <a href="#" class="z-10 float-right translate-y-[-7px] hover:text-[#74642F] hover:underline">View all products</a>
+      </div>
+    </div>
+  </div>
+  <div class="mt-20"></div>
+  <div class="flex items-center justify-center gap-x-[100px] bg-[#EDEBE4] py-[100px]">
+    <img src="../../../public/imgs/best-selling.png" class="h-[550px]" alt="">
+    <div class="max-w-[450px]">
+      <div class="flex flex-col mb-[34px]">
+        <h1 class="text-[48px] capitalize font-secondary">Best selling book</h1>
+        <span class="text-[#888888] text-sm">By Timbur Hood</span>
+      </div>
+      <div class="mb-10">
+        <h2 class="text-2xl font-secondary">Birds gonna be happy</h2>
+        <span class="text-[#7A7A7A] text-sm mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</span>
+        <p class="flex items-center mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span class="text-[#74642F] text-4xl">$ 45.00</span></p>
+      </div>
+      <div>
+        <button class="px-5 min-w-[150px] py-3 border border-[#a50000] text-[#a50000] bg-white rounded-xl">Add To Cart</button>
+        <button class="px-5 min-w-[150px] py-3 border border-white text-white bg-[#a50000] rounded-xl">Buy Now</button>
+      </div>
+    </div>
+  </div>
+  <div class="mt-16"></div>
+  <div class="container">
+    <div class="flex items-end mb-14 gap-x-20">
+      <div class="line w-[400px] h-[1px] bg-[#E0E0E0] -translate-y-5"></div>
+      <div class="flex flex-col items-center gap-y-2">
+        <span class="font-medium text-[#7A7A7A]">Some quality items</span>
+        <h2 class="text-5xl font-secondary">Popular Books</h2>
+      </div>
+      <div class="line w-[400px] h-[1px] bg-[#E0E0E0] -translate-y-5"></div>
+    </div>
+    <div class="flex justify-center w-full">
+      <ul class="flex gap-x-[40px] font-semibold mx-auto text-[#999999]">
+        <li class="text-[#111111] pb-1 border-b-[3px] px-1 border-b-[#9A884C] ">All Genre</li>
+        <li>Business</li>
+        <li>Techlogogy</li>
+        <li>Adventure</li>
+        <li>Romantic</li>
+        <li>Fictional</li>
+      </ul>
+    </div>
+    <div class="grid grid-cols-4 gap-10 mt-10">
+      <?php for ($i = 1; $i <= 8; $i++) { ?>
+        <div class="swiper-slide min-h-[466px]">
+          <div class="group px-5 py-3 bg-[#EFEEE8] relative">
+            <img src="../../../public/imgs/bookdemo.png" alt="">
+            <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
+          </div>
+          <div class="text-center">
+            <h4 class="text-[#74642F] text-[22px]">Simple way of piece life</h4>
+            <p class="text-[#888888] text-sm mb-3">Armor Ramsey</p>
+            <span class="text-[#74642F] text-lg">$ 40.00</span>
+          </div>
+        </div><?php  } ?>
+    </div>
+  </div>
   <?php include '../layouts/footer.php' ?>
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <script>
@@ -75,6 +158,17 @@
       },
       // disableOnInteraction: false
       // pauseOnMouseEnter: true
+    });
+    const swiper = new Swiper(".slider-product", {
+      slidesPerView: 4,
+      spaceBetween: 50,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        dynamicBullets: true,
+        dynamicMainBullets: 4
+      },
     });
   </script>
 </body>
