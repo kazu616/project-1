@@ -681,6 +681,10 @@ body {
   top: 784px;
 }
 
+.top-\[115px\] {
+  top: 115px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1365,6 +1369,10 @@ body {
   text-align: center;
 }
 
+.text-start {
+  text-align: start;
+}
+
 .font-secondary {
   font-family: Cormorant Unicase, serif;
 }
@@ -1570,6 +1578,10 @@ body {
 
 .duration-200 {
   transition-duration: 200ms;
+}
+
+.duration-150 {
+  transition-duration: 150ms;
 }
 
 .ease-in {
