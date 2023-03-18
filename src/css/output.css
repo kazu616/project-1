@@ -425,6 +425,7 @@ body {
   box-sizing: border-box;
   background: #f3f2ec;
   font-family: "Plus Jakarta Sans", sans-serif;
+  color: #111111;
 }
 
 .container {
@@ -564,12 +565,20 @@ body {
   visibility: hidden;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
 
 .relative {
   position: relative;
+}
+
+.bottom-0 {
+  bottom: 0px;
 }
 
 .bottom-20 {
@@ -626,6 +635,10 @@ body {
 
 .right-16 {
   right: 4rem;
+}
+
+.right-2 {
+  right: 0.5rem;
 }
 
 .top-0 {
@@ -689,6 +702,10 @@ body {
   margin-bottom: 3.5rem;
 }
 
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
 .mb-3 {
   margin-bottom: 0.75rem;
 }
@@ -697,12 +714,24 @@ body {
   margin-bottom: 1rem;
 }
 
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
 .mb-\[34px\] {
   margin-bottom: 34px;
 }
 
+.mb-\[40px\] {
+  margin-bottom: 40px;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
 }
 
 .mt-16 {
@@ -731,6 +760,10 @@ body {
 
 .flex {
   display: flex;
+}
+
+.table {
+  display: table;
 }
 
 .grid {
@@ -789,12 +822,12 @@ body {
   min-height: 150px;
 }
 
-.min-h-\[466px\] {
-  min-height: 466px;
+.min-h-\[400px\] {
+  min-height: 400px;
 }
 
-.min-h-\[500px\] {
-  min-height: 500px;
+.min-h-\[466px\] {
+  min-height: 466px;
 }
 
 .w-\[111px\] {
@@ -865,8 +898,20 @@ body {
   min-width: 150px;
 }
 
+.max-w-\[330px\] {
+  max-width: 330px;
+}
+
 .max-w-\[450px\] {
   max-width: 450px;
+}
+
+.max-w-\[550px\] {
+  max-width: 550px;
+}
+
+.max-w-\[736px\] {
+  max-width: 736px;
 }
 
 .flex-1 {
@@ -998,6 +1043,11 @@ body {
        column-gap: 5rem;
 }
 
+.gap-x-48 {
+  -moz-column-gap: 12rem;
+       column-gap: 12rem;
+}
+
 .gap-x-5 {
   -moz-column-gap: 1.25rem;
        column-gap: 1.25rem;
@@ -1100,6 +1150,11 @@ body {
 
 .border-b-\[3px\] {
   border-bottom-width: 3px;
+}
+
+.border-\[\#6F6F6F\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(111 111 111 / var(--tw-border-opacity));
 }
 
 .border-\[\#797676\] {
@@ -1282,12 +1337,20 @@ body {
   padding-bottom: 2.5rem;
 }
 
+.pb-16 {
+  padding-bottom: 4rem;
+}
+
 .pb-3 {
   padding-bottom: 0.75rem;
 }
 
-.pt-52 {
-  padding-top: 13rem;
+.pr-16 {
+  padding-right: 4rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .pt-\[13px\] {
@@ -1374,6 +1437,11 @@ body {
   line-height: 1.25rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1401,6 +1469,10 @@ body {
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.leading-\[60px\] {
+  line-height: 60px;
 }
 
 .text-\[\#000000\] {
@@ -1489,6 +1561,11 @@ body {
 
 .opacity-40 {
   opacity: 0.4;
+}
+
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .duration-200 {

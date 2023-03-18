@@ -12,6 +12,7 @@
     box-sizing: border-box;
     background: #f3f2ec;
     font-family: "Plus Jakarta Sans", sans-serif;
+    color: #111111;
   }
   .container {
     max-width: 1280px !important;
