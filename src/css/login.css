@@ -1,0 +1,74 @@
+.auth {
+  width: 448px;
+  padding: 48px 36px 28px 36px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.form-login .form-field input {
+  min-width: 100%;
+}
+.form-input:not(:placeholder-shown) + .form-label,
+.form-input:focus + .form-label {
+  background: #fff;
+}
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auth .text h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.auth .logo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.auth .text p {
+  font-size: 0.87rem;
+  font-weight: 400;
+  letter-spacing: 0.15px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.form-login button {
+  padding: 10px 20px;
+  outline: none;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  background: #9155fd;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+footer {
+  z-index: -1;
+  height: 40%;
+  background: #eff0f5;
+  position: relative;
+}
+
+footer img {
+  position: absolute;
+}
+footer img:first-child {
+  left: 0;
+  top: -50px;
+}
+footer img:last-child {
+  right: 0;
+  top: -100px;
+}

@@ -1,6 +1,6 @@
-<footer class="min-h-[500px]">
-  <div class=" border-b border-[#E0E0E0]">
-    <div class="container flex gap-x-[300px] pb-10 pt-52">
+<footer>
+  <div class=" border-b border-[#E0E0E0] pt-20">
+    <div class="container flex gap-x-[300px] pb-10">
       <h1 class="text-3xl uppercase font-secondary">
         <span class="font-semibold">Book</span>
         <span>Saw</span>
@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div class="container mt-4">
+  <div class="container mt-4 mb-4">
     <p>© 2021 Templates Jungle. All rights reserved.</p>
   </div>
 </footer>
