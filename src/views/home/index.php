@@ -25,7 +25,7 @@
               <button class="px-5 py-3 uppercase bg-transparent border border-[#C0C0C0]">Read More</button>
             </div>
             <div>
-              <img src="../public/imgs/book.png" class="w-[300px]" alt="">
+              <img src="imgs/book.png" class="w-[300px]" alt="">
             </div>
           </div>
         </div>
@@ -45,11 +45,11 @@
   </div>
   <div class="bg-[#EDEBE4] w-full min-h-[150px] flex justify-center items-center mt-20">
     <div class="container flex items-center gap-x-[80px] justify-center">
-      <img src="../public/imgs/associate1.png" class="w-[150px] object-cover" alt="">
-      <img src="../public/imgs/associate2.png" class="w-[150px] object-cover" alt="">
-      <img src="../public/imgs/associate3.png" class="w-[150px] object-cover" alt="">
-      <img src="../public/imgs/associate4.png" class="w-[150px] object-cover" alt="">
-      <img src="../public/imgs/associate5.png" class="w-[150px] object-cover" alt="">
+      <img src="imgs/associate1.png" class="w-[150px] object-cover" alt="">
+      <img src="imgs/associate2.png" class="w-[150px] object-cover" alt="">
+      <img src="imgs/associate3.png" class="w-[150px] object-cover" alt="">
+      <img src="imgs/associate4.png" class="w-[150px] object-cover" alt="">
+      <img src="imgs/associate5.png" class="w-[150px] object-cover" alt="">
     </div>
   </div>
   <div class="mt-36"></div>
@@ -67,7 +67,7 @@
         <?php for ($i = 1; $i <= 8; $i++) { ?>
           <div class="swiper-slide min-h-[466px]">
             <div class="group px-5 py-3 bg-[#EFEEE8] relative">
-              <img src="../public/imgs/bookdemo.png" alt="">
+              <img src="imgs/bookdemo.png" alt="">
               <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
             </div>
             <div class="text-center">
@@ -85,7 +85,7 @@
   </div>
   <div class="mt-20"></div>
   <div class="flex items-center justify-center gap-x-[100px] bg-[#EDEBE4] py-[100px]">
-    <img src="../public/imgs/best-selling.png" class="h-[550px]" alt="">
+    <img src="imgs/best-selling.png" class="h-[550px]" alt="">
     <div class="max-w-[450px]">
       <div class="flex flex-col mb-[34px]">
         <h1 class="text-[48px] capitalize font-secondary">Best selling book</h1>
@@ -126,7 +126,7 @@
       <?php for ($i = 1; $i <= 8; $i++) { ?>
         <div class="swiper-slide min-h-[466px]">
           <div class="group px-5 py-3 bg-[#EFEEE8] relative">
-            <img src="../public/imgs/bookdemo.png" alt="">
+            <img src="imgs/bookdemo.png" alt="">
             <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
           </div>
           <div class="text-center">

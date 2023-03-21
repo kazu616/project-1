@@ -83,15 +83,15 @@
             </div>
           </div>
         </div>
-        <button name="sbm" class="px-5 py-[10px] outline-none text-white rounded-[5px] bg-[#6a5af9] border-0 cursor-pointer max-w-[200px] mt-8" type="submit">
+        <button name="sbm" class="px-5 py-[10px] outline-none text-white rounded-[5px] bg-[#6a5af9] border-0 cursor-pointer min-w-[200px] mt-8 mb-8" type="submit">
           Add Order
         </button>
         <!-- <?= isset($error) ? $error : "" ?> -->
       </form>
     </div>
   </main>
-  <div class="fixed top-0 items-center justify-center hidden w-full h-full bg-black bg-opacity-50" id="popup_overlay">
-    <div class="min-h-[80%] bg-[#28243d] min-w-[1000px] rounded-[10px] relative p-5 px-20" id="popup">
+  <div class="fixed top-0 flex items-center justify-center hidden w-full h-full bg-black bg-opacity-50" id="popup_overlay">
+    <div class="min-h-[80%] bg-[#28243d] min-w-[1000px] rounded-[10px] relative p-5 px-20 overflow-auto" id="popup">
       <div class="absolute text-3xl cursor-pointer top-4 right-4" id="btn_close">
         <i class="fa-regular fa-circle-xmark"></i>
       </div>
@@ -101,37 +101,39 @@
           <input type="text" placeholder="Enter something..." class="search-header" />
         </div>
       </div>
-      <!-- <?php foreach ($result as $item) { ?>
-        <div class="flex items-center justify-between item gap-x-20 border-b border-[#989393] mt-10">
-          <input type="checkbox" name="id_prods" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer">
-          <div class="flex gap-x-5">
-            <div class=" w-[148px] max-h-[208px]">
-              <img src="imgs/<?= $item['img'] ?>" class="object-cover w-full h-full" alt="">
+      <form action="?controller=orderAdmin&action=addProduct" method="POST">
+        <?php foreach ($result as $item) { ?>
+          <div class="flex items-center item pb-5 gap-x-20 border-b border-[#989393] mt-10">
+            <input type="checkbox" name="check_list[]" value="<?= $item['idProduct'] ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer">
+            <div class="flex gap-x-5">
+              <div class="h-[100px]">
+                <img src="imgs/best-selling.png" class="object-cover w-full h-full" alt="">
+              </div>
+              <div class="pt-4 text-center w-[200px]">
+                <h3 class="text-xl uppercase"><?= $item['name_prod'] ?></h3>
+                <p class="text-sm text-[#dacfcf] "><?= $item['name_author'] ?> </p>
+              </div>
             </div>
-            <div class="pt-16 text-center">
-              <h3 class="text-xl uppercase"><?= $item['name'] ?></h3>
-              <p class="text-sm text-[#dacfcf] "><? $item['nameAuthor'] ?> </p>
-            </div>
+            <input type="number" name="<?= $item['idPoduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
+            <div class="price">$ <?= $item['price'] ?></div>
           </div>
-          <input type="number" class="bg-transparent border border-[##D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
-          <div class="price">$ <?= $item['price'] ?></div>
+        <?php } ?>
+        <div class="pagination-container">
+          <div class="pagination">
+            <span class="pagination-inner">
+              <?php
+              $number_of_page = 1;
+              for ($i = 1; $i <= $number_of_page; $i++) {
+              ?>
+                <a href="?pagelayout=product&page=<?= $i ?>" class=<?= isset($_GET["page"]) ? ($_GET["page"] == $i ? "pagination-active" : "") : ($i == 1 ? "pagination-active" : "") ?>><?= $i ?></a>
+              <?php } ?>
+            </span>
+          </div>
         </div>
-      <?php } ?> -->
-      <div class="pagination-container">
-        <div class="pagination">
-          <span class="pagination-inner">
-            <?php
-            $number_of_page = 1;
-            for ($i = 1; $i <= $number_of_page; $i++) {
-            ?>
-              <a href="?pagelayout=product&page=<?= $i ?>" class=<?= isset($_GET["page"]) ? ($_GET["page"] == $i ? "pagination-active" : "") : ($i == 1 ? "pagination-active" : "") ?>><?= $i ?></a>
-            <?php } ?>
-          </span>
+        <div class="w-full mt-10 text-center">
+          <button type="submit" class="w-[400px] px-5 py-2 bg-[#9155fd] rounded-[100vmax]">Add to order</button>
         </div>
-      </div>
-      <div class="w-full mt-10 text-center">
-        <button class="w-[400px] px-5 py-2 bg-[#9155fd] rounded-[100vmax]">Add to order</button>
-      </div>
+      </form>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

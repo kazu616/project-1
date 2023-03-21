@@ -7,7 +7,7 @@ function index()
 function getProducts()
 {
   include_once "connect/openDB.php";
-  $sql = "SELECT *, authors.name as nameAuthor FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor";
+  $sql = "SELECT *, products.name as name_prod,authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor";
   $result = mysqli_query($connect, $sql);
   return $result;
 }
@@ -31,11 +31,18 @@ function destroy()
 
 function storeSession()
 {
+  $arr = $_POST['check_list'];
+  foreach ($arr as $value) {
+    echo $value . '<br>';
+    echo $_POST[$value] . "<br>";
+  }
+  // $_SESSION['cart'] = array();
+  // $_SESSION['cart'][$product_id] = 1;
 }
 
 switch ($action) {
   case 'add':
-    // $result = getProducts();
+    $result = getProducts();
     break;
   case 'store':
     break;
@@ -45,7 +52,7 @@ switch ($action) {
     break;
   case 'destroy':
     break;
-  case 'storeSession':
+  case 'addProduct':
     storeSession();
     break;
 }

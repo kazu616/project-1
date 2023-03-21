@@ -9,8 +9,12 @@ switch ($action) {
     }
     break;
   case 'add': {
-      // include_once 'models/admin/orderModel.php';
+      include_once 'models/admin/orderModel.php';
       include_once 'views/admin/order/addOrder.php';
+    }
+    break;
+  case 'addProduct': {
+      include_once 'models/admin/orderModel.php';
     }
     break;
 }

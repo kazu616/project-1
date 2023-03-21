@@ -18,8 +18,8 @@
     <span>Admin</span>
   </div>
   <ul>
-    <a href="/">
-      <li class=<?php echo isset($_GET["controller"])  ? "" : "activeLink" ?>>
+    <a href="?controller=admin">
+      <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "admin" ? "activeLink" : "") : "" ?>>
         <box-icon type="solid" name="home"></box-icon>
         <span>Dashboard</span>
       </li>
