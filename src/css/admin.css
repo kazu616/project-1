@@ -623,11 +623,15 @@ main header .search box-icon {
 
 .pagination a {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   color: var(--main-text-light);
   text-decoration: none;
   font-size: 1.2rem;
-  padding: 8px 16px 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
   border-radius: 100rem;
   transition: all 0.25s;
 }

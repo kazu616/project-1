@@ -56,8 +56,8 @@
     </form>
   </div>
   <footer class="fixed bottom-0 w-full">
-    <img src="img/auth-v1-tree.png" alt="">
-    <img src="img/auth-v1-tree-2.png" alt="">
+    <img src="imgs/auth-v1-tree.png" alt="">
+    <img src="imgs/auth-v1-tree-2.png" alt="">
   </footer>
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script src="js/login.js"></script>
