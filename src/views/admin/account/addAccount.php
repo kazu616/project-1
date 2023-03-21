@@ -17,15 +17,13 @@
             <h3 class="title-table">
                 Add Account
             </h3>
-            <form class="form-basic" method="POST" action="index.php?controller=accountAdmin&action=add"
-                autocomplete="off">
+            <form class="form-basic" method="POST" action="index.php?controller=accountAdmin&action=add" autocomplete="off">
                 <div class="form-field">
                     <input type="text" required class="form-input" id="username" name="username" placeholder=" " />
                     <label for="username" class="form-label">Username</label>
                 </div>
                 <div class="form-field">
-                    <input type="text" required class="form-input" id="phone_number" name="phone_number"
-                        placeholder=" " />
+                    <input type="text" required class="form-input" id="phone_number" name="phone_number" placeholder=" " />
                     <label for="phone_number" class="form-label">Phone number</label>
                 </div>
                 <div class="form-field">
@@ -54,8 +52,8 @@
                 </div>
                 <div class="form-field">
                     <label for="product-image">URL Image: </label>
-                    <input type="file" <?= isset($_GET["edit"]) ? "" : "required" ?> name="image" id="product-image">
-                    <img class="preview_image" src=<?= isset($_GET["edit"]) ? "./uploads/$old_image" : "" ?> alt="">
+                    <input type="file" required name="image" id="product-image">
+                    <img class="preview_image" src="" alt="">
                 </div>
                 <div>
                 </div>
@@ -66,9 +64,7 @@
             </form>
         </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"
-        integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="js/main.js"></script>
 </body>
