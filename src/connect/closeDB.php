@@ -1,3 +1,3 @@
-<?php 
-include_once'./projectMVC/connect/openDB.php';
- mysqli_close($connect);
+<?php
+include_once 'openDB.php';
+mysqli_close($connect);

@@ -10,6 +10,9 @@ switch ($controller) {
   case 'admin':
     include_once 'controllers/admin/admin.controller.php';
     break;
+  case 'dashboardAdmin':
+    include_once 'controllers/admin/admin.controller.php';
+    break;
   case 'productAdmin':
     include_once 'controllers/admin/product.controller.php';
     break;
