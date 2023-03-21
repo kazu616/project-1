@@ -59,6 +59,7 @@
                     >
                         <form
                             class="flex flex-col justify-start items-start gap-5"
+                            id="form_signup"
                         >
                             <!-- email -->
                             <div class="flex flex-col gap-1">
@@ -68,11 +69,15 @@
                                     >Email</label
                                 >
                                 <input
+                                    id="email"
                                     type="text"
                                     name="email_signup"
                                     placeholder="mail@abc.com"
                                     class="w-[400px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-[0.8rem] text-left text-[#000000]"
                                 />
+                                <span
+                                    class="form-message text-[12px] text-red-400"
+                                ></span>
                             </div>
                             <!-- phone -->
                             <div class="flex flex-col gap-1">
@@ -82,11 +87,15 @@
                                     >Phone Number</label
                                 >
                                 <input
+                                    id="phone"
                                     type="number"
                                     placeholder="+84"
                                     name="phone_signup"
                                     class="w-[400px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-[0.8rem] text-left text-black"
                                 />
+                                <span
+                                    class="form-message text-[12px] text-red-400"
+                                ></span>
                             </div>
                             <!-- password -->
                             <div class="flex flex-col gap-1">
@@ -96,11 +105,15 @@
                                     >Password</label
                                 >
                                 <input
+                                    id="password"
                                     type="password"
                                     placeholder="******************"
                                     name="password_signup"
                                     class="w-[400px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-[0.8rem] text-left text-black"
                                 />
+                                <span
+                                    class="form-message text-[12px] text-red-400"
+                                ></span>
                             </div>
                             <!-- password again -->
                             <div class="flex flex-col gap-1">
@@ -111,11 +124,15 @@
                                     Enter The Password
                                 </label>
                                 <input
+                                    id="re_password"
                                     type="password"
                                     placeholder="******************"
                                     name="password_signup_check"
                                     class="w-[400px] px-2.5 py-[13px] rounded-[5px] border border-[#ded2d9] text-[0.8rem] text-left text-black"
                                 />
+                                <span
+                                    class="form-message text-[12px] text-red-400"
+                                ></span>
                             </div>
                             <input
                                 name="signup"
@@ -166,4 +183,15 @@
             </div>
         </div>
     </body>
+    <script src="./validator.js"></script>
+    <script>
+        validator({
+            form: "#form_signup",
+            errorSelector: ".form-message",
+            rules: [
+                validator.isEmail("#email"),
+                validator.isPassword("#password", 6),
+            ],
+        });
+    </script>
 </html>

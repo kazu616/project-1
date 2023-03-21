@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
+
     <body class="bg-[#FFE6C9]">
         <div
             class="w-[1536px] h-[864px] relative overflow-hidden rounded-[27.2px] bg-white border-[8px] border-white mx-auto transform translate-y-[3.5%]"
@@ -98,7 +99,11 @@
                     >
                         ------------- or Sign in with Email -------------
                     </p>
-                    <form class="flex flex-col justify-start items-start gap-6">
+                    <form
+                        class="flex flex-col justify-start items-start gap-6"
+                        id="form-login"
+                        class="form"
+                    >
                         <div
                             class="flex flex-col justify-start items-start gap-2"
                         >
@@ -108,11 +113,15 @@
                                 >Email</label
                             >
                             <input
+                                id="email"
                                 type="email"
                                 name="email"
                                 placeholder="abc@mail.com"
                                 class="w-[336px] px-2 py-[10px] rounded-[5px] border border-[#ded2d9]"
                             />
+                            <span
+                                class="form-message text-[12px] text-red-400"
+                            ></span>
                         </div>
                         <div
                             class="flex flex-col justify-start items-start gap-2"
@@ -123,14 +132,20 @@
                                 >Password</label
                             >
                             <input
+                                id="password"
+                                required
                                 type="password"
                                 name="password"
                                 placeholder="***************"
                                 class="w-[336px] px-2 py-[10px] rounded-[5px] border border-[#ded2d9]"
                             />
+                            <span
+                                class="form-message text-[12px] text-red-400"
+                            ></span>
                         </div>
                         <input
                             type="submit"
+                            required
                             class="w-[336px] px-2 py-2 rounded-md bg-[#7f265b] cursor-pointer text-white hover:bg-black duration-150"
                             name="login"
                             value="Login"
@@ -154,4 +169,15 @@
             </div>
         </div>
     </body>
+    <script src="./validator.js"></script>
+    <script>
+        validator({
+            form: "#form_login",
+            errorSelector: ".form-message",
+            rules: [
+                validator.isEmail("#email"),
+                validator.isPassword("#password", 6),
+            ],
+        });
+    </script>
 </html>
