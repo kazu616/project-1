@@ -47,13 +47,13 @@
         <a href="?controller=authorAdmin">
             <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "authorAdmin" ? "activeLink" : "") : "" ?>>
                 <box-icon type="solid" name="user-plus"></box-icon>
-                <span>Manufacturers</span>
+                <span>Authors</span>
             </li>
         </a>
         <a href="?controller=category">
             <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "category" ? "activeLink" : "") : "" ?>>
                 <box-icon type="solid" name="category"></box-icon>
-                <span>Categories</span>
+                <span>Genres</span>
             </li>
         </a>
         <a href="?controller=orderAdmin">

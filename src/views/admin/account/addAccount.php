@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/admin.css">
-    <title>Admin</title>
+<?php include_once 'views/layouts/head_admin.php' ?>
 </head>
 
 <body>
@@ -17,7 +9,7 @@
             <h3 class="title-table">
                 Add Account
             </h3>
-            <form class="form-basic" method="POST" action="index.php?controller=accountAdmin&action=add" autocomplete="off">
+            <form class="form-basic" method="POST" action="index.php?controller=accountAdmin&action=add" autocomplete="off" enctype="multipart/form-data">
                 <div class="form-field">
                     <input type="text" required class="form-input" id="username" name="username" placeholder=" " />
                     <label for="username" class="form-label">Username</label>
@@ -41,14 +33,12 @@
                 </div>
                 <div class="form-roles">
                     <label>Roles:</label>
-                    <div class="form-radio">
-                        <label for="role_admin">Admin</label>
-                        <input type="radio" name="roles" value="1" id="role_admin" />
-                    </div>
-                    <div class="form-radio">
-                        <label for="role_user">Customer</label>
-                        <input type="radio" name="roles" value="2" id="role_user" />
-                    </div>
+                    <?php foreach ($roles as $role) { ?>
+                        <div class="form-radio">
+                            <label for="role_admin"><?= $role['name'] ?></label>
+                            <input type="radio" name="roles" value="<?= $role['idRole'] ?>" id="role_admin" />
+                        </div>
+                    <?php } ?>
                 </div>
                 <div class="form-field">
                     <label for="product-image">URL Image: </label>
@@ -60,13 +50,10 @@
                 <button name="sbm" type="submit">
                     Add Account
                 </button>
-                <!-- <?= isset($error) ? $error : "" ?> -->
             </form>
         </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="js/main.js"></script>
+    <?php include_once 'views/layouts/jsFooter_admin.php' ?>
 </body>
 
 </html>

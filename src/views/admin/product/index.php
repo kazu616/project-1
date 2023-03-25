@@ -1,52 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once 'views/layouts/head_admin.php' ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/admin.css">
-  <title>Admin</title>
-</head>
 
 <body>
-  <?php include_once "views/layouts/sidebar.php" ?>
-  <main>
-    <?php include_once "views/layouts/header_admin.php" ?>
-    <div class="table">
-      <h3>Products</h3>
-      <a href="?pagelayout=add_product">
-        <button class="add-btn">Add product</button>
-      </a>
-      <table class="styled-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Author</th>
-            <th>Price</th>
-            <th>Amount</th>
-            <th>Issuing date</th>
-            <th>Capacity</th>
-            <th>Genre</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-      </table>
-      <div class="pagination-container">
-        <div class="pagination">
-          <a class="pagination-newer" href="?pagelayout=product&page=<?= $page == 1 ? 1 : $page - 1 ?>">PREV</a>
-          <span class="pagination-inner">
-          </span>
-          <a class="pagination-older" href="?pagelayout=product&page=<?= $page != $number_of_page ?  ($page + 1) : $page ?>">NEXT</a>
-        </div>
-      </div>
-    </div>
-  </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-  <script src="js/main.js"></script>
+    <?php include_once "views/layouts/sidebar.php" ?>
+    <main>
+        <?php include_once "views/layouts/header_admin.php" ?>
+        <div class="table">
+            <h3>Products</h3>
+            <a href="?controller=productAdmin&action=show_formAdd">
+                <button class="add-btn">Add product</button>
+            </a>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Image</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Issuing date</th>
+                        <th>Genre</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($products as $product) { ?>
+                        <tr>
+                            <td>
+                                <?= $product['idProduct'] ?>
+                            </td>
+                            <td>
+                                <?= $product['name'] ?>
+                            </td>
+                            <td>
+                                <img src="imgs/<?= $product['img'] ?>" alt="" />
+                            </td>
+                            <td>
+                                <?= $product['nameAuthor'] ?>
+                            </td>
+                            <td>
+                                <?= $product['price'] ?>
+                            </td>
+                            <td>
+                                <?= $product['amount'] ?>
+                            </td>
+                            <td>
+                                <?= $product['issuingDate'] ?>
+                            </td>
+                            <td>
+                                <?= $product['nameGenre'] ?>
+                            </td>
+                            <td>
+                                <a href="index.php?controller=productAdmin&action=clone_data_edit&id=<?= $product['idProduct'] ?>" title="Edit Product">
+                                    <button class="edit-btn">
+                                        <box-icon name="edit"></box-icon>
+                                    </button>
+                                </a>
+                                <a href="index.php?controller=productAdmin&action=delete&id=<?= $product['idProduct'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
+                                    <button type="button">
+                                        <box-icon type="solid" name="trash"></box-icon>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+    </main>
+    <?php include_once 'views/layouts/jsFooter_admin.php' ?>
+
 </body>
 
 </html>

@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once 'views/layouts/head_admin.php' ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/admin.css">
-    <title>Admin</title>
-</head>
 
 <body>
     <?php include_once "views/layouts/sidebar.php" ?>
@@ -41,7 +33,7 @@
                                 <?= $account['name'] ?>
                             </td>
                             <td>
-                                <?= $account['img'] ?>
+                                <img src="imgs/<?= $account['img'] ?>" alt="" />
                             </td>
                             <td>
                                 <?= $account['phoneNumber'] ?>
@@ -53,17 +45,15 @@
                                 <?= $account['password'] ?>
                             </td>
                             <td>
-                                <?php if ($account['idRole'] == 1) {
-                                    echo 'admin';
-                                } else echo 'customer'; ?>
+                                <?= $account['nameRole'] ?>
                             </td>
                             <td>
-                                <a href="" title="Edit Product">
+                                <a href="index.php?controller=accountAdmin&action=clone_data_edit&id=<?= $account['idAccount'] ?>" title="Edit Product">
                                     <button class="edit-btn">
                                         <box-icon name="edit"></box-icon>
                                     </button>
                                 </a>
-                                <a href="" onclick="return confirm('Are you sure?');" title="Delete Product">
+                                <a href="index.php?controller=accountAdmin&action=delete&id=<?= $account['idAccount'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
                                     <button type="button">
                                         <box-icon type="solid" name="trash"></box-icon>
                                     </button>
@@ -81,9 +71,7 @@
             </div>
         </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script src="js/main.js"></script>
+    <?php include_once 'views/layouts/jsFooter_admin.php' ?>
 </body>
 
 </html>
