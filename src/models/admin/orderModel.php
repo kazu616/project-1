@@ -1,20 +1,93 @@
 <?php
 //function để lấy dữ liệu từ DB về
+
 function index()
 {
+  include_once "connect/openDB.php";
+  $result = [];
+  $sqlGetOrders = "SELECT * FROM `order`";
+  $queryGetOrders = mysqli_query($connect, $sqlGetOrders);
+  foreach ($queryGetOrders as $item) {
+    $idOrder = $item['idOrder'];
+    $sqlGetOrderDetail = "SELECT * FROM (order_detail INNER JOIN `order` on order_detail.idOrder = order.idOrder) INNER JOIN products on order_detail.idProduct = products.idProduct WHERE idOrder = $idOrder";
+    $query = mysqli_query($connect, $sqlGetOrderDetail);
+    $order = mysqli_fetch_array($query);
+    // var_dump($order);
+  }
+  // die();
+  include_once "connect/closeDB.php";
+  return $result;
 }
 
 function getProducts()
 {
-  include_once "connect/openDB.php";
-  $sql = "SELECT *, products.name as name_prod,authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor";
+  include "connect/openDB.php";
+  $page = 1;
+  if (isset($_GET["page"])) {
+    $page = $_GET["page"];
+  }
+  $product_per_page = 1;
+  $sqlCount = "SELECT COUNT(*) FROM products";
+  $queryQuantity = mysqli_query($connect, $sqlCount);
+  $quantity = mysqli_fetch_array($queryQuantity)[0];
+  $number_of_page = ceil($quantity / $product_per_page);
+  $prod_show_per_page = $product_per_page * ($page  - 1);
+  $sql = "SELECT *, products.name as name_prod,authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor LIMIT $prod_show_per_page, $product_per_page";
   $result = mysqli_query($connect, $sql);
-  return $result;
+  include "connect/closeDB.php";
+  $array = array();
+  $array['data'] = $result;
+  $array['total_page'] = $number_of_page;
+  return $array;
+}
+
+function getProductsInSession()
+{
+  if (!isset($_SESSION['order'])) return ['data' => [], 'total_price' => 0];
+  $result = [];
+  $total_price = 0;
+  $array = [];
+  $arr = $_SESSION['order'];
+  include "connect/openDB.php";
+  foreach ($arr as $key => $value) {
+    $sql = "SELECT *, products.name as name_prod, authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE idProduct = $key";
+    $query = mysqli_query($connect, $sql);
+    $item = mysqli_fetch_array($query);
+    $item['amount_order'] = $value;
+    $total_price += $item['price'] * $value;
+    array_push($result, $item);
+  }
+  $array['total_price'] = $total_price;
+  $array['data'] = $result;
+  include "connect/closeDB.php";
+  return $array;
 }
 
 //    Function lưu dữ liệu lên DB
 function store()
 {
+  if (!isset($_SESSION['order']) || count($_SESSION['order']) === 0) {
+    header("location: ?controller=orderAdmin&action=add");
+    return;
+  }
+  $cus_name = $_POST["cus_name"];
+  $address = $_POST["address"];
+  $status = $_POST["status"];
+  $phone_number = $_POST["phone_number"];
+  include "connect/openDB.php";
+  $arr = $_SESSION['order'];
+  $bill_code = generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 20);
+  $sqlAddOrder = "INSERT INTO `order`(idAdmin, status, name_customer, phone_number, address_customer, bill_code) 
+    VALUES (7, $status, '$cus_name', '$phone_number', '$address', '$bill_code')";
+  if (mysqli_query($connect, $sqlAddOrder)) {
+    $last_id = mysqli_insert_id($connect);
+    echo "New record created successfully. Last inserted ID is: " . $last_id;
+  } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($connect);
+  }
+  foreach ($arr as $key => $value) {
+  }
+  include "connect/closeDB.php";
 }
 //function lấy dữ liệu trên db dựa theo id
 function edit()
@@ -33,26 +106,55 @@ function storeSession()
 {
   $arr = $_POST['check_list'];
   foreach ($arr as $value) {
-    echo $value . '<br>';
-    echo $_POST[$value] . "<br>";
+    $amount = 1;
+    if (isset($_POST[$value]) && !empty($_POST[$value])) {
+      $amount = (int)$_POST[$value];
+    }
+    if (isset($_SESSION['order'][$value])) {
+      $amount = $amount + $_SESSION['order'][$value];
+    }
+    $_SESSION['order'][$value] = $amount;
   }
-  // $_SESSION['cart'] = array();
-  // $_SESSION['cart'][$product_id] = 1;
+  header("location: ?controller=orderAdmin&action=add");
+}
+
+function deleteProdInSession()
+{
+  if (!isset($_GET['id'])) return;
+  $id = $_GET['id'];
+  unset($_SESSION['order'][$id]);
+  header("location: ?controller=orderAdmin&action=add");
 }
 
 switch ($action) {
-  case 'add':
-    $result = getProducts();
+  case '': {
+      index();
+    }
     break;
-  case 'store':
+  case 'add': {
+      $result = getProducts();
+      $array = getProductsInSession();
+    }
     break;
-  case 'edit':
+  case 'store': {
+      store();
+    }
     break;
-  case 'update':
+  case 'edit': {
+    }
     break;
-  case 'destroy':
+  case 'update': {
+    }
     break;
-  case 'addProduct':
-    storeSession();
+  case 'destroy': {
+    }
+    break;
+  case 'addProduct': {
+      storeSession();
+    }
+    break;
+  case 'deleteProd': {
+      deleteProdInSession();
+    }
     break;
 }

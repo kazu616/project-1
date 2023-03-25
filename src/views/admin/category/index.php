@@ -15,30 +15,30 @@
     <?php include_once "views/layouts/header_admin.php" ?>
     <div class="flex-2">
       <div class="table" style="width: 800px">
-        <h3>Categories</h3>
+        <h3>Genres</h3>
         <table class="styled-table">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Category</th>
+              <th>Genre</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             <?php
             $i = 1;
-            while ($row = mysqli_fetch_array($query)) {
+            while ($row = mysqli_fetch_array($array['data'])) {
             ?>
               <tr>
                 <td><?= $i ?></td>
                 <td><?= $row["name"] ?></td>
                 <td>
-                  <a href="index.php?pagelayout=category&edit=true&id=<?= $row['id'] ?>">
+                  <a href="?controller=categoryAdmin&edit=true&id=<?= $row['idGenre'] ?>">
                     <button style="background: #000">
                       <box-icon name="edit"></box-icon>
                     </button>
                   </a>
-                  <a href="index.php?pagelayout=del_category&id=<?= $row['id'] ?>" onclick="return confirm('Are you sure?');">
+                  <a href="?controller=categoryAdmin&action=destroy&id=<?= $row['idGenre'] ?>" onclick="return confirm('Are you sure?');">
                     <button type=" button">
                       <box-icon type="solid" name="trash"></box-icon>
                     </button>
@@ -51,13 +51,13 @@
         </table>
       </div>
       <div class="content" style="flex-direction: column">
-        <h3>Add Category</h3>
-        <form method="POST" class="form-advance" autocomplete="off">
+        <h3><?= isset($_GET['edit']) ? "Edit Genre" : "Add Genre" ?></h3>
+        <form method="POST" class="form-advance" action="?controller=categoryAdmin&action=<?= isset($_GET['edit']) ? "edit&id=" . $_GET['id'] : "add"  ?>" autocomplete="off">
           <div class="form-field">
-            <input type="text" required value="<?= isset($_GET["id"]) ? $old_name : "" ?>" class="form-input" id="product-category" name="name" placeholder=" " />
-            <label for="product-category" class="form-label">Category name</label>
+            <input type="text" required value="<?= isset($_GET["id"]) ? $array['itemEdit']['name'] : "" ?>" class="form-input" id="product-category" name="name" placeholder=" " />
+            <label for="product-category" class="form-label">Genre name</label>
           </div>
-          <button name="sbm">Add category</button>
+          <button name="sbm"><?= isset($_GET['edit']) ? "Edit Genre" : "Add Genre" ?></button>
         </form>
       </div>
     </div>

@@ -19,23 +19,26 @@
       <h3 class="title-table">
         Add Order
       </h3>
-      <form method="POST" autocomplete="off">
+      <form method="POST" autocomplete="off" action="?controller=orderAdmin&action=store">
         <div class="form-basic">
           <div class="form-field">
-            <input type="text" required class="form-input" id="username" name="username" placeholder=" " />
-            <label for="username" class="form-label">Customer Name</label>
+            <input type="text" required class="form-input" id="cus_name" name="cus_name" placeholder=" " />
+            <label for="cus_name" class="form-label">Customer Name</label>
           </div>
           <div class="form-field">
-            <input type="email" required class="form-input" name="email" id="email" placeholder=" " />
-            <label for="email" class="form-label">Phone number</label>
+            <input type="text" required class="form-input" name="phone_number" id="phone_number" placeholder=" " />
+            <label for="phone_number" class="form-label">Phone number</label>
           </div>
           <div class="form-field">
-            <input type="text" required class="form-input" id="phone_number" name="phone_number" placeholder=" " />
-            <label for="phone_number" class="form-label">Delivery address</label>
+            <input type="text" required class="form-input" id="address" name="address" placeholder=" " />
+            <label for="address" class="form-label">Delivery address</label>
           </div>
           <div class="form-field">
-            <select name="status" required>
+            <select name="status" id="status" required>
               <option value="">Select status</option>
+              <option value="<?= PENDING ?>">Pending</option>
+              <option value="<?= DELIVERING ?>">Delivering</option>
+              <option value="<?= RECEIVED ?>">Received</option>
             </select>
           </div>
         </div>
@@ -46,27 +49,44 @@
               Add product
             </button>
           </div>
-          <div class="border-b border-[#d3d2cd88] item-prod flex justify-between items-center mb-5">
-            <div class="flex gap-x-5">
-              <div class=" w-[148px] max-h-[208px]">
-                <img src="imgs/best-selling.png" class="object-cover w-full h-full" alt="">
+          <?php foreach ($array['data'] as $key => $value) { ?>
+            <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative">
+              <a href="?controller=orderAdmin&action=deleteProd&id=<?= $value['idProduct'] ?>" onclick="return confirm('Are you sure?');" class="absolute text-red-500 right-4 top-4">
+                <i class="fa-solid fa-circle-xmark fa-lg"></i>
+              </a>
+              <div class="flex gap-x-5">
+                <div class=" w-[148px] max-h-[208px]">
+                  <img src="imgs/best-selling.png" class="object-cover w-full h-full" alt="">
+                </div>
+                <div class="pt-10 text-center">
+                  <h3 class="text-xl uppercase"><?= $value['name_prod'] ?></h3>
+                  <p class="text-sm text-[#dacfcf] "><?= $value['name_author'] ?></p>
+                </div>
               </div>
-              <div class="pt-10 text-center">
-                <h3 class="text-xl uppercase">Way of happies</h3>
-                <p class="text-sm text-[#dacfcf] ">Ananda Kumar </p>
+              <div class="flex flex-col pb-1 mr-10 gap-y-1">
+                <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
+                  <p>Amount:</p>
+                  <span class="text-xl font-secondary"><?= $value['amount_order'] ?></span>
+                </div>
+                <!-- <p class="flex items-end mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span>$ 45.00</span></p> -->
+                <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
+                  <p>Price:</p>
+                  <span class="text-xl font-secondary"> $ <?= number_format($value['price']) ?></span>
+                </div>
               </div>
             </div>
-            <div class="flex flex-col pb-10 mr-4 gap-y-1">
-              <span class="text-[18px] uppercase">Amount: 1</span>
-              <span class="text-[18px] uppercase">Price: $80.00 </span>
+          <?php } ?>
+          <?php if (count($array['data']) === 0) { ?>
+            <div class="flex items-center justify-center">
+              <img src="imgs/empty-cart.png" class="w-[300px]" alt="">
             </div>
-          </div>
-          <div class="flex justify-between">
+          <?php } ?>
+          <div class="flex justify-between mt-10">
             <span class="text-xl">Created Day: <?= date('d/m/Y') ?></span>
             <div class="flex flex-col uppercase gap-y-3 min-w-[250px] text-lg">
               <div class="flex justify-between">
                 <p>Total:</p>
-                <span>$80.00</span>
+                <span>$<?= $array['total_price'] ?></span>
               </div>
               <div class="flex justify-between">
                 <p>Payment:</p>
@@ -78,7 +98,7 @@
               </div>
               <div class="flex justify-between">
                 <p>Total price:</p>
-                <span>$50.00</span>
+                <span>$<?= $array['total_price'] ?></span>
               </div>
             </div>
           </div>
@@ -101,8 +121,12 @@
           <input type="text" placeholder="Enter something..." class="search-header" />
         </div>
       </div>
-      <form action="?controller=orderAdmin&action=addProduct" method="POST">
-        <?php foreach ($result as $item) { ?>
+      <form action="?controller=orderAdmin&action=addProduct" id="form_add_prod" method="POST">
+        <input type="text" name="cus_name" id="cus_name_session" class="hidden">
+        <input type="text" name="phone_number" id="phone_number_session" class="hidden">
+        <input type="text" name="address" id="address_session" class="hidden">
+        <input type="number" name="status" id="status_session" class="hidden">
+        <?php foreach ($result['data'] as $item) { ?>
           <div class="flex items-center item pb-5 gap-x-20 border-b border-[#989393] mt-10">
             <input type="checkbox" name="check_list[]" value="<?= $item['idProduct'] ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer">
             <div class="flex gap-x-5">
@@ -114,7 +138,7 @@
                 <p class="text-sm text-[#dacfcf] "><?= $item['name_author'] ?> </p>
               </div>
             </div>
-            <input type="number" name="<?= $item['idPoduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
+            <input type="number" max=10 name="<?= $item['idProduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
             <div class="price">$ <?= $item['price'] ?></div>
           </div>
         <?php } ?>
@@ -122,10 +146,9 @@
           <div class="pagination">
             <span class="pagination-inner">
               <?php
-              $number_of_page = 1;
-              for ($i = 1; $i <= $number_of_page; $i++) {
+              for ($i = 1; $i <= $result['total_page']; $i++) {
               ?>
-                <a href="?pagelayout=product&page=<?= $i ?>" class=<?= isset($_GET["page"]) ? ($_GET["page"] == $i ? "pagination-active" : "") : ($i == 1 ? "pagination-active" : "") ?>><?= $i ?></a>
+                <a href="?controller=orderAdmin&action=add&page=<?= $i ?>" class=<?= isset($_GET["page"]) ? ($_GET["page"] == $i ? "pagination-active" : "") : ($i == 1 ? "pagination-active" : "") ?>><?= $i ?></a>
               <?php } ?>
             </span>
           </div>

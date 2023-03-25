@@ -5,6 +5,7 @@ if (isset($_GET['action'])) {
 }
 switch ($action) {
   case '': {
+      include_once 'models/admin/orderModel.php';
       include_once 'views/admin/order/index.php';
     }
     break;
@@ -17,4 +18,12 @@ switch ($action) {
       include_once 'models/admin/orderModel.php';
     }
     break;
+  case 'deleteProd': {
+      include_once 'models/admin/orderModel.php';
+      // header("location: ?controller=orderAdmin&action=add");
+    }
+    break;
+  case 'store': {
+      include_once 'models/admin/orderModel.php';
+    }
 }

@@ -39,14 +39,14 @@
         <span>Users</span>
       </li>
     </a>
-    <a href="?controller=manufacturer">
-      <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "manufacturer" ? "activeLink" : "") : "" ?>>
+    <a href="?controller=manufacturerAdmin">
+      <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "manufacturerAdmin" ? "activeLink" : "") : "" ?>>
         <box-icon type="solid" name="user-plus"></box-icon>
         <span>Manufacturers</span>
       </li>
     </a>
-    <a href="?controller=category">
-      <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "category" ? "activeLink" : "") : "" ?>>
+    <a href="?controller=categoryAdmin">
+      <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "categoryAdmin" ? "activeLink" : "") : "" ?>>
         <box-icon type="solid" name="category"></box-icon>
         <span>Categories</span>
       </li>
@@ -57,8 +57,8 @@
         <span>Order</span>
       </li>
     </a>
-    <a href="?controller=other">
-      <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "other" ? "activeLink" : "") : "" ?>>
+    <a href="?controller=otherAdmin">
+      <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "otherAdmin" ? "activeLink" : "") : "" ?>>
         <box-icon type="logo" name="visual-studio"></box-icon>
         <span>Others</span>
       </li>

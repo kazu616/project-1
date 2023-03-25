@@ -22,11 +22,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Image</th>
+            <th>Bill code</th>
             <th>Created date</th>
-            <th>Amount</th>
-            <th>Total Cost</th>
             <th>Status</th>
+            <th>Total Cost</th>
             <th>Actions</th>
           </tr>
         </thead>

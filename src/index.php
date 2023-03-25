@@ -1,5 +1,9 @@
 <?php
 session_start();
+include_once "utils/common.php";
+define("PENDING", 1);
+define("DELIVERING", 2);
+define("RECEIVED", 3);
 //Lấy controller đang làm việc
 $controller = '';
 if (isset($_GET['controller'])) {
@@ -21,6 +25,12 @@ switch ($controller) {
     break;
   case 'orderAdmin':
     include_once 'controllers/admin/order.controller.php';
+    break;
+  case 'categoryAdmin':
+    include_once 'controllers/admin/category.controller.php';
+    break;
+  case 'account':
+    include_once 'controllers/customer/account.controller.php';
     break;
   default:
     include_once 'controllers/customer/customer.controller.php';
