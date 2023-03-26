@@ -14,10 +14,10 @@
 <body>
   <?php require_once 'views/layouts/header1.php' ?>
   <?php require_once 'views/layouts/header2.php' ?>
-  <div class="mt-10 swiper mySwiper">
+  <div class="w-full h-full mt-10 swiper mySwiper">
     <div class="swiper-wrapper">
       <?php for ($i = 1; $i <= 5; $i++) { ?>
-        <div class="swiper-slide">
+        <div class="flex items-center justify-center swiper-slide">
           <div class="container flex items-center gap-x-[200px] px-40">
             <div class="flex-1">
               <h1 class="mb-4 font-secondary text-7xl">Life of the wild</h1>
@@ -31,12 +31,12 @@
         </div>
       <?php } ?>
     </div>
-    <div class="swiper-button-next1 py-[18px] rounded-full border border-[#797676] top-1/2 -translate-y-1/2 px-3 right-16 flex justify-center items-center cursor-pointer z-10 absolute">
+    <div class="swiper-button-next1 py-[18px] rounded-full border border-[#797676] top-1/2 -translate-y-1/2 px-3 right-16 flex justify-center items-center cursor-pointer z-10 absolute hover:opacity-20">
       <svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M20.1324 0.445312L18.4832 1.88002L23.4999 6.14724H0V8.14127H23.4999L18.4843 12.4095L20.1324 13.8432L28 7.14425L20.1324 0.445312Z" fill="#333333" />
       </svg>
     </div>
-    <div class="swiper-button-prev1 py-[18px] rounded-full border border-[#797676] top-1/2 -translate-y-1/2 px-3 left-16 flex justify-center items-center cursor-pointer z-10 absolute">
+    <div class="swiper-button-prev1 py-[18px] rounded-full border border-[#797676] top-1/2 -translate-y-1/2 px-3 left-16 flex justify-center items-center cursor-pointer z-10 absolute hover:opacity-20">
       <svg width="28" height="14" viewBox="0 0 28 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7.8705 0.445312L0 7.14425L7.8705 13.8432L9.51721 12.4095L4.50328 8.14127H28V6.14724H4.50211L9.51721 1.87902L7.8705 0.445312Z" fill="#333333" />
       </svg>
