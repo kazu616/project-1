@@ -1,93 +1,143 @@
 <?php
-//function để lấy dữ liệu từ DB về
-function index()
+function indexAccount()
 {
-    $search = '';
-    if (isset($_POST['search'])) {
-        $search = $_POST['search'];
-    }
-    $page = 1;
-    if (isset($_GET['page'])) {
-        $page = $_GET['page'];
-    }
-    include_once 'connect/openConnect.php';
-    $sqlCount = "SELECT COUNT(*) AS count_record FROM brand WHERE name LIKE '%$search%'";
-    $counts = mysqli_query($connect, $sqlCount);
-    foreach ($counts as $each) {
-        $countRecord = $each['count_record'];
-    }
-    $recordOnePage = 3;
-    $countPage = ceil($countRecord / $recordOnePage);
-    $start = ($page - 1) * $recordOnePage;
-    $end = 3;
-    $sql = "SELECT * FROM brand WHERE name LIKE '%$search%' LIMIT $start, $end";
-    $brands = mysqli_query($connect, $sql);
-    include_once 'connect/closeConnect.php';
-    $array = array();
-    $array['search'] = $search;
-    $array['infor'] = $brands;
-    $array['page'] = $countPage;
-    return $array;
+    include_once 'connect/openDB.php';
+    $sql = "SELECT accounts.*, roles.name AS nameRole FROM accounts INNER JOIN roles ON accounts.idRole = roles.idRole";
+    $accounts = mysqli_query($connect, $sql);
+    include_once 'connect/closeDB.php';
+    return $accounts;
 }
+function clone_data_role()
+{
+    include_once 'connect/openDB.php';
+    $sql = "SELECT * FROM roles";
+    $roles = mysqli_query($connect, $sql);
+    include_once 'connect/closeDB.php';
+    return $roles;
+}
+function addAccount()
+{
+    $name = $_POST['username'];
+    $phoneNumber = $_POST['phone_number'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $roles = $_POST['roles'];
+    $img = $_FILES["image"]["name"];
+    $image_name_default = explode(".", $_FILES["image"]["name"]);
+    $image_name = str_replace(" ", "", ($image_name_default[0] . floor(microtime(true) * 1000) . "." . $image_name_default[1]));
+    $target_file = "imgs/" . basename($image_name);
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if ($check) {
+        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+    }
 
-//    Function lưu dữ liệu lên DB
-function store()
-{
-    $name = $_POST['name'];
-    include_once 'connect/openConnect.php';
-    $sql = "INSERT INTO brand(name) VALUES ('$name')";
-    mysqli_query($connect, $sql);
-    include_once 'connect/closeConnect.php';
+    include_once 'connect/openDB.php';
+
+    $sql_check = "SELECT * FROM accounts WHERE email = ?";
+    $stmt = mysqli_prepare($connect, $sql_check);
+    mysqli_stmt_bind_param($stmt, "s", trim($email));
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        echo '<script language="javascript">';
+        echo 'alert("Duplicate email");';
+        echo 'window.location.href="?controller=accountAdmin&action=show_formAdd";';
+        echo '</script>';
+    } else {
+        $stmt = mysqli_prepare($connect, "INSERT INTO accounts (name, img, phoneNumber, password, email, address, idRole) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, $phoneNumber, trim($password), $email, $address, $roles);
+        mysqli_stmt_execute($stmt);
+        header('Location:?controller=accountAdmin');
+        include_once 'connect/closeDB.php';
+    }
+    include_once 'connect/closeDB.php';
 }
-//function lấy dữ liệu trên db dựa theo id
+function clone_data_edit()
+{
+    $id = $_GET['id'];
+    include_once 'connect/openDB.php';
+    $sql = "SELECT * FROM accounts WHERE idAccount = '$id'";
+    $data_clone = mysqli_query($connect, $sql);
+    include_once 'connect/closeDB.php';
+    return $data_clone;
+}
 function edit()
 {
-    $id = $_GET['id'];
-    include_once 'connect/openConnect.php';
-    $sql = "SELECT * FROM brand WHERE id = '$id'";
-    $brands = mysqli_query($connect, $sql);
-    include_once 'connect/closeConnect.php';
-    return $brands;
-}
-//    function update dữ liệu trên db
-function update()
-{
     $id = $_POST['id'];
-    $name = $_POST['name'];
-    include_once 'connect/openConnect.php';
-    $sql = "UPDATE brand SET name = '$name' WHERE id = '$id'";
-    mysqli_query($connect, $sql);
-    include_once 'connect/closeConnect.php';
+    $name = $_POST['username'];
+    $phoneNumber = $_POST['phone_number'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $address = $_POST['address'];
+    $roles = $_POST['roles'];
+    $old_image = $_POST['old_img'];
+
+    if ((!file_exists($_FILES['image']['tmp_name']) || !is_uploaded_file($_FILES['image']['tmp_name'])) && isset($_POST["old_img"])) {
+        $image_name = $old_image;
+    } else {
+        $img = $_FILES["image"]["name"];
+        $image_name_default = explode(".", $_FILES["image"]["name"]);
+        $image_name = str_replace(" ", "", ($image_name_default[0] . floor(microtime(true) * 1000) . "." . $image_name_default[1]));
+        $target_file = "imgs/" . basename($image_name);
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if ($check) {
+            move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+        }
+    }
+
+    include_once 'connect/openDB.php';
+    $sql_email_check = "SELECT * FROM accounts WHERE email = '$email'";
+    $check = mysqli_query($connect, $sql_email_check);
+    $row_check = mysqli_num_rows($check);
+
+    $sql_check = "SELECT * FROM accounts WHERE email = ? AND idAccount = ?";
+    $stmt = mysqli_prepare($connect, $sql_check);
+    mysqli_stmt_bind_param($stmt, "so", trim($email), $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if (mysqli_num_rows($result) > 0) {
+        echo '<script language="javascript">';
+        echo 'alert("Duplicate emails");';
+        echo 'window.location.href="?controller=accountAdmin&action=clone_data_edit&id=' . $id . '";';
+        echo '</script>';
+    } else {
+        $sql_update = "UPDATE accounts SET name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
+        $stmt = mysqli_prepare($connect, $sql_update);
+        mysqli_stmt_bind_param($stmt, 'ssisssi', trim($name), $image_name, $phoneNumber, trim($password), $address, $roles, $id);
+        mysqli_stmt_execute($stmt);
+        include_once 'connect/closeDB.php';
+        header('Location:?controller=accountAdmin');
+    }
 }
-//fucntion xóa dữ liệu trên db
-function destroy()
+
+function delete()
 {
     $id = $_GET['id'];
-    include_once 'connect/openConnect.php';
-    $sql = "DELETE FROM brand WHERE id = '$id'";
-    mysqli_query($connect, $sql);
-    include_once 'connect/closeConnect.php';
+    include_once 'connect/openDB.php';
+    $sql = "DELETE FROM accounts WHERE idAccount = '$id'";
+    $data_clone = mysqli_query($connect, $sql);
+    include_once 'connect/closeDB.php';
 }
+
 
 switch ($action) {
     case '':
-        //Lấy dữ liệu từ DB về
-        $array = index();
+        $accounts = indexAccount();
         break;
-    case 'store':
-        //            Lưu dữ liệu lên DB
-        store();
+    case 'show_formAdd':
+        $roles = clone_data_role();
+        break;
+    case 'add':
+        addAccount();
+        break;
+    case 'clone_data_edit':
+        $data_clone = clone_data_edit();
         break;
     case 'edit':
-        //Lấy dữ liệu từ DB về dựa trên id
-        $brands = edit();
+        edit();
         break;
-    case 'update':
-        //chỉnh sửa dữ liệu lên db
-        update();
-        break;
-    case 'destroy':
-        //xóa dữ liệu trên db
-        destroy();
+    case 'delete':
+        delete();
         break;
 }

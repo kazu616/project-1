@@ -6,9 +6,9 @@
     <main>
         <?php include_once "views/layouts/header_admin.php" ?>
         <div class="table">
-            <h3>Users</h3>
-            <a href="?controller=accountAdmin&action=show_formAdd">
-                <button class="add-btn">Add user</button>
+            <h3>Products</h3>
+            <a href="?controller=productAdmin&action=show_formAdd">
+                <button class="add-btn">Add product</button>
             </a>
             <table class="styled-table">
                 <thead>
@@ -16,44 +16,48 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Image</th>
-                        <th>Phone number</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>Roles</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Amount</th>
+                        <th>Issuing date</th>
+                        <th>Genre</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($accounts as $account) { ?>
+                    <?php foreach ($products as $product) { ?>
                         <tr>
                             <td>
-                                <?= $account['idAccount'] ?>
+                                <?= $product['idProduct'] ?>
                             </td>
                             <td>
-                                <?= $account['name'] ?>
+                                <?= $product['name'] ?>
                             </td>
                             <td>
-                                <img src="imgs/<?= $account['img'] ?>" alt="" />
+                                <img src="imgs/<?= $product['img'] ?>" alt="" />
                             </td>
                             <td>
-                                <?= $account['phoneNumber'] ?>
+                                <?= $product['nameAuthor'] ?>
                             </td>
                             <td>
-                                <?= $account['email'] ?>
+                                <?= $product['price'] ?>
                             </td>
                             <td>
-                                <?= $account['password'] ?>
+                                <?= $product['amount'] ?>
                             </td>
                             <td>
-                                <?= $account['nameRole'] ?>
+                                <?= $product['issuingDate'] ?>
                             </td>
                             <td>
-                                <a href="index.php?controller=accountAdmin&action=clone_data_edit&id=<?= $account['idAccount'] ?>" title="Edit Product">
+                                <?= $product['nameGenre'] ?>
+                            </td>
+                            <td>
+                                <a href="index.php?controller=productAdmin&action=clone_data_edit&id=<?= $product['idProduct'] ?>" title="Edit Product">
                                     <button class="edit-btn">
                                         <box-icon name="edit"></box-icon>
                                     </button>
                                 </a>
-                                <a href="index.php?controller=accountAdmin&action=delete&id=<?= $account['idAccount'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
+                                <a href="index.php?controller=productAdmin&action=delete&id=<?= $product['idProduct'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
                                     <button type="button">
                                         <box-icon type="solid" name="trash"></box-icon>
                                     </button>
@@ -63,15 +67,9 @@
                     <?php } ?>
                 </tbody>
             </table>
-            <div class="pagination-container">
-                <div class="pagination">
-                    <span class="pagination-inner">
-                    </span>
-                </div>
-            </div>
-        </div>
     </main>
     <?php include_once 'views/layouts/jsFooter_admin.php' ?>
+
 </body>
 
 </html>
