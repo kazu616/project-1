@@ -13,10 +13,10 @@
       </div>
     </div>
     <div class="avt">
-      <img src="imgs/avt.png" alt="" />
+      <img src="img/avt.png" alt="" />
       <ul class="dropdown-avt">
         <div class="avt-detail">
-          <img src="imgs/avt.png" alt="" />
+          <img src="img/avt.png" alt="" />
           <div class="info">
             <h3>John Wick</h3>
             <p>Admin</p>

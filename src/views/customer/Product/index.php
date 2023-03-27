@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../css/output.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Booksaw</title>
@@ -44,7 +46,8 @@
                 </div>
             </div>
             <div class="flex justify-between">
-                <div class="w-[145px] h-[135px] bg-[#FBFBFB] border-solid border border-white rounded-lg flex items-center justify-center shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105 hover:bg-[#FFC43F]">
+                <div
+                    class="w-[145px] h-[135px] bg-[#FBFBFB] border-solid border border-white rounded-lg flex items-center justify-center shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105 hover:bg-[#FFC43F]">
                     <div class="flex-column">
                         <i class="fa-solid fa-book m-5 text-2xl"></i>
                         <p class="text-center">Novel</p>
@@ -71,8 +74,10 @@
             <div>
                 <div class="grid grid-cols-4 gap-10">
                     <div>
-                        <div class="flex-colum w-[300px] h-[400px] bg-[#FBFBFB] border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
-                            <img src="../../../imgs/booktest.png" class=" mt-3 w-[300px] h-[270px] object-contain border-b-[1px] ">
+                        <div
+                            class="flex-colum w-[300px] h-[400px] bg-[#FBFBFB] border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
+                            <img src="../../../imgs/booktest.png"
+                                class=" mt-3 w-[300px] h-[270px] object-contain border-b-[1px] ">
                             <p class="text-center font-semibold text-lg mt-3 ">Name</p>
                             <p class="text-center font-italic text-xs ">Author</p>
                             <div class="flex justify-between pr-4 pl-4 mt-2">
@@ -83,8 +88,10 @@
                     </div>
 
                     <div>
-                        <div class="flex-colum w-[300px] h-[400px] bg-[#FBFBFB] border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
-                            <img src="../../../imgs/booktest.png" class=" mt-3 w-[300px] h-[270px] object-contain border-b-[1px] ">
+                        <div
+                            class="flex-colum w-[300px] h-[400px] bg-[#FBFBFB] border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
+                            <img src="../../../imgs/booktest.png"
+                                class=" mt-3 w-[300px] h-[270px] object-contain border-b-[1px] ">
                             <p class="text-center font-semibold text-lg mt-3 ">Name</p>
                             <p class="text-center font-italic text-xs ">Author</p>
                             <div class="flex justify-between pr-4 pl-4 mt-2">
