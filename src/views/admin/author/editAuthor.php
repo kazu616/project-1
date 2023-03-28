@@ -18,7 +18,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($authors as $author) { ?>
+                        <?php foreach ($data_clone['author_show'] as $author) { ?>
                         <tr>
                             <td>
                                 <?= $author['idAuthor'] ?>
@@ -52,11 +52,35 @@
                 </table>
             </div>
             <div class="content" style="flex-direction: column">
-                <?php include_once 'addAuthor.php'; ?>
+                <h3>Edit Author</h3>
+                <?php foreach ($data_clone['clone_author'] as $data_author) { ?>
+                <form method="POST" class="form-advance" autocomplete="off" enctype="multipart/form-data"
+                    action="index.php?controller=authorAdmin&action=edit">
+                    <input type="hidden" value="<?= $data_author['idAuthor'] ?>" name="id" />
+                    <input type="hidden" value="<?= $data_author['img'] ?>" name="old_img" />
+                    <div class="form-field">
+                        <input type="text" required value="<?= $data_author['name'] ?>" class="form-input" name="name"
+                            placeholder=" " />
+                        <label for="" class="form-label">Author name</label>
+                    </div>
+                    <div class="form-field">
+                        <input type="text" required value="<?= $data_author['country'] ?>" class="form-input"
+                            name="country" placeholder=" " />
+                        <label for="" class="form-label">Country name</label>
+                    </div>
+                    <div class="form-field">
+                        <label for="product-image">URL Image: </label>
+                        <input type="file" name="image" id="product-image">
+                        <img class="preview_image" src="<?php echo "imgs/" . $data_author['img']; ?>" alt="">
+                    </div>
+                    <button name="sbm">Edit Author</button>
+                </form>
+                <?php } ?>
             </div>
         </div>
     </main>
     <?php include_once 'views/layouts/jsFooter_admin.php' ?>
+
 </body>
 
 </html>
