@@ -122,10 +122,6 @@
         </div>
       </div>
       <form action="?controller=orderAdmin&action=addProduct" id="form_add_prod" method="POST">
-        <input type="text" name="cus_name" id="cus_name_session" class="hidden">
-        <input type="text" name="phone_number" id="phone_number_session" class="hidden">
-        <input type="text" name="address" id="address_session" class="hidden">
-        <input type="number" name="status" id="status_session" class="hidden">
         <?php foreach ($result['data'] as $item) { ?>
           <div class="flex items-center item pb-5 gap-x-20 border-b border-[#989393] mt-10">
             <input type="checkbox" name="check_list[]" value="<?= $item['idProduct'] ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer">

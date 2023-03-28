@@ -28,48 +28,62 @@
         </div>
       </div>
       <ul class="flex flex-col gap-2 text-lg font-medium">
-        <li class="flex items-center text-red-500 cursor-pointer gap-x-5">
+        <li class="flex items-center cursor-pointer gap-x-5">
           <i class="text-xl fa-regular fa-user"></i>
           <span>My Account</span>
         </li>
-        <li class="flex items-center cursor-pointer gap-x-5">
+        <li class="flex items-center text-red-500 cursor-pointer gap-x-5">
           <i class="text-xl fa-solid fa-list"></i>
           <span>My Order</span>
         </li>
       </ul>
     </div>
-    <div class="flex-1 bg-[#EDEBE4] rounded-[10px] p-6">
-      <div class="px-5 pb-3 border-b border-b-[#BCBCBC] mb-2">
-        <h2 class="text-2xl font-medium text-red-500">My Profile</h2>
-        <p class="text-lg">Manage profile information for account security</p>
+    <div class="flex-1 rounded-[10px]">
+      <div class="flex items-center justify-between bg-[#EDEBE4] mb-10">
+        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold text-red-500 uppercase border-b-2 border-red-500 cursor-pointer">All</a>
+        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Pending</a>
+        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Transport</a>
+        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Complete</a>
+        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Cancelled</a>
       </div>
-      <div class="flex mt-5 pb-[50px]">
-        <div class="flex flex-col items-start flex-1 gap-5 pl-10 pr-5 border-r border-[#BCBCBC]">
-          <div class="flex items-center justify-between w-full">
-            <span class="font-bold">Username</span>
-            <input type="text" value="customer" class="min-w-[320px] py-3 rounded-[10px] px-2" placeholder="Username" name="username">
+      <div class="flex flex-col w-full gap-x-5">
+        <div class="w-full rounded-[20px] bg-white p-5">
+          <div class="flex justify-end uppercase gap-x-5 border-b border-[#888888] pb-3 mb-5">
+            <div class="flex gap-x-2 pr-5 border-r border-[#888888]">
+              <p>bill of lading code:</p>
+              <span class="text-red-500">230301AS0HEQP1</span>
+            </div>
+            <div class="flex gap-x-2">
+              <p>Status:</p>
+              <span class="text-[#61FF00]">Complete</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between w-full">
-            <span class="font-bold">Email</span>
-            <input type="text" value="customer" class="min-w-[320px] py-3 rounded-[10px] px-2" placeholder="Email" name="email">
+          <div class="h-[150px] px-3 flex justify-between items-end pb-3 border-b border-[#888] mb-3">
+            <div class="flex h-full gap-x-4">
+              <img src="imgs/best-selling.png" class="object-cover h-full" alt="">
+              <div class="flex flex-col justify-between py-3">
+                <div class="text-center">
+                  <h3 class="text-lg uppercase">Way of happies</h3>
+                  <p class="text-sm text-[#dacfcf]">Ananda Kumar</p>
+                </div>
+                <span>Amount: 1</span>
+              </div>
+            </div>
+            <div class="flex items-center py-3 gap-x-3">
+              <p class="text-[#888]">Price:</p>
+              <span>$ 80.00</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between w-full">
-            <span class="font-bold">Password</span>
-            <input type="password" value="customer" class="min-w-[320px] py-3 rounded-[10px] px-2" placeholder="Password" name="password">
+          <div class="flex items-center justify-between mb-5 text-xl">
+            <p class="text-[#888888]">Created Day: 20/10/2023</p>
+            <div class="flex items-center gap-x-3">
+              <p class="text-[#888]">Total:</p>
+              <span class="text-red-500">$ 80.00</span>
+            </div>
           </div>
-          <div class="flex items-center justify-between w-full">
-            <span class="font-bold">Phone Number</span>
-            <input type="text" value="0923838283" class="min-w-[320px] py-3 rounded-[10px] px-2" placeholder="Phone number" name="phone_number">
+          <div class="flex justify-end">
+            <button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px]">Received The Confirme</button>
           </div>
-          <div class="flex items-start justify-between w-full">
-            <span class="font-bold">Address</span>
-            <textarea type="text" name="address" class="min-w-[320px] py-3 rounded-[10px] px-2 resize-none h-[150px]" placeholder="Address"></textarea>
-          </div>
-          <button class="px-5 py-2 bg-[#FFA800] text-white rounded-[10px]">Save</button>
-        </div>
-        <div class="w-[300px] flex items-center gap-y-5 flex-col">
-          <img src="imgs/avt.png" class="w-[150px] h-[150px] rounded-full" alt="">
-          <button class="px-10 py-2 uppercase bg-[#BEBEBE] font-semibold text-white rounded-[10px]">Uploading</button>
         </div>
       </div>
     </div>

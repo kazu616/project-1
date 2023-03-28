@@ -35,6 +35,9 @@ switch ($controller) {
   case 'order':
     include_once 'controllers/customer/order.controller.php';
     break;
+  case 'cart':
+    include_once 'controllers/customer/cart.controller.php';
+    break;
   default:
     include_once 'controllers/customer/customer.controller.php';
     break;
