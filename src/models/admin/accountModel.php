@@ -46,7 +46,7 @@ function addAccount()
         echo '</script>';
     } else {
         $stmt = mysqli_prepare($connect, "INSERT INTO accounts (name, img, phoneNumber, password, email, address, idRole) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, $phoneNumber, trim($password), $email, $address, $roles);
+        mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, $phoneNumber, trim($password), trim($email), $address, $roles);
         mysqli_stmt_execute($stmt);
         header('Location:?controller=accountAdmin');
         include_once 'connect/closeDB.php';
@@ -87,9 +87,6 @@ function edit()
     }
 
     include_once 'connect/openDB.php';
-    $sql_email_check = "SELECT * FROM accounts WHERE email = '$email'";
-    $check = mysqli_query($connect, $sql_email_check);
-    $row_check = mysqli_num_rows($check);
 
     $sql_check = "SELECT * FROM accounts WHERE email = ? AND idAccount = ?";
     $stmt = mysqli_prepare($connect, $sql_check);
@@ -102,9 +99,9 @@ function edit()
         echo 'window.location.href="?controller=accountAdmin&action=clone_data_edit&id=' . $id . '";';
         echo '</script>';
     } else {
-        $sql_update = "UPDATE accounts SET name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
+        $sql_update = "UPDATE accounts SET email=? name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
         $stmt = mysqli_prepare($connect, $sql_update);
-        mysqli_stmt_bind_param($stmt, 'ssisssi', trim($name), $image_name, $phoneNumber, trim($password), $address, $roles, $id);
+        mysqli_stmt_bind_param($stmt, 'sssissii', trim($email), trim($name), $image_name, $phoneNumber, trim($password), $address, $roles, $id);
         mysqli_stmt_execute($stmt);
         include_once 'connect/closeDB.php';
         header('Location:?controller=accountAdmin');

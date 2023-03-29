@@ -54,7 +54,7 @@ function addProduct()
     } else {
         // insert the new product
         if ($price >= 0 && $amount >= 0) {
-            $sql = "INSERT INTO products(name,img, price, amount, openingDate,description,idGenre,idAuthor)
+            $sql = "INSERT INTO products(name,img, price, amount, issuingDate,description,idGenre,idAuthor)
             VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($connect, $sql);
             mysqli_stmt_bind_param($stmt, "ssddssii", trim($name), $image_name, $price, $amount, $issuingDate, $description, $genre, $author);
@@ -127,7 +127,7 @@ function edit()
         // Product name doesn't exist, proceed with update
         $sql_update = "UPDATE products SET name = ?, img = ?, amount = ?, price = ?, idAuthor = ?, idGenre = ?, issuingDate = ?, description = ? WHERE idProduct = ?";
         $stmt = mysqli_prepare($connect, $sql_update);
-        mysqli_stmt_bind_param($stmt, "ssddiiisi", trim($name), $image_name, $amount, $price, $author, $genre, $issuingDate, $description, $id);
+        mysqli_stmt_bind_param($stmt, "ssddiissi", trim($name), $image_name, $amount, $price, $author, $genre, $issuingDate, $description, $id);
         mysqli_stmt_execute($stmt);
         include_once 'connect/closeDB.php';
         header('Location:?controller=productAdmin');
@@ -138,7 +138,7 @@ function delete()
 {
     $id = $_GET['id'];
     include_once 'connect/openDB.php';
-    $sql = "DELETE FROM products WHERE idAccount = '$id'";
+    $sql = "DELETE FROM products WHERE idProduct = '$id'";
     $data_clone = mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
 }

@@ -50,8 +50,8 @@
                 <span>Authors</span>
             </li>
         </a>
-        <a href="?controller=category">
-            <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "category" ? "activeLink" : "") : "" ?>>
+        <a href="?controller=genreAdmin">
+            <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "genreAdmin" ? "activeLink" : "") : "" ?>>
                 <box-icon type="solid" name="category"></box-icon>
                 <span>Genres</span>
             </li>

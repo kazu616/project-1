@@ -12,30 +12,67 @@ if (isset($_GET['controller'])) {
 //Kiểm tra đó là controller nào
 switch ($controller) {
   case 'admin':
-    include_once 'controllers/admin/admin.controller.php';
+    if (isset($_SESSION['email'])) {
+      include_once 'controllers/admin/admin.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
   case 'productAdmin':
-    include_once 'controllers/admin/product.controller.php';
+    if (isset($_SESSION['email'])) {
+      include_once 'controllers/admin/product.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
   case 'accountAdmin':
     include_once 'controllers/admin/account.controller.php';
     break;
   case 'authorAdmin':
-    include_once 'controllers/admin/author.controller.php';
+    if (isset($_SESSION['email'])) {
+      include_once 'controllers/admin/author.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
   case 'orderAdmin':
-    include_once 'controllers/admin/order.controller.php';
+    if (isset($_SESSION['email'])) {
+      include_once 'controllers/admin/order.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
-  case 'categoryAdmin':
-    include_once 'controllers/admin/category.controller.php';
+  case 'genreAdmin':
+    if (isset($_SESSION['email'])) {
+      include_once 'controllers/admin/genre.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
-  case 'account':
-    include_once 'controllers/customer/account.controller.php';
+  case 'user':
+    if (!isset($_SESSION['email'])) {
+      include_once 'controllers/customer/user.controller.php';
+    } elseif (isset($_SESSION['email']) && $_GET['action'] == "logout") {
+      include_once 'controllers/customer/user.controller.php';
+    } else {
+      header('Location:index.php?controller=productCustomer');
+    }
     break;
   case 'order':
-    include_once 'controllers/customer/order.controller.php';
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+      include_once 'controllers/customer/order.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
+    break;
+  case 'productCustomer':
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+      include_once 'controllers/customer/productController.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
   default:
-    include_once 'controllers/customer/customer.controller.php';
+    header('Location:index.php?controller=user&action=login');
     break;
 }
