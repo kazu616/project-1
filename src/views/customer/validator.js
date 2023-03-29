@@ -11,9 +11,14 @@ function validator(options) {
         }
     }
     var formElement = document.querySelector(options.form);
-    var formElement_signup = document.querySelector(options.form_signup);
     if (formElement) {
-        console.log(formElement);
+        // formElement.onsubmit = function (e) {
+        //     //         e.preventDefault();
+        //     //         options.rules.forEach(function (rule) {
+        //     //             var inputElement = formElement.querySelector(rule.selector);
+        //     //             validate(inputElement, rule);
+        //     //         });
+        // };
         options.rules.forEach(function (rule) {
             var inputElement = formElement.querySelector(rule.selector);
             if (inputElement) {
@@ -43,7 +48,6 @@ validator.isPassword = function (selector, min) {
     return {
         selector: selector,
         test: function (value) {
-            console.log(value);
             return value.trim()
                 ? value.length >= min
                     ? undefined
@@ -52,3 +56,45 @@ validator.isPassword = function (selector, min) {
         },
     };
 };
+validator.isConfirmation = function (selector, getConfirmationValue, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return value == getConfirmationValue()
+                ? undefined
+                : message || "Giá trị nhập vào không chính xác";
+        },
+    };
+};
+validator.isPhone = function (selector, max) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return value.trim()
+                ? value.length <= max
+                    ? undefined
+                    : "Số điện thoại cần 10 số"
+                : "Vui lòng nhập trường này";
+        },
+    };
+};
+
+function validate_login() {
+    let email = document.forms["form_login"]["email_login"].value;
+    let password = document.forms["form_login"]["password_login"].value;
+    if (email == "" || password == "") {
+        alert("Plese enter full values");
+        return false;
+    }
+}
+function validate_signup() {
+    let email = document.forms["form_signup"]["email_signup"].value;
+    let password = document.forms["form_signup"]["password_signup"].value;
+    let phone = document.forms["form_signup"]["phoneNumber"].value;
+    let password_cf =
+        document.forms["form_signup"]["password_confirmation"].value;
+    if (email == "" || password == "" || phone == "" || password_cf == "") {
+        alert("Plese enter full values");
+        return false;
+    }
+}
