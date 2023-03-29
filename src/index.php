@@ -32,11 +32,14 @@ switch ($controller) {
   case 'account':
     include_once 'controllers/customer/account.controller.php';
     break;
-  case 'order':
+  case 'order_history':
     include_once 'controllers/customer/order.controller.php';
     break;
   case 'cart':
     include_once 'controllers/customer/cart.controller.php';
+    break;
+  case 'order_detail':
+    include_once 'controllers/customer/order_detail.controller.php';
     break;
   default:
     include_once 'controllers/customer/customer.controller.php';
