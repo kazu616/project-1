@@ -58,6 +58,10 @@ switch ($controller) {
       header('Location:index.php?controller=productCustomer');
     }
     break;
+  case 'order_history': {
+      include_once 'controllers/customer/order.controller.php';
+    }
+    break;
   case 'order':
     if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
       include_once 'controllers/customer/order.controller.php';
@@ -78,6 +82,9 @@ switch ($controller) {
     } else {
       header('Location:index.php?controller=user&action=login');
     }
+    break;
+  case 'order_detail':
+    include_once 'controllers/customer/order_detail.controller.php';
     break;
   default:
     header('Location:index.php?controller=user&action=login');

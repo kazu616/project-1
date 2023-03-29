@@ -26,4 +26,10 @@ switch ($action) {
   case 'store': {
       include_once 'models/admin/orderModel.php';
     }
+    break;
+  case 'checkout': {
+      include_once 'models/admin/orderModel.php';
+      include_once 'views/admin/order/checkout.php';
+    }
+    break;
 }

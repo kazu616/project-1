@@ -7,14 +7,17 @@ function index()
   $result = [];
   $sqlGetOrders = "SELECT * FROM `order`";
   $queryGetOrders = mysqli_query($connect, $sqlGetOrders);
-  foreach ($queryGetOrders as $item) {
-    $idOrder = $item['idOrder'];
-    $sqlGetOrderDetail = "SELECT * FROM (order_detail INNER JOIN `order` on order_detail.idOrder = order.idOrder) INNER JOIN products on order_detail.idProduct = products.idProduct WHERE idOrder = $idOrder";
-    $query = mysqli_query($connect, $sqlGetOrderDetail);
-    $order = mysqli_fetch_array($query);
-    // var_dump($order);
+  $result['data'] = $queryGetOrders;
+  foreach ($queryGetOrders as $each) {
+    $total_price = 0;
+    $idOrder = $each['idOrder'];
+    $sqlTotalPrice = "SELECT sold_price, amount FROM order_detail WHERE idOrder = $idOrder";
+    $query = mysqli_query($connect, $sqlTotalPrice);
+    foreach ($query as $item) {
+      $total_price += $item['amount'] * $item['sold_price'];
+    }
+    $result[$idOrder] = $total_price;
   }
-  // die();
   include_once "connect/closeDB.php";
   return $result;
 }
@@ -81,12 +84,20 @@ function store()
     VALUES (7, $status, '$cus_name', '$phone_number', '$address', '$bill_code')";
   if (mysqli_query($connect, $sqlAddOrder)) {
     $last_id = mysqli_insert_id($connect);
+    foreach ($arr as $key => $value) {
+      $sqlSelectProd = "SELECT price FROM products WHERE idProduct = $key";
+      $query = mysqli_query($connect, $sqlSelectProd);
+      $sold_price = mysqli_fetch_array($query)['price'];
+      $sqlInsertOrderDetail = "INSERT INTO order_detail(amount, sold_price, idOrder, idProduct) VALUES($value, $sold_price, $last_id, $key)";
+      $query = mysqli_query($connect, $sqlInsertOrderDetail);
+      header("Location: ?controller=orderAdmin");
+    }
+    unset($_SESSION['order']);
     echo "New record created successfully. Last inserted ID is: " . $last_id;
   } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($connect);
   }
-  foreach ($arr as $key => $value) {
-  }
+
   include "connect/closeDB.php";
 }
 //function lấy dữ liệu trên db dựa theo id
@@ -128,7 +139,7 @@ function deleteProdInSession()
 
 switch ($action) {
   case '': {
-      index();
+      $result = index();
     }
     break;
   case 'add': {
@@ -138,6 +149,14 @@ switch ($action) {
     break;
   case 'store': {
       store();
+    }
+    break;
+  case 'checkout': {
+      if (!isset($_SESSION['order']) || count($_SESSION['order']) === 0) {
+        header("Location: ?controller=orderAdmin&action=add");
+        return ['data' => [], 'total_price' => 0];
+      }
+      $array = getProductsInSession();
     }
     break;
   case 'edit': {

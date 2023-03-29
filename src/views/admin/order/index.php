@@ -29,6 +29,29 @@
             <th>Actions</th>
           </tr>
         </thead>
+        <tbody>
+          <?php foreach ($result['data'] as $each) { ?>
+            <tr>
+              <td><?= $each['idOrder'] ?></td>
+              <td><?= $each['bill_code'] ?></td>
+              <td><?= $each['createdDate'] ?></td>
+              <td><?= $each['status'] ?></td>
+              <td><?= $result[$each['idOrder']] ?></td>
+              <td>
+                <a href="?pagelayout=add_product&edit=true&id=<?= $row['prod_id'] ?>" title="Edit Product">
+                  <button class="edit-btn">
+                    <box-icon name="edit"></box-icon>
+                  </button>
+                </a>
+                <a href="?pagelayout=del_product&id=<?= $row['prod_id'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
+                  <button type="button">
+                    <box-icon type="solid" name="trash"></box-icon>
+                  </button>
+                </a>
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
       </table>
       <div class="pagination-container">
         <div class="pagination">
