@@ -73,7 +73,11 @@ switch ($controller) {
     }
     break;
   case 'cart':
-    include_once 'controllers/customer/cart.controller.php';
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+      include_once 'controllers/customer/cart.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
   default:
     header('Location:index.php?controller=user&action=login');

@@ -3,7 +3,7 @@
 
 <head>
     <?php require_once 'views/layouts/head_customer.php' ?>
-    <title>Booksaw</title>
+    <title>Book Page</title>
 </head>
 
 <body class="bg-[#F3F2EC]">
@@ -112,9 +112,9 @@
                                 <div class="flex justify-between pr-4 pl-4 mt-2">
                                     <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
                                         $<?= $product['price'] ?></p>
-                                    <button class="hover:text-[#a37d56] transition-all duration-300">Add To
+                                    <a href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>" class="hover:text-[#a37d56] transition-all duration-300 cursor-pointer ">Add To
                                         Cart <i class="fa-solid fa-cart-shopping"></i>
-                                    </button>
+                                    </a>
 
                                 </div>
                             </div>
