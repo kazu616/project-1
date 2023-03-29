@@ -8,10 +8,10 @@
       <i class="fa-brands fa-twitter"></i>
     </div>
     <div class="flex items-center gap-x-10">
-      <span class="flex items-center gap-x-2">
+      <a href="?controller=account" class="flex items-center gap-x-2">
         <i class="fa-regular fa-user"></i>
         <p class="uppercase">Account</p>
-      </span>
+      </a>
       <span class="flex items-center gap-x-2">
         <i class="fa-solid fa-magnifying-glass"></i>
         <p class="uppercase">Search</p>

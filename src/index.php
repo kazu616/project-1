@@ -72,6 +72,9 @@ switch ($controller) {
       header('Location:index.php?controller=user&action=login');
     }
     break;
+  case 'cart':
+    include_once 'controllers/customer/cart.controller.php';
+    break;
   default:
     header('Location:index.php?controller=user&action=login');
     break;
