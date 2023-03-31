@@ -103,14 +103,47 @@ function store()
 //function lấy dữ liệu trên db dựa theo id
 function edit()
 {
+
+  if (!isset($_GET['id'])) return;
+  $id = $_GET['id'];
+  $array = [];
+  $data = [];
+  $total_price = 0;
+  include "connect/openDB.php";
+  $sql = "SELECT * FROM `order` WHERE idOrder = $id";
+  $query = mysqli_query($connect, $sql);
+  $order = mysqli_fetch_array($query);
+  if ($order['status'] == COMPLETED || $order['status'] == CANCELED) {
+    return header("Location: ?controller=orderAdmin");
+  }
+  $array['order'] = $order;
+  $sql = "SELECT *, order_detail.amount as amount_order FROM order_detail INNER JOIN products ON order_detail.idProduct = products.idProduct WHERE idOrder = $id";
+  $query = mysqli_query($connect, $sql);
+  foreach ($query as $each) {
+    $idProduct = $each['idProduct'];
+    $sql = "SELECT *, products.name as name_prod, authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE idProduct = $idProduct";
+    $query = mysqli_query($connect, $sql);
+    $item = mysqli_fetch_array($query);
+    $item['amount_order'] = $each['amount_order'];
+    $total_price += $each['sold_price'] * $each['amount_order'];
+    $data[] = $item;
+  }
+  include "connect/openDB.php";
+  $array['data'] = $data;
+  $array['total_price'] = $total_price;
+  return $array;
 }
 //    function update dữ liệu trên db
 function update()
 {
-}
-//fucntion xóa dữ liệu trên db
-function destroy()
-{
+  if (!isset($_GET['id'])) return;
+  $id = $_GET['id'];
+  $status = $_POST['status'];
+  include "connect/openDB.php";
+  $sql = "UPDATE `order` SET status = $status WHERE idOrder = $id";
+  mysqli_query($connect, $sql);
+  include "connect/openDB.php";
+  header("Location: ?controller=orderAdmin");
 }
 
 function storeSession()
@@ -126,7 +159,7 @@ function storeSession()
     }
     $_SESSION['order'][$value] = $amount;
   }
-  header("location: ?controller=orderAdmin&action=add");
+  header("Location: ?controller=orderAdmin&action=add");
 }
 
 function deleteProdInSession()
@@ -160,9 +193,11 @@ switch ($action) {
     }
     break;
   case 'edit': {
+      $array = edit();
     }
     break;
   case 'update': {
+      update();
     }
     break;
   case 'destroy': {

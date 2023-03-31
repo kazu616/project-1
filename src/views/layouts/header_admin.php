@@ -1,7 +1,5 @@
 <header>
   <div class="search">
-    <box-icon name="search-alt-2"></box-icon>
-    <input type="text" placeholder="Enter something..." class="search-header" />
   </div>
   <div class="user-header">
     <div class="icon">
@@ -30,7 +28,7 @@
           <box-icon name="cog"></box-icon>
           <span> FAQ </span>
         </li>
-        <a href="logout.php">
+        <a href="?controller=auth_admin&action=logout">
           <li>
             <box-icon name="log-out"></box-icon>
             <span>Logout</span>

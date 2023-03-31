@@ -3,6 +3,18 @@ $action = '';
 if (isset($_GET['action'])) {
   $action = $_GET['action'];
 }
+
+function checkLogin()
+{
+  if (isset($_SESSION['email']) && isset($_SESSION['customer_role'])) {
+    if ($_SESSION['customer_role'] == 2) {
+      return true;
+    }
+  } else {
+    return false;
+  }
+}
+
 switch ($action) {
   case '': {
       include_once 'views/customer/login.php';

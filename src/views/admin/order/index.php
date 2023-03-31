@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/output.css">
   <link rel="stylesheet" href="css/admin.css">
   <title>Admin</title>
 </head>
@@ -35,19 +36,15 @@
               <td><?= $each['idOrder'] ?></td>
               <td><?= $each['bill_code'] ?></td>
               <td><?= $each['createdDate'] ?></td>
-              <td><?= $each['status'] ?></td>
+              <td><?= $each['status'] == PENDING ? '<span class="px-5 py-3 text-white rounded-[5px] bg-orange-400">PENDING</span>' : ($each['status'] == DELIVERING ? '<span class="px-5 py-3 text-white bg-blue-400 rounded-[5px]">DELIVERING</span>' : ($each['status'] == COMPLETED ? '<span class="px-5 py-3 text-white bg-green-400 rounded-[5px]">COMPLETED</span>' : '<span class="px-5 py-3 rounded-[5px] text-white bg-red-400">CANCELED</span>')) ?>
+              </td>
               <td><?= $result[$each['idOrder']] ?></td>
               <td>
-                <a href="?pagelayout=add_product&edit=true&id=<?= $row['prod_id'] ?>" title="Edit Product">
-                  <button class="edit-btn">
+                <button class="edit-btn <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled' : '' ?>">
+                  <a href="?controller=orderAdmin&action=edit&id=<?= $each['idOrder'] ?>" class="fill-white <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled"' : '' ?>" title="Edit Product">
                     <box-icon name="edit"></box-icon>
-                  </button>
-                </a>
-                <a href="?pagelayout=del_product&id=<?= $row['prod_id'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
-                  <button type="button">
-                    <box-icon type="solid" name="trash"></box-icon>
-                  </button>
-                </a>
+                  </a>
+                </button>
               </td>
             </tr>
           <?php } ?>
