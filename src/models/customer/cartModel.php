@@ -29,9 +29,9 @@ function add_to_cart()
     isset($_GET['amount']) ? $amount = $_GET['amount'] : $amount = 1;
     if (isset($_SESSION['cart'])) {
         if (isset($_SESSION['cart'][$product_id])) {
-            $_SESSION['cart'][$product_id]++;
+            $_SESSION['cart'][$product_id] = $_SESSION['cart'][$product_id] + $amount;
         } else {
-            $_SESSION['cart'][$product_id] = 1;
+            $_SESSION['cart'][$product_id] = $amount;
         }
     } else {
         $_SESSION['cart'] = array();

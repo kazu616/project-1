@@ -11,6 +11,8 @@ inputAmount.addEventListener("blur", () => {
     if (inputAmount.value > parseInt(total_amount.textContent.trim())) {
         alert("Insufficient quantity in stock");
         inputAmount.value = 1;
+    } else {
+        data.setAttribute("name", inputAmount.value);
     }
 });
 minusBtn.addEventListener("click", () => {
@@ -29,7 +31,7 @@ plusBtn.addEventListener("click", () => {
 
 add_to_cart.addEventListener("click", (event) => {
     event.preventDefault();
-    if (inputAmount.value > 0) {
+    if (parseInt(total_amount.textContent.trim()) > 0) {
         window.location.href =
             "?controller=cart&action=add_to_cart&mode=1&id=" +
             idPr +
@@ -39,7 +41,7 @@ add_to_cart.addEventListener("click", (event) => {
 });
 buy_now.addEventListener("click", (event) => {
     event.preventDefault();
-    if (inputAmount.value > 0) {
+    if (parseInt(total_amount.textContent.trim()) > 0) {
         window.location.href =
             "?controller=cart&action=add_to_cart&mode=2&id=" +
             idPr +
