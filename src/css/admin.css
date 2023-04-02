@@ -566,7 +566,7 @@ main header .search box-icon {
 }
 
 .edit-btn {
-  background: rgb(71, 67, 67) !important;
+  background: #474343;
 }
 
 .toggle_btn {
@@ -664,4 +664,12 @@ main header .search box-icon {
 }
 .pagination-active::before {
   transform: scale(1);
+}
+
+a.disabled {
+  pointer-events: none;
+}
+
+button.disabled {
+  cursor: not-allowed !important;
 }

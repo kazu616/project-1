@@ -32,4 +32,13 @@ switch ($action) {
       include_once 'views/admin/order/checkout.php';
     }
     break;
+  case 'edit': {
+      include_once 'models/admin/orderModel.php';
+      include_once 'views/admin/order/editOrder.php';
+    }
+    break;
+  case 'update': {
+      include_once 'models/admin/orderModel.php';
+    }
+    break;
 }

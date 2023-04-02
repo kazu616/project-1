@@ -40,14 +40,14 @@
       <h2>Welcome to Admin Page!</h2>
       <p>Please sign-in to your account and start the adventure</p>
     </div>
-    <form class="form-login" autocomplete="off" method="POST">
+    <form class="form-login" autocomplete="off" method="POST" action="?controller=auth_admin&action=loginAccess">
       <div class="form-field">
-        <input type="email" value="admin@gmail.com" class="form-input" id="email" name="email" placeholder=" " />
+        <input type="email" value="dhoa4646@gmail.com" class="form-input" id="email" name="email_login" placeholder=" " />
         <label for="email" class="form-label">Email</label>
       </div>
       <div class="error-login">
         <div class="form-field" style="margin-bottom: 5px">
-          <input type="password" value="123" class="form-input" name="password" id="password" placeholder=" " />
+          <input type="password" value="10102003" class="form-input" name="password_login" id="password" placeholder=" " />
           <label for="password" class="form-label">Password</label>
           <box-icon name='low-vision' class="hide_eyes" style="right: 15px"></box-icon>
         </div>
