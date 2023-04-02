@@ -2,8 +2,6 @@
 function indexCart()
 {
     include_once 'connect/openDB.php';
-    $sqlCustomer = "SELECT * FROM accounts";
-    $customers = mysqli_query($connect, $sqlCustomer);
     $cart = array();
     $infor = array();
     if (isset($_SESSION['cart'])) {
@@ -11,6 +9,7 @@ function indexCart()
             $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM ((products INNER JOIN authors ON products.idAuthor = authors.idAuthor) INNER JOIN genres ON products.idGenre = genres.idGenre) WHERE idProduct = '$product_id'";
             $products = mysqli_query($connect, $sql);
             foreach ($products as $product) {
+                $cart[$product_id]['img'] = $product['img'];
                 $cart[$product_id]['product_name'] = $product['name'];
                 $cart[$product_id]['price'] = $product['price'];
                 $cart[$product_id]['amount'] = $amount;
@@ -20,17 +19,14 @@ function indexCart()
         }
     }
     include_once 'connect/closeDB.php';
-    $infor['customer'] = $customers;
     $infor['cart'] = $cart;
-    // return $infor;
-    var_dump($infor);
+    return $infor;
 }
+
 function add_to_cart()
 {
-    //        Lấy được id của sản phẩm vừa được thêm vào
     $product_id = $_GET['id'];
-    //        Lưu lên session id sản phầm và số lượng mặc định là 1
-    //        Kiểm tra xem giỏ hàng đã tồn tại hay chưa
+    isset($_GET['amount']) ? $amount = $_GET['amount'] : $amount = 1;
     if (isset($_SESSION['cart'])) {
         if (isset($_SESSION['cart'][$product_id])) {
             $_SESSION['cart'][$product_id]++;
@@ -39,15 +35,99 @@ function add_to_cart()
         }
     } else {
         $_SESSION['cart'] = array();
-        $_SESSION['cart'][$product_id] = 1;
+        $_SESSION['cart'][$product_id] = $amount;
     }
-    var_dump($_SESSION['cart']);
+    if ($_GET['mode'] == 1) {
+        header('Location: index.php?controller=productCustomer&action=single_product&id=' . $product_id);
+    } else {
+        header('Location:index.php?controller=cart');
+    }
 }
+function change_amount()
+{
+    $productId = $_GET['id'];
+    include_once 'connect/openDB.php';
+    $sql = "SELECT amount FROM products WHERE idProduct = ?";
+    $stmt = mysqli_prepare($connect, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $productId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $amount_DB = mysqli_fetch_assoc($result);
+    include_once 'connect/closeDB.php';
+    if ($_GET['mode'] == 1) {
+        foreach ($_SESSION['cart'] as $product_id => $amount_old) {
+            if ($productId == $product_id) {
+                if ($amount_old > 1) {
+                    $_SESSION['cart'][$product_id] = $amount_old - 1;
+                    header('Location:index.php?controller=cart');
+                } else {
+                    echo '<script language="javascript">';
+                    echo 'alert("The quantity is too small");';
+                    echo 'window.location.href="?controller=cart";';
+                    echo '</script>';
+                }
+            }
+        }
+    }
+    if ($_GET['mode'] == 2) {
+        foreach ($_SESSION['cart'] as $product_id => $amount_old) {
+            if ($productId == $product_id) {
+                if ($amount_old < $amount_DB['amount']) {
+                    $_SESSION['cart'][$product_id] = $amount_old + 1;
+                    header('Location:index.php?controller=cart');
+                } else {
+                    echo '<script language="javascript">';
+                    echo 'alert("Insufficient products in stock");';
+                    echo 'window.location.href="?controller=cart";';
+                    echo '</script>';
+                }
+            }
+        }
+    }
+    if ($_GET['mode'] == 3) {
+        $amount_new = $_GET['amount'];
+        if ($amount_new < 1) {
+            echo '<script language="javascript">';
+            echo 'alert("Wrong quantity format");';
+            echo 'window.location.href="?controller=cart";';
+            echo '</script>';
+        } else {
+            foreach ($_SESSION['cart'] as $product_id => $amount_old) {
+                if ($productId == $product_id && $amount_new < $amount_DB['amount']) {
+                    $_SESSION['cart'][$product_id] = $amount_new;
+                    header('Location:index.php?controller=cart');
+                } else {
+                    echo '<script language="javascript">';
+                    echo 'alert("Insufficient products in stock");';
+                    echo 'window.location.href="?controller=cart";';
+                    echo '</script>';
+                }
+            }
+        }
+    }
+}
+function trashPr()
+{
+    $id =  $_GET['id'];
+    foreach ($_SESSION['cart'] as $product_id => $amount_old) {
+        if ($id == $product_id) {
+            unset($_SESSION['cart'][$product_id]);
+            break;
+        }
+    }
+}
+
 switch ($action) {
     case '':
         $carts = indexCart();
         break;
     case 'add_to_cart':
         add_to_cart();
+        break;
+    case 'change_amount':
+        change_amount();
+        break;
+    case 'trashPr':
+        trashPr();
         break;
 }

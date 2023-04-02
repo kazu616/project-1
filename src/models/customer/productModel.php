@@ -10,7 +10,7 @@ function indexData()
       $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
       $products_number = 16;
       $total_page = ceil($total_product / $products_number);
-      $page = empty($_GET['page']) ? 1 : $_GET['page'];
+      $page = $_GET['page'];
       $offset = ($page - 1) * $products_number;
 
       $sql_genres = "SELECT * FROM genres";
@@ -142,10 +142,21 @@ function indexData()
     }
   }
 }
-
+function single_product()
+{
+  $id = $_GET['id'];
+  include_once 'connect/openDB.php';
+  $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM ((products INNER JOIN authors ON products.idAuthor = authors.idAuthor) INNER JOIN genres ON products.idGenre = genres.idGenre) WHERE idProduct = $id ";
+  $data =  mysqli_query($connect, $sql);
+  include_once 'connect/closeDB.php';
+  return $data;
+}
 
 switch ($action) {
   case '':
     $data = indexData();
+    break;
+  case 'single_product':
+    $data_pr = single_product();
     break;
 }

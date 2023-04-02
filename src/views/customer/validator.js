@@ -21,6 +21,7 @@ function validator(options) {
         // };
         options.rules.forEach(function (rule) {
             var inputElement = formElement.querySelector(rule.selector);
+            console.log(inputElement);
             if (inputElement) {
                 inputElement.onblur = function () {
                     validate(inputElement, rule);

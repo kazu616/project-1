@@ -103,16 +103,19 @@
                         <div>
                             <div class="flex-colum w-[300px] h-[400px] bg-white border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
                                 <div class="w-[270px] h-[235px] rounded-xl bg-[#F9F9F9] mx-auto hover:shadow-md duration-300 transition-all  ease-in-out ">
-                                    <img src="./imgs/<?= $product['img'] ?>" class=" mt-3 w-[270px] h-[235px] pt-5 object-contain cursor-pointer">
+                                    <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>"><img src="./imgs/<?= $product['img'] ?>" class=" mt-3 w-[270px] h-[235px] pt-5 object-contain cursor-pointer"></a>
                                 </div>
                                 <div class="ml-4 flex flex-col mb-3">
-                                    <a class="text-left font-semibold text-lg mt-3 transition-all duration-300  hover:text-[#FFA801] hover:cursor-pointer capitalize text-[#333]"><?= $product['name'] ?></a>
-                                    <a class="text-left font-italic transition-all duration-300 text-sm text-[#9D9D9D] hover:cursor-pointer hover:font-bold"><?= $product['nameAuthor'] ?></a>
+                                    <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>" class="text-left font-semibold text-lg mt-3 transition-all duration-300  hover:text-[#FFA801] hover:cursor-pointer capitalize text-[#333]"><?= $product['name'] ?></a>
+                                    <p class="text-left font-italic text-sm text-[#9D9D9D] ">
+                                        <?= $product['nameAuthor'] ?></p>
+                                    <p class="text-left font-italic text-sm text-[#24ff10] ">
+                                        <?= $product['nameGenre'] ?></p>
                                 </div>
                                 <div class="flex justify-between pr-4 pl-4 mt-2">
                                     <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
                                         $<?= $product['price'] ?></p>
-                                    <a href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>" class="hover:text-[#a37d56] transition-all duration-300 cursor-pointer ">Add To
+                                    <a href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>" class="hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add To
                                         Cart <i class="fa-solid fa-cart-shopping"></i>
                                     </a>
 
@@ -137,13 +140,31 @@
                 </div>
                 <div class="lg:flex hidden">
                     <?php
-                    for ($page = 1; $page <= $data['totalPage']; $page++) { ?>
-                        <a href="?controller=productCustomer&idG=<?php if (isset($_GET['idG'])) {
-                                                                        echo "" . $_GET['idG'];
-                                                                    }  ?>&mode=<?= $_GET['mode'] ?>&page=<?= $page ?>" class="<?php if ($_GET['page'] == $page) {
-                                                                                                                                    echo "text-lg font-medium leading-none cursor-pointer text-indigo-700 border-t border-indigo-400 pt-3 mr-4 px-2";
-                                                                                                                                } else echo "text-lg font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2" ?>"><?= $page ?></a>
-                    <?php } ?>
+                    // Use the $data['totalPage'] variable instead of $total_pages
+                    for ($page = 1; $page <= $data['totalPage']; $page++) {
+                        if ($page == 1 || $page == $data['totalPage'] || ($page >= $_GET['page'] - 2 && $page <= $_GET['page'] + 2)) {
+                    ?>
+                            <a href="?controller=productCustomer&idG=<?php if (isset($_GET['idG'])) {
+                                                                            echo "" . $_GET['idG'];
+                                                                        } ?>&mode=<?= $_GET['mode'] ?>&page=<?= $page ?>" class="<?php if ($_GET['page'] == $page) {
+                                                                                                                                        echo "text-lg font-medium leading-none cursor-pointer text-indigo-700 border-t border-indigo-400 pt-3 mr-4 px-2";
+                                                                                                                                    } else echo "text-lg font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2" ?>">
+                                <?php
+                                if ($page == $_GET['page']) {
+                                    echo "$page";
+                                } else {
+                                    echo "$page";
+                                }
+                                ?>
+                            </a>
+                        <?php
+                        } elseif (($page == $_GET['page'] - 3 && $_GET['page'] > 4) || ($page == $_GET['page'] + 3 && $_GET['page'] < $data['totalPage'] - 3)) {
+                        ?>
+                            <span class=" pr-4 pt-2 text-xl ">...</span>
+                    <?php
+                        }
+                    }
+                    ?>
                 </div>
                 <div class="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
                     <a href="?controller=productCustomer&idG=<?php if (isset($_GET['idG'])) {
@@ -154,7 +175,6 @@
                         <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-
                 </div>
             </div>
         </div>

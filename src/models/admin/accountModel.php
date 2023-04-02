@@ -46,7 +46,7 @@ function addAccount()
         echo '</script>';
     } else {
         $stmt = mysqli_prepare($connect, "INSERT INTO accounts (name, img, phoneNumber, password, email, address, idRole) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, $phoneNumber, trim($password), trim($email), $address, $roles);
+        mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, trim($phoneNumber), trim($password), trim($email), trim($address), $roles);
         mysqli_stmt_execute($stmt);
         header('Location:?controller=accountAdmin');
         include_once 'connect/closeDB.php';
@@ -101,7 +101,7 @@ function edit()
     } else {
         $sql_update = "UPDATE accounts SET email=? name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
         $stmt = mysqli_prepare($connect, $sql_update);
-        mysqli_stmt_bind_param($stmt, 'sssissii', trim($email), trim($name), $image_name, $phoneNumber, trim($password), $address, $roles, $id);
+        mysqli_stmt_bind_param($stmt, 'sssissii', trim($email), trim($name), $image_name, trim($phoneNumber), trim($password), trim($address), $roles, $id);
         mysqli_stmt_execute($stmt);
         include_once 'connect/closeDB.php';
         header('Location:?controller=accountAdmin');

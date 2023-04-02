@@ -1,5 +1,5 @@
 <?php
-function generate_string($input, $strength = 16)
+function generate_string($input, $strength = 10)
 {
   $input_length = strlen($input);
   $random_string = '';

@@ -5,7 +5,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 primary: ["Plus Jakarta Sans", "sans-serif"],
-                secondary: ["Cormorant Unicase", "serif"],
+                secondary: ["Prata", "serif"],
             },
         },
     },
