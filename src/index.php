@@ -58,7 +58,7 @@ switch ($controller) {
     include_once 'controllers/customer/user.controller.php';
     break;
   case 'order_history': {
-      include_once 'controllers/customer/order.controller.php';
+      include_once 'controllers/customer/order_history.controller.php';
     }
     break;
   case 'order':

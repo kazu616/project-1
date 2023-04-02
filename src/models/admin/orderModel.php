@@ -77,11 +77,12 @@ function store()
   $address = $_POST["address"];
   $status = $_POST["status"];
   $phone_number = $_POST["phone_number"];
+  $idAdmin = $_SESSION['customer_id'];
   include "connect/openDB.php";
   $arr = $_SESSION['order'];
   $bill_code = generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 20);
-  $sqlAddOrder = "INSERT INTO `order`(idAdmin, status, name_customer, phone_number, address_customer, bill_code) 
-    VALUES (7, $status, '$cus_name', '$phone_number', '$address', '$bill_code')";
+  $sqlAddOrder = "INSERT INTO `order`(status, name_customer, phone_number, address_customer, bill_code, idAdmin) 
+    VALUES ($status, '$cus_name', '$phone_number', '$address', '$bill_code', $idAdmin)";
   if (mysqli_query($connect, $sqlAddOrder)) {
     $last_id = mysqli_insert_id($connect);
     foreach ($arr as $key => $value) {
@@ -103,7 +104,6 @@ function store()
 //function lấy dữ liệu trên db dựa theo id
 function edit()
 {
-
   if (!isset($_GET['id'])) return;
   $id = $_GET['id'];
   $array = [];
@@ -198,9 +198,6 @@ switch ($action) {
     break;
   case 'update': {
       update();
-    }
-    break;
-  case 'destroy': {
     }
     break;
   case 'addProduct': {

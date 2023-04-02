@@ -38,7 +38,8 @@
               <option value="">Select status</option>
               <option value="<?= PENDING ?>">Pending</option>
               <option value="<?= DELIVERING ?>">Delivering</option>
-              <option value="<?= RECEIVED ?>">Received</option>
+              <option value="<?= COMPLETED ?>">COMPLETED</option>
+              <option value="<?= CANCELED ?>">CANCELED</option>
             </select>
           </div>
         </div>
