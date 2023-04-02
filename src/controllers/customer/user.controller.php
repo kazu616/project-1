@@ -37,7 +37,6 @@ switch ($action) {
       }
       break;
     }
-    break;
   case 'signupAccess': {
       include_once 'models/customer/userModel.php';
     }
