@@ -3,18 +3,26 @@ const popup_overlay = document.querySelector("#popup_overlay");
 const btn_popup = document.querySelector("#btn_popup");
 const btn_close = document.querySelector("#btn_close");
 const img_cart_empty = document.querySelector("#img_cart_empty");
+const avatar_img = document.querySelector("#product-image");
+const upload_avtImg = document.querySelector("#upload_avtImg");
 
-btn_popup.addEventListener("click", () => {
-  popup_overlay.classList.remove("hidden");
-});
+if (btn_popup) {
+  btn_popup.addEventListener("click", () => {
+    popup_overlay.classList.remove("hidden");
+  });
+}
 
-btn_close.addEventListener("click", () => {
-  popup_overlay.classList.add("hidden");
-});
+if (btn_close) {
+  btn_close.addEventListener("click", () => {
+    popup_overlay.classList.add("hidden");
+  });
+}
 
 document.addEventListener("click", (e) => {
-  if (e.target.matches("#popup_overlay")) {
-    popup_overlay.classList.add("hidden");
+  if (popup_overlay) {
+    if (e.target.matches("#popup_overlay")) {
+      popup_overlay.classList.add("hidden");
+    }
   }
 });
 
@@ -32,4 +40,10 @@ if (img_cart_empty !== null) {
     },
     onClick: function () {}, // Callback after click
   }).showToast();
+}
+
+if (upload_avtImg) {
+  upload_avtImg.addEventListener("click", () => {
+    avatar_img.click();
+  });
 }

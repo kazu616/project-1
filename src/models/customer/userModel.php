@@ -29,6 +29,8 @@ function loginCustomer()
         $_SESSION['email'] = $email;
         $_SESSION['customer_id'] = $row['idAccount'];
         $_SESSION['customer_role'] = $row['idRole'];
+        $_SESSION['customer_img'] = $row['img'];
+        $_SESSION['customer_name'] = $row['name'];
 
         // Return success indicator
         return 1;
