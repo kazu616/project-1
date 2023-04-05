@@ -85,11 +85,38 @@ function add_data()
     include_once 'connect/closeDB.php';
     header('Location:index.php?controller=cart');
 }
+function order_detail()
+{
+    $id_order = $_GET['id'];
+    include_once 'connect/openDB.php';
+    $sql = "SELECT `order`.*, order_detail.*, order_detail.amount AS total_amount, products.*, authors.name AS nameAuthor
+    FROM `order`
+    JOIN order_detail ON `order`.idOrder = order_detail.idOrder
+    JOIN products ON order_detail.idProduct = products.idProduct
+    JOIN authors ON products.idAuthor = authors.idAuthor
+    WHERE `order`.idOrder = $id_order
+    ";
+    $infor = mysqli_fetch_assoc(mysqli_query($connect, $sql));
+    $data_DB = mysqli_fetch_all(mysqli_query($connect, $sql), MYSQLI_ASSOC);
+    // foreach ($data_DB as $data) {
+    //     echo $data['idProduct'];
+    //     echo $data['img'];
+    //     echo $data['name'];
+    //     echo $data['nameAuthor'] . '<br>';
+    // }
+    $data = array();
+    $data['DB'] = $data_DB;
+    $data['info'] = $infor;
+    return $data;
+}
 switch ($action) {
     case '':
         $listPr = checkout();
         break;
     case 'add_data':
         add_data();
+        break;
+    case 'order_detail':
+        $data = order_detail();
         break;
 }

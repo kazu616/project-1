@@ -13,4 +13,9 @@ switch ($action) {
       include_once 'models/customer/orderModel.php';
     }
     break;
+  case 'order_detail': {
+      include_once 'models/customer/orderModel.php';
+      include_once 'views/customer/order/order_detail.php';
+    }
+    break;
 }

@@ -31,7 +31,10 @@ switch ($action) {
   case 'loginAccess': {
       include_once 'models/customer/userModel.php';
       if ($test == 0) {
-        header('Location:index.php?controller=user&action=signup');
+        echo '<script language="javascript">';
+        echo 'alert("Email or password wrong");';
+        echo 'window.location.href="?controller=user&action=login";';
+        echo '</script>';
       } elseif ($test == 1) {
         header('Location:index.php?controller=productCustomer');
       }

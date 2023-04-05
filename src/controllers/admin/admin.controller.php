@@ -9,6 +9,7 @@ switch ($action) {
     }
     break;
   case '': {
+      include_once 'models/admin/adminModel.php';
       include_once 'views/admin/index.php';
     }
     break;
