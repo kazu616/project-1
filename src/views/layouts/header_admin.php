@@ -1,6 +1,5 @@
 <header>
-  <div class="search">
-  </div>
+  <div></div>
   <div class="user-header">
     <div class="icon">
       <div class="moon">

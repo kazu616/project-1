@@ -28,29 +28,29 @@
             Add product
           </button>
         </div>
-        <?php foreach ($array['data'] as $key => $value) { ?>
-          <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative">
-            <a href="?controller=orderAdmin&action=deleteProd&id=<?= $value['idProduct'] ?>" onclick="return confirm('Are you sure?');" class="absolute text-red-500 right-4 top-4">
+        <?php foreach ($array['data'] as $each) { ?>
+          <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative mt-10">
+            <a href="?controller=orderAdmin&action=deleteProd&id=<?= $each['idProduct'] ?>" onclick="return confirm('Are you sure?');" class="absolute text-red-500 right-4 top-4">
               <i class="fa-solid fa-circle-xmark fa-lg"></i>
             </a>
-            <div class="flex gap-x-5">
+            <div class="flex gap-x-5 min-h-[180px] mb-7">
               <div class=" w-[148px] max-h-[208px]">
-                <img src="imgs/best-selling.png" class="object-cover w-full h-full" alt="">
+                <img src="imgs/<?= $each['img'] ?>" class="object-cover w-full h-full" alt="">
               </div>
               <div class="pt-10 text-center">
-                <h3 class="text-xl uppercase"><?= $value['name_prod'] ?></h3>
-                <p class="text-sm text-[#dacfcf] "><?= $value['name_author'] ?></p>
+                <h3 class="text-xl uppercase"><?= $each['name_prod'] ?></h3>
+                <p class="text-sm text-[#dacfcf] "><?= $each['name_author'] ?></p>
               </div>
             </div>
             <div class="flex flex-col pb-1 mr-10 gap-y-1">
               <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
                 <p>Amount:</p>
-                <span class="text-xl font-secondary"><?= $value['amount_order'] ?></span>
+                <span class="text-xl font-secondary"><?= $each['amount_order'] ?></span>
               </div>
               <!-- <p class="flex items-end mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span>$ 45.00</span></p> -->
               <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
                 <p>Price:</p>
-                <span class="text-xl font-secondary"> $ <?= number_format($value['price']) ?></span>
+                <span class="text-xl font-secondary"> $ <?= number_format($each['price']) ?></span>
               </div>
             </div>
           </div>
@@ -92,40 +92,27 @@
       <div class="absolute text-3xl cursor-pointer top-4 right-4" id="btn_close">
         <i class="fa-regular fa-circle-xmark"></i>
       </div>
-      <div class="mx-auto relative w-[300px] mb-10">
-        <div class="search">
-          <box-icon name="search-alt-2" class="absolute top-1/2 -translate-y-1/2 left-[10px] fill-[#fff]"></box-icon>
-          <input type="text" placeholder="Enter something..." class="search-header" />
-        </div>
-      </div>
+      <h3 class="mt-10 text-2xl">Products:</h3>
       <form action="?controller=orderAdmin&action=addProduct" id="form_add_prod" method="POST">
-        <?php foreach ($result['data'] as $item) { ?>
-          <div class="flex items-center item pb-5 gap-x-20 border-b border-[#989393] mt-10">
-            <input type="checkbox" name="check_list[]" value="<?= $item['idProduct'] ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer">
-            <div class="flex gap-x-5">
-              <div class="h-[100px]">
-                <img src="imgs/best-selling.png" class="object-cover w-full h-full" alt="">
+        <div class="max-h-[500px] overflow-auto list_product_pop_up">
+          <?php foreach ($result['data'] as $item) { ?>
+            <div class="flex items-center item pb-5 gap-x-20 border-b border-[#989393] mt-10">
+              <input type="checkbox" name="check_list[]" value="<?= $item['idProduct'] ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer">
+              <div class="flex gap-x-5">
+                <div class="h-[100px]">
+                  <img src="imgs/<?= $item['img'] ?>" class="object-cover w-full h-full" alt="">
+                </div>
+                <div class="pt-4 text-center w-[200px]">
+                  <h3 class="text-xl uppercase"><?= $item['name_prod'] ?></h3>
+                  <p class="text-sm text-[#dacfcf] "><?= $item['name_author'] ?> </p>
+                </div>
               </div>
-              <div class="pt-4 text-center w-[200px]">
-                <h3 class="text-xl uppercase"><?= $item['name_prod'] ?></h3>
-                <p class="text-sm text-[#dacfcf] "><?= $item['name_author'] ?> </p>
-              </div>
+              <input type="number" max=10 name="<?= $item['idProduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
+              <div class="price">$ <?= $item['price'] ?></div>
             </div>
-            <input type="number" max=10 name="<?= $item['idProduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
-            <div class="price">$ <?= $item['price'] ?></div>
-          </div>
-        <?php } ?>
-        <div class="pagination-container">
-          <div class="pagination">
-            <span class="pagination-inner">
-              <?php
-              for ($i = 1; $i <= $result['total_page']; $i++) {
-              ?>
-                <a href="?controller=orderAdmin&action=add&page=<?= $i ?>" class=<?= isset($_GET["page"]) ? ($_GET["page"] == $i ? "pagination-active" : "") : ($i == 1 ? "pagination-active" : "") ?>><?= $i ?></a>
-              <?php } ?>
-            </span>
-          </div>
+          <?php } ?>
         </div>
+
         <div class="w-full mt-10 text-center">
           <button type="submit" class="w-[400px] px-5 py-2 bg-[#9155fd] rounded-[100vmax]">Add to order</button>
         </div>

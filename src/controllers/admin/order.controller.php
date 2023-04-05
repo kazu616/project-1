@@ -41,4 +41,8 @@ switch ($action) {
       include_once 'models/admin/orderModel.php';
     }
     break;
+  case 'search': {
+      include_once 'models/admin/orderModel.php';
+    }
+    break;
 }

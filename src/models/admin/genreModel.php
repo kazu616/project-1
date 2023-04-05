@@ -24,10 +24,18 @@ function store()
     $name_genre = $_POST['name'];
     if (empty($name_genre) || trim($name_genre) === "") return header("location: ?controller=categoryAdmin");
     include_once "connect/openDB.php";
-    $sql = "INSERT INTO genres (name) VALUES ('$name_genre')";
-    mysqli_query($connect, $sql);
+    $sql_check = "SELECT * FROM genres WHERE name = '$name_genre'";
+    $query = mysqli_query($connect, $sql_check);
+    if ($query && mysqli_num_rows($query) > 0) {
+        echo '<script language="javascript">
+        alert("Name genre duplicate");
+        </script>';
+    } else {
+        $sql = "INSERT INTO genres (name) VALUES ('$name_genre')";
+        mysqli_query($connect, $sql);
+        header("location: ?controller=categoryAdmin");
+    }
     include_once "connect/closeDB.php";
-    header("location: ?controller=categoryAdmin");
 }
 
 function edit()

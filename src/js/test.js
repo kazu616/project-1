@@ -8,6 +8,7 @@ const upload_avtImg = document.querySelector("#upload_avtImg");
 
 if (btn_popup) {
   btn_popup.addEventListener("click", () => {
+    document.body.classList.add("overflow-hidden");
     popup_overlay.classList.remove("hidden");
   });
 }

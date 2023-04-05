@@ -103,7 +103,7 @@
     </div>
   </div>
   <div class="mt-16"></div>
-  <div class="container border-b border-[#E0E0E0] pb-16">
+  <div class="container border-b border-[#E0E0E0] pb-16" id="popular_book">
     <div class="flex items-end mb-14 gap-x-20">
       <div class="line w-[400px] h-[1px] bg-[#E0E0E0] -translate-y-5"></div>
       <div class="flex flex-col items-center gap-y-2">
@@ -114,12 +114,14 @@
     </div>
     <div class="flex justify-center w-full">
       <ul class="flex gap-x-[40px] font-semibold mx-auto text-[#999999]">
-        <li class="text-[#111111] pb-1 border-b-[3px] px-1 border-b-[#9A884C]">All Genre</li>
-        <li>Business</li>
-        <li>Techlogogy</li>
-        <li>Adventure</li>
-        <li>Romantic</li>
-        <li>Fictional</li>
+        <a href="?genres=0#popular_book">
+          <li class=" pb-1 px-1 <?= isset($_GET['genre']) ? ($_GET['genre'] == 0 ? "border-b-[3px]  border-b-[#9A884C] text-[#111111]" : "")  : "border-b-[3px]  border-b-[#9A884C] text-[#111111]" ?>">All Genre</li>
+        </a>
+        <?php foreach ($array["genres"] as $genre) { ?>
+          <a href="?genre=<?= $genre['idGenre'] ?>#popular_book">
+            <li class="pb-1 px-1  <?= isset($_GET['genre']) ? ($_GET['genre'] == $genre['idGenre'] ? "border-b-[3px]  border-b-[#9A884C] text-[#111111]" : "")  : "" ?>"><?= $genre['name'] ?></li>
+          </a>
+        <?php } ?>
       </ul>
     </div>
     <div class="grid grid-cols-4 gap-10 mt-10">

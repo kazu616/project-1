@@ -58,7 +58,11 @@ switch ($controller) {
     include_once 'controllers/customer/user.controller.php';
     break;
   case 'order_history': {
-      include_once 'controllers/customer/order_history.controller.php';
+      if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+        include_once 'controllers/customer/order_history.controller.php';
+      } else {
+        header('Location:index.php?controller=user&action=login');
+      }
     }
     break;
   case 'order':
@@ -79,14 +83,22 @@ switch ($controller) {
     }
     break;
   case 'order_detail':
-    include_once 'controllers/customer/order_detail.controller.php';
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+      include_once 'controllers/customer/order_detail.controller.php';
+    } else {
+      header('Location:index.php?controller=user&action=login');
+    }
     break;
   case 'auth_admin': {
       include_once 'controllers/admin/auth.controller.php';
     }
     break;
   case 'account': {
-      include_once 'controllers/customer/account.controller.php';
+      if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+        include_once 'controllers/customer/account.controller.php';
+      } else {
+        header('Location:index.php?controller=user&action=login');
+      }
     }
     break;
   default:

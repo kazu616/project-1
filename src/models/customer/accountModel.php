@@ -1,17 +1,17 @@
 <?php
 function indexAccount()
 {
-  // if (!isset($_SESSION['customer_id']) || $_SESSION['customer_role'] == 1) {
-  //   session_unset();
-  //   session_destroy();
-  //   echo '<script type="text/JavaScript"> 
-  //   window.location.href="?controller=user&action=login";
-  //   </script>';
-  //   return;
-  // }
-  // $id = $_SESSION['customer_id'];
+  if (!isset($_SESSION['customer_id']) || $_SESSION['customer_role'] == 1) {
+    session_unset();
+    session_destroy();
+    echo '<script type="text/JavaScript"> 
+    window.location.href="?controller=user&action=login";
+    </script>';
+    return;
+  }
+  $id = $_SESSION['customer_id'];
   include_once 'connect/openDB.php';
-  $sql = "SELECT * FROM accounts WHERE idAccount = 9";
+  $sql = "SELECT * FROM accounts WHERE idAccount = $id";
   $account = mysqli_query($connect, $sql);
   $result = mysqli_fetch_array($account);
   include_once 'connect/closeDB.php';
@@ -20,15 +20,15 @@ function indexAccount()
 
 function update()
 {
-  // if (!isset($_SESSION['customer_id'])) {
-  //   session_unset();
-  //   session_destroy();
-  //   echo '<script language="javascript">';
-  //   echo 'window.location.href="?controller=user&action=login';
-  //   echo '</script>';
-  //   return;
-  // }
-  // $id = $_SESSION['customer_id'];
+  if (!isset($_SESSION['customer_id'])) {
+    session_unset();
+    session_destroy();
+    echo '<script language="javascript">';
+    echo 'window.location.href="?controller=user&action=login';
+    echo '</script>';
+    return;
+  }
+  $id = $_SESSION['customer_id'];
   $name = $_POST['name'];
   $phoneNumber = $_POST['phone_number'];
   $password = $_POST['password'];
@@ -37,7 +37,7 @@ function update()
   $old_image = $_POST['old_img'];
   include_once 'connect/openDB.php';
 
-  $sql_check = "SELECT * FROM accounts WHERE email = $email AND idAccount != 9";
+  $sql_check = "SELECT * FROM accounts WHERE email = '$email' AND idAccount != $id";
   $query = mysqli_query($connect, $sql_check);
   if ($query && mysqli_num_rows($query) > 0) {
     echo '<script language="javascript">
@@ -57,8 +57,10 @@ function update()
         $_SESSION['customer_img'] = $image_name;
       }
     }
-    $sql_update = "UPDATE accounts SET email='$email', name='$name', img='$image_name', phoneNumber='$phoneNumber', password='$password', address='$address' WHERE idAccount=9";
+    $sql_update = "UPDATE accounts SET email='$email', name='$name', img='$image_name', phoneNumber='$phoneNumber', password='$password', address='$address' WHERE idAccount=$id";
     mysqli_query($connect, $sql_update);
+    $_SESSION['customer_name'] = $name;
+    $_SESSION['email'] = $email;
     include_once 'connect/closeDB.php';
     header('Location:?controller=account');
   }

@@ -17,13 +17,13 @@
     <?php include 'views/layouts/side_bar_account.php' ?>
     <div class="flex-1 rounded-[10px]">
       <div class="flex items-center justify-between bg-[#EDEBE4] mb-10">
-        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold text-red-500 uppercase border-b-2 border-red-500 cursor-pointer">All</a>
-        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Pending</a>
-        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Transport</a>
-        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Complete</a>
-        <a href="#" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Cancelled</a>
+        <a href="?controller=order_history" class="flex items-center justify-center px-10 py-5 text-xl font-semibold text-red-500 uppercase border-b-2 border-red-500 cursor-pointer">All</a>
+        <a href="?controller=order_history&status=1" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Pending</a>
+        <a href="?controller=order_history&status=2" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Transport</a>
+        <a href="?controller=order_history&status=3" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Complete</a>
+        <a href="?controller=order_history&status=4" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Cancelled</a>
       </div>
-      <div class="flex flex-col w-full gap-10">
+      <div class="flex flex-col w-full gap-10 min-h-[500px]">
         <?php foreach ($array as $each) { ?>
           <div class="w-full rounded-[20px] bg-white p-5">
             <div class="flex justify-end uppercase gap-x-5 border-b border-[#888888] pb-3 mb-5">
@@ -33,7 +33,20 @@
               </div>
               <div class="flex gap-x-2">
                 <p>Status:</p>
-                <span class="text-[#61FF00]"><?= $each['order']['status'] ?></span>
+                <?php switch ($each['order']['status']) {
+                  case PENDING:
+                    echo "<span class='text-orange-500'>Pending</span>";
+                    break;
+                  case DELIVERING:
+                    echo "<span class='text-blue-500'>Delivering</span>";
+                    break;
+                  case COMPLETED:
+                    echo "<span class='text-green-500'>Completed</span>";
+                    break;
+                  case CANCELED:
+                    echo "<span class='text-red-500'>Canceled</span>";
+                    break;
+                } ?>
               </div>
             </div>
             <?php foreach ($each['data'] as $item) { ?>
@@ -58,14 +71,14 @@
               <p class="text-[#888888]">Created Day: <?php
                                                       $date = date_create(explode(" ", $each['order']['createdDate'])[0]);
                                                       echo date_format($date, "d/m/Y");
-                                                      die();
                                                       ?></p>
               <div class="flex items-center gap-x-3">
                 <p class="text-[#888]">Total:</p>
-                <span class="text-red-500">$ 80.00</span>
+                <span class="text-red-500">$ <?= $each['total_price'] ?></span>
               </div>
             </div>
-            <div class="flex justify-end">
+            <div class="flex justify-end gap-x-5">
+              <?php if ($each['order']['status'] == PENDING) { ?> <button class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel Order</button> <?php } ?>
               <button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px]">Received The Confirme</button>
             </div>
           </div>

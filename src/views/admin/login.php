@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/admin.css">
   <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/output.css">
+  <script src="js/toastr.min.js"></script>
 </head>
 
 <body>
