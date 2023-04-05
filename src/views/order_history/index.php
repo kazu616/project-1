@@ -27,7 +27,7 @@
         <?php foreach ($array as $each) { ?>
           <div class="w-full rounded-[20px] bg-white p-5">
             <div class="flex justify-end uppercase gap-x-5 border-b border-[#888888] pb-3 mb-5">
-              <div class="flex gap-x-2 pr-5 border-r border-[#888888]">
+              <div class="flex gap-x-2 pr-5 border-r border-[#888888] uppercase">
                 <p>bill of lading code:</p>
                 <span class="text-red-500"><?= $each['order']['bill_code'] ?></span>
               </div>
