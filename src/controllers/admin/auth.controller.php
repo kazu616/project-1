@@ -31,7 +31,11 @@ switch ($action) {
       }
       include_once 'models/admin/authModel.php';
       if ($check == 0) {
-        header('Location:index.php?controller=auth_admin');
+        echo '<script language="javascript">
+        alert("Login failed");
+        window.location.href="?controller=auth_admin";
+        </script>';
+        // header('Location:index.php?controller=auth_admin');
       } elseif ($check == 1) {
         header('Location:index.php?controller=admin');
       }

@@ -6,57 +6,61 @@
 @import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
 
 @layer base {
-    body {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        background: #f3f2ec;
-        font-family: "Plus Jakarta Sans", sans-serif;
-        color: #111111;
-    }
-    .container {
-        max-width: 1280px !important;
-        margin: 0 auto;
-    }
-    input,
-    textarea {
-        outline: none;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f3f2ec;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #111111;
+  }
+  .container {
+    max-width: 1280px !important;
+    margin: 0 auto;
+  }
+  input,
+  textarea {
+    outline: none;
+  }
 }
 
 .swiper-pagination {
-    z-index: -1 !important;
+  z-index: -1 !important;
 }
 
 .swiper-pagination-bullet {
-    display: inline-block !important;
-    border-radius: 0 !important;
-    width: 10px !important;
-    height: 10px !important;
-    border-radius: 100% !important;
-    background: #74642f !important;
+  display: inline-block !important;
+  border-radius: 0 !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 100% !important;
+  background: #74642f !important;
 }
 .swiper-pagination-bullet-active {
-    padding: 3px !important;
+  padding: 3px !important;
 }
 
 *,
 *:before,
 *:after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 * {
-    margin: 0;
-    padding: 0;
-    font: inherit;
+  margin: 0;
+  padding: 0;
+  font: inherit;
 }
 img,
 picture,
 svg,
 video {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 body {
-    min-height: 100vh;
+  min-height: 100vh;
+}
+
+.list_product_pop_up::-webkit-scrollbar {
+  display: none;
 }

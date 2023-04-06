@@ -11,13 +11,41 @@
     <?php require_once 'views/layouts/header2.php' ?>
     <div class="container mt-10 mb-52">
         <h2 class="mb-10 text-2xl uppercase font-secondary">bill of product</h2>
+        <div class="flex items-center justify-between w-full  bg-[#EDEBE4] py-5 px-10 rounded-[10px] ">
+            <div>
+                <a href="#">Back</a>
+            </div>
+            <div class="flex uppercase gap-x-5">
+                <div class="flex gap-x-2 pr-5 border-r border-[#888888] uppercase">
+                    <p>bill of lading code:</p>
+                    <span class="text-red-500">79087987987987</span>
+                </div>
+                <div class="flex gap-x-2">
+                    <p>Status:</p> 1
+                    <!-- <?php switch ($each['order']['status']) {
+                                case PENDING:
+                                    echo "<span class='text-orange-500'>Pending</span>";
+                                    break;
+                                case DELIVERING:
+                                    echo "<span class='text-blue-500'>Delivering</span>";
+                                    break;
+                                case COMPLETED:
+                                    echo "<span class='text-green-500'>Completed</span>";
+                                    break;
+                                case CANCELED:
+                                    echo "<span class='text-red-500'>Canceled</span>";
+                                    break;
+                            } ?> -->
+                </div>
+            </div>
+        </div>
         <div class="w-full rounded-[10px] bg-[#EDEBE4] border mt-8 min-h-[500px] px-10 pt-5 pb-10">
             <div class="flex items-center justify-between">
-                <h3 class="mb-10 text-2xl font-secondary uppercase">Delivery address</h3>
+                <h3 class="mb-10 text-2xl uppercase font-secondary">Delivery address</h3>
             </div>
             <form action="?controller=order&action=add_data" method="POST">
                 <div class="flex flex-col gap-2 mb-10">
-                    <span class="text-lg uppercase text-black"><?= "Name:  " . $data['info']['name_customer'] ?></span>
+                    <span class="text-lg text-black uppercase"><?= "Name:  " . $data['info']['name_customer'] ?></span>
                     <span class="text-lg text-[#968E8E] uppercase"><?= "Phone:  " . $data['info']['phone_number']  ?></span>
                     <span class="text-lg uppercase text-[#968e8e]"><?= "Address:  " . $data['info']['address_customer']  ?></span>
                 </div>
@@ -32,14 +60,14 @@
                                 <p class="text-sm text-[#888888] "><?= $value['nameAuthor'] ?></p>
                             </div>
                         </div>
-                        <div class="flex flex-col pb-1 mr-10 gap-y-1 text-lg font-extralight text-left uppercase text-black">
-                            <div class="flex justify-between items-center">
+                        <div class="flex flex-col pb-1 mr-10 text-lg text-left text-black uppercase gap-y-1 font-extralight">
+                            <div class="flex items-center justify-between">
                                 <p>Amount:</p>
                                 <span class="text-xl font-secondary text-[#888888]"><?= $value['total_amount'] ?></span>
                             </div>
                             <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
                                 <p>Price:</p>
-                                <span class="text-2xl font-secondary text-red-700"><?= "$ " . $value['sold_price'] ?></span>
+                                <span class="text-2xl text-red-700 font-secondary"><?= "$ " . $value['sold_price'] ?></span>
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,16 @@ const toggle_password = document.querySelector(".hide_eyes");
 const queryString = window.location.search;
 const page = queryString.split("=")[1];
 let pre_url;
+const search_bill_code = document.querySelector("#search_bill_code");
+const input_search_bill = document.querySelector(".search-header");
+
+if (search_bill_code && input_search_bill) {
+  search_bill_code.addEventListener("click", () => {
+    console.log("object");
+    const value = input_search_bill.value;
+    window.location = `?controller=orderAdmin&search=${value}`;
+  });
+}
 
 if (lightTheme) {
   func_lightTheme();
