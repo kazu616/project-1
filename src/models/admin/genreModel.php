@@ -29,6 +29,7 @@ function store()
     if ($query && mysqli_num_rows($query) > 0) {
         echo '<script language="javascript">
         alert("Name genre duplicate");
+        window.location.href="?controller=genreAdmin";
         </script>';
     } else {
         $sql = "INSERT INTO genres (name) VALUES ('$name_genre')";

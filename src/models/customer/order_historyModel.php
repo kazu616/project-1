@@ -2,13 +2,14 @@
 
 function index()
 {
-  $status = '';
+  $status = 0;
+  $id = $_SESSION['customer_id'];
+  $sql = "SELECT * FROM `order` WHERE idCustomer = $id";
   if (isset($_GET['status'])) {
     $status = $_GET['status'];
+    $sql = "SELECT * FROM `order` WHERE idCustomer = $id AND status = $status";
   }
-  $id = $_SESSION['customer_id'];
   include_once 'connect/openDB.php';
-  $sql = "SELECT * FROM `order` WHERE idCustomer = $id";
   $result = mysqli_query($connect, $sql);
   $array = [];
   foreach ($result as $each) {
@@ -29,8 +30,23 @@ function index()
   return $array;
 }
 
+function update()
+{
+  if (!isset($_GET['status']) || !isset($_GET['id'])) return;
+  $status = $_GET['status'];
+  $id = $_GET['id'];
+  include_once 'connect/openDB.php';
+  $sql = "UPDATE `order` SET status = $status WHERE idOrder = $id";
+  mysqli_query($connect, $sql);
+  include_once 'connect/closeDB.php';
+  header("Location: ?controller=order_history");
+}
+
 switch ($action) {
   case '':
     $array = index();
     break;
+  case 'update': {
+      update();
+    }
 }

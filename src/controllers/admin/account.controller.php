@@ -25,4 +25,8 @@ switch ($action) {
   case 'delete':
     include_once 'models/admin/accountModel.php';
     header('Location:?controller=accountAdmin');
+    break;
+  case 'search': {
+      include_once 'models/admin/accountModel.php';
+    }
 }

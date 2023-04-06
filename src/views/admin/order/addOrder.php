@@ -34,7 +34,7 @@
               <i class="fa-solid fa-circle-xmark fa-lg"></i>
             </a>
             <div class="flex gap-x-5 min-h-[180px] mb-7">
-              <div class=" w-[148px] max-h-[208px]">
+              <div class=" w-[148px]">
                 <img src="imgs/<?= $each['img'] ?>" class="object-cover w-full h-full" alt="">
               </div>
               <div class="pt-10 text-center">
@@ -98,9 +98,9 @@
           <?php foreach ($result['data'] as $item) { ?>
             <div class="flex items-center item pb-5 gap-x-20 border-b border-[#989393] mt-10">
               <input type="checkbox" name="check_list[]" value="<?= $item['idProduct'] ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer">
-              <div class="flex gap-x-5">
-                <div class="h-[100px]">
-                  <img src="imgs/<?= $item['img'] ?>" class="object-cover w-full h-full" alt="">
+              <div class="flex items-center gap-x-5">
+                <div class=" w-[148px]">
+                  <img src="imgs/<?= $item['prod_image'] ?>" class="object-cover w-full h-full" alt="">
                 </div>
                 <div class="pt-4 text-center w-[200px]">
                   <h3 class="text-xl uppercase"><?= $item['name_prod'] ?></h3>

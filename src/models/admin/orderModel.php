@@ -42,7 +42,7 @@ function index()
 function getProducts()
 {
   include "connect/openDB.php";
-  $sql = "SELECT *, products.name as name_prod,authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor";
+  $sql = "SELECT *, products.name as name_prod,authors.name as name_author, products.img as prod_image FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor";
   $result = mysqli_query($connect, $sql);
   include "connect/closeDB.php";
   $array = array();

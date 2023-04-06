@@ -32,7 +32,7 @@ switch ($action) {
       include_once 'models/admin/authModel.php';
       if ($check == 0) {
         echo '<script language="javascript">
-        alert("Login failed");
+        alert("Email or password incorrect!!");
         window.location.href="?controller=auth_admin";
         </script>';
         // header('Location:index.php?controller=auth_admin');
