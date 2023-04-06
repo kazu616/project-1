@@ -94,7 +94,6 @@ window.onload = function () {
         }
     });
 };
-// document.addEventListener("DOMContentLoaded", change_amount);
 function changeAmount(inputElem) {
     var amountNew = inputElem.value;
     var productId = inputElem.name;
