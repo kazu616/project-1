@@ -178,7 +178,6 @@
                 </div>
             </div>
         </div>
-        <a href="index.php?controller=user&action=logout" class="w-10 h-10">đăng xuất</a>
     </main>
     <?php include 'views/layouts/footer_customer.php' ?>
 </body>
