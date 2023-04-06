@@ -63,7 +63,7 @@
                         </select>
                     </div>
                     <div class="form-field">
-                        <input type="text" required class="form-input" value="<?= $data_product['description'] ?>" style="height: 150px;" name="description" placeholder=" " />
+                        <textarea type="text" required class="form-input" style="height: 150px;" name="description" placeholder=" "><?= $data_product['description'] ?></textarea>
                         <label class="form-label">Description</label>
                     </div>
                     <div></div>

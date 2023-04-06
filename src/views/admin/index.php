@@ -43,6 +43,13 @@
                     </div>
                     <box-icon name='category' type='solid' size="lg"></box-icon>
                 </div>
+                <div class="dashboard-item">
+                    <div class="desc">
+                        <h3><?= $attributes['total_orders'] ?></h3>
+                        <p>Orders</p>
+                    </div>
+                    <box-icon name='money-withdraw' size="lg"></box-icon>
+                </div>
             <?php } ?>
         </div>
         <div class="chartsBx">
@@ -118,7 +125,7 @@
                                 $found_data = false;
                                 foreach ($data['chart'] as $data_chart) {
                                     if ($i == $data_chart['month']) {
-                                        echo $data_chart['total_prices'] . ",";
+                                        echo $data_chart['total_money'] . ",";
                                         $found_data = true;
                                     }
                                 }

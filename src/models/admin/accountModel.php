@@ -87,10 +87,12 @@ function edit()
     }
 
     include_once 'connect/openDB.php';
-
-    $sql_check = "SELECT * FROM accounts WHERE email = ? AND idAccount = ?";
+    $trimed_email = trim($email);
+    $trimed_name = trim($name);
+    $trimed_phoneNumber = trim($phoneNumber);
+    $sql_check = "SELECT * FROM accounts WHERE email = ? AND idAccount != ?";
     $stmt = mysqli_prepare($connect, $sql_check);
-    mysqli_stmt_bind_param($stmt, "so", trim($email), $id);
+    mysqli_stmt_bind_param($stmt, "si", $trimed_email, $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
@@ -99,14 +101,16 @@ function edit()
         echo 'window.location.href="?controller=accountAdmin&action=clone_data_edit&id=' . $id . '";';
         echo '</script>';
     } else {
-        $sql_update = "UPDATE accounts SET email=? name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
+        $sql_update = "UPDATE `accounts` SET email=?, name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
         $stmt = mysqli_prepare($connect, $sql_update);
-        mysqli_stmt_bind_param($stmt, 'sssissii', trim($email), trim($name), $image_name, trim($phoneNumber), trim($password), trim($address), $roles, $id);
+        mysqli_stmt_bind_param($stmt, 'ssssssii', $trimed_email, $trimed_name, $image_name, $trimed_phoneNumber, trim($password), trim($address), $roles, $id);
         mysqli_stmt_execute($stmt);
         include_once 'connect/closeDB.php';
         header('Location:?controller=accountAdmin');
     }
+    include_once 'connect/closeDB.php';
 }
+
 
 function delete()
 {

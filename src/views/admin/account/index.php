@@ -25,41 +25,43 @@
                 </thead>
                 <tbody>
                     <?php foreach ($accounts as $account) { ?>
-                        <tr>
-                            <td>
-                                <?= $account['idAccount'] ?>
-                            </td>
-                            <td>
-                                <?= $account['name'] ?>
-                            </td>
-                            <td>
-                                <img src="imgs/<?= $account['img'] ?>" alt="" />
-                            </td>
-                            <td>
-                                <?= $account['phoneNumber'] ?>
-                            </td>
-                            <td>
-                                <?= $account['email'] ?>
-                            </td>
-                            <td>
-                                <?= $account['password'] ?>
-                            </td>
-                            <td>
-                                <?= $account['nameRole'] ?>
-                            </td>
-                            <td>
-                                <a href="index.php?controller=accountAdmin&action=clone_data_edit&id=<?= $account['idAccount'] ?>" title="Edit Product">
-                                    <button class="edit-btn">
-                                        <box-icon name="edit"></box-icon>
-                                    </button>
-                                </a>
-                                <a href="index.php?controller=accountAdmin&action=delete&id=<?= $account['idAccount'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
-                                    <button type="button">
-                                        <box-icon type="solid" name="trash"></box-icon>
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <?= $account['idAccount'] ?>
+                        </td>
+                        <td>
+                            <?= $account['name'] ?>
+                        </td>
+                        <td>
+                            <img src="imgs/<?= $account['img'] ?>" alt="" />
+                        </td>
+                        <td>
+                            <?= $account['phoneNumber'] ?>
+                        </td>
+                        <td>
+                            <?= $account['email'] ?>
+                        </td>
+                        <td>
+                            <?= $account['password'] ?>
+                        </td>
+                        <td>
+                            <?= $account['nameRole'] ?>
+                        </td>
+                        <td>
+                            <a href="index.php?controller=accountAdmin&action=clone_data_edit&id=<?= $account['idAccount'] ?>"
+                                title="Edit Product">
+                                <button class="edit-btn">
+                                    <box-icon name="edit"></box-icon>
+                                </button>
+                            </a>
+                            <a href="index.php?controller=accountAdmin&action=delete&id=<?= $account['idAccount'] ?>"
+                                onclick="return confirm('Are you sure?');" title="Delete Product">
+                                <button type="button">
+                                    <box-icon type="solid" name="trash"></box-icon>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
                     <?php } ?>
                 </tbody>
             </table>
