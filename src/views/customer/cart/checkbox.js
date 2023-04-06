@@ -46,7 +46,6 @@ window.onload = function () {
     });
 
     // Add an event listener to the "All" checkbox
-    // Add an event listener to the "All" checkbox
     const allCheckbox = document.getElementById("all-checkbox");
     allCheckbox.addEventListener("change", function () {
         // Check or uncheck all other checkboxes based on the state of the "All" checkbox
@@ -62,6 +61,7 @@ window.onload = function () {
             });
         }
         // Log the checkedId_product array to console
+        console.log(checkbox);
         console.log(checkedId_product);
 
         // Calculate the total value of all checked boxes
