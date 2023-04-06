@@ -9,4 +9,7 @@ switch ($action) {
       include_once 'views/order_history/index.php';
     }
     break;
+  case 'update': {
+      include_once 'models/customer/order_historyModel.php';
+    }
 }

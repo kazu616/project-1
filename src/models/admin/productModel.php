@@ -1,11 +1,29 @@
 <?php
 function indexProduct()
 {
+    $array = [];
+    $page = 1;
+    $prod_per_page = 5;
+    $search = '';
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    }
+    if (isset($_GET['search'])) {
+        $search = $_GET['search'];
+    }
     include_once 'connect/openDB.php';
-    $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM ((products INNER JOIN authors ON products.idAuthor = authors.idAuthor) INNER JOIN genres ON products.idGenre = genres.idGenre)";
+    $sqlGetTotalProduct = "SELECT COUNT(*) FROM products WHERE name LIKE '$search%'";
+    $query = mysqli_query($connect, $sqlGetTotalProduct);
+    $total_prod = mysqli_fetch_array($query)[0];
+    $number_of_page = ceil($total_prod / $prod_per_page);
+    $prod_offset = ($page - 1) * $prod_per_page;
+    $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM products INNER JOIN authors ON products.idAuthor = authors.idAuthor INNER JOIN genres ON products.idGenre = genres.idGenre WHERE products.name LIKE '$search%' LIMIT $prod_per_page OFFSET $prod_offset";
     $products = mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
-    return $products;
+    $array['products'] = $products;
+    $array['number_of_page'] = $number_of_page;
+    $array['page'] = $page;
+    return $array;
 }
 function clone_data_genres_authors()
 {
@@ -139,14 +157,21 @@ function delete()
     $id = $_GET['id'];
     include_once 'connect/openDB.php';
     $sql = "DELETE FROM products WHERE idProduct = '$id'";
-    $data_clone = mysqli_query($connect, $sql);
+    mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
+}
+
+function handleSearch()
+{
+    if (!isset($_POST['search'])) return;
+    $search = $_POST['search'];
+    header("location: ?controller=productAdmin&search=$search");
 }
 
 
 switch ($action) {
     case '':
-        $products = indexProduct();
+        $array = indexProduct();
         break;
     case 'show_formAdd':
         $array_genre_author = clone_data_genres_authors();
@@ -163,4 +188,8 @@ switch ($action) {
     case 'delete':
         delete();
         break;
+    case 'search': {
+            handleSearch();
+            break;
+        }
 }

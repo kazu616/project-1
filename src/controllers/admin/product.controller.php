@@ -25,4 +25,7 @@ switch ($action) {
   case 'delete':
     include_once 'models/admin/productModel.php';
     header('Location:?controller=productAdmin');
+  case 'search': {
+      include_once 'models/admin/productModel.php';
+    }
 }

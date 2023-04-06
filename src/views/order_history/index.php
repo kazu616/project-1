@@ -17,11 +17,11 @@
     <?php include 'views/layouts/side_bar_account.php' ?>
     <div class="flex-1 rounded-[10px]">
       <div class="flex items-center justify-between bg-[#EDEBE4] mb-10">
-        <a href="?controller=order_history" class="flex items-center justify-center px-10 py-5 text-xl font-semibold text-red-500 uppercase border-b-2 border-red-500 cursor-pointer">All</a>
-        <a href="?controller=order_history&status=1" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Pending</a>
-        <a href="?controller=order_history&status=2" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Transport</a>
-        <a href="?controller=order_history&status=3" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Complete</a>
-        <a href="?controller=order_history&status=4" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase cursor-pointer">Cancelled</a>
+        <a href="?controller=order_history" class="flex items-center justify-center px-10 py-5 text-xl font-semibold uppercase border-b-2 cursor-pointer <?= isset($_GET['status']) ? "" : "border-red-500  text-red-500" ?>">All</a>
+        <a href="?controller=order_history&status=1" class="flex items-center justify-center px-10 py-5 text-xl font-semibold border-b-2 uppercase cursor-pointer <?= isset($_GET['status']) ? ($_GET['status'] == 1 ? "text-red-500 border-red-500" : "") : ""  ?>">Pending</a>
+        <a href="?controller=order_history&status=2" class="flex items-center justify-center px-10 py-5 text-xl font-semibold border-b-2 uppercase cursor-pointer <?= isset($_GET['status']) ? ($_GET['status'] == 2 ? "text-red-500 border-red-500" : "") : ""  ?>">Transport</a>
+        <a href="?controller=order_history&status=3" class="flex items-center justify-center px-10 py-5 text-xl font-semibold border-b-2 uppercase cursor-pointer <?= isset($_GET['status']) ? ($_GET['status'] == 3 ? "text-red-500 border-red-500" : "") : ""  ?>">Complete</a>
+        <a href="?controller=order_history&status=4" class="flex items-center justify-center px-10 py-5 text-xl font-semibold border-b-2 uppercase cursor-pointer <?= isset($_GET['status']) ? ($_GET['status'] == 4 ? "text-red-500 border-red-500" : "") : ""  ?>">Cancelled</a>
       </div>
       <div class="flex flex-col w-full gap-10 min-h-[500px]">
         <?php foreach ($array as $each) { ?>
@@ -52,7 +52,7 @@
             <?php foreach ($each['data'] as $item) { ?>
               <div class="h-[150px] px-3 flex justify-between items-end pb-3 border-b border-[#888] mb-3">
                 <div class="flex h-full gap-x-4">
-                  <img src="imgs/best-selling.png" class="object-cover h-full" alt="">
+                  <img src="imgs/<?= $item['img'] ?>" class="object-cover h-full w-[148px]" alt="">
                   <div class="flex flex-col justify-between py-3">
                     <div class="text-center">
                       <h3 class="text-lg uppercase"><?= $item['productName'] ?></h3>
@@ -78,8 +78,13 @@
               </div>
             </div>
             <div class="flex justify-end gap-x-5">
-              <?php if ($each['order']['status'] == PENDING) { ?> <button class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel Order</button> <?php } ?>
-              <button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px]">Received The Confirme</button>
+              <form action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=4" method="post">
+                <?php if ($each['order']['status'] == PENDING) { ?> <button class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel Order</button> <?php } ?>
+              </form>
+              <form action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=3" method="post">
+                <button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px] <?= $each['order']['status'] != 2 ? "bg-[#888]" : "" ?>">Received The Confirme</button>
+              </form>
+
             </div>
           </div>
         <?php } ?>

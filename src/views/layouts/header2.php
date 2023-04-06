@@ -6,10 +6,10 @@
   <div class="flex gap-x-[60px] items-center">
     <div class="flex items-center uppercase gap-x-5">
       <a href="index.php" class="text-[#74642F]">Home</a>
-      <a href="?controller=home">About</a>
+      <a href="#">About</a>
       <a href="#">Pages</a>
-      <a href="?controller=products">Shop</a>
-      <a href="?controller=home">Articles</a>
+      <a href="?controller=productCustomer">Shop</a>
+      <a href="#">Articles</a>
       <a href="#">Contact</a>
     </div>
     <!-- <span>

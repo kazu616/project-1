@@ -62,12 +62,6 @@
                 <span>Order</span>
             </li>
         </a>
-        <a href="?controller=other">
-            <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "other" ? "activeLink" : "") : "" ?>>
-                <box-icon type="logo" name="visual-studio"></box-icon>
-                <span>Others</span>
-            </li>
-        </a>
     </ul>
     <span class="title-link">Form</span>
     <ul>
