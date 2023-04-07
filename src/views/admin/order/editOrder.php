@@ -51,7 +51,7 @@
             <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative">
               <div class="flex gap-x-5">
                 <div class=" w-[148px] max-h-[208px]">
-                  <img src="imgs/best-selling.png" class="object-cover w-full h-full" alt="">
+                  <img src="imgs/<?= $value['prod_image'] ?>" class="object-cover w-full h-full" alt="">
                 </div>
                 <div class="pt-10 text-center">
                   <h3 class="text-xl uppercase"><?= $value['name_prod'] ?></h3>

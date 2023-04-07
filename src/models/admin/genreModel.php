@@ -34,7 +34,10 @@ function store()
     } else {
         $sql = "INSERT INTO genres (name) VALUES ('$name_genre')";
         mysqli_query($connect, $sql);
-        header("location: ?controller=categoryAdmin");
+        echo '<script language="javascript">
+        alert("Name genre duplicate");
+        window.location.href="?controller=genreAdmin";
+        </script>';
     }
     include_once "connect/closeDB.php";
 }

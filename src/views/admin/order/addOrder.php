@@ -35,7 +35,7 @@
             </a>
             <div class="flex gap-x-5 min-h-[180px] mb-7">
               <div class=" w-[148px]">
-                <img src="imgs/<?= $each['img'] ?>" class="object-cover w-full h-full" alt="">
+                <img src="imgs/<?= $each['prod_image'] ?>" class="object-cover w-full h-full" alt="">
               </div>
               <div class="pt-10 text-center">
                 <h3 class="text-xl uppercase"><?= $each['name_prod'] ?></h3>

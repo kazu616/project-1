@@ -59,7 +59,7 @@ function getProductsInSession()
   $arr = $_SESSION['order'];
   include "connect/openDB.php";
   foreach ($arr as $key => $value) {
-    $sql = "SELECT *, products.name as name_prod, authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE idProduct = $key";
+    $sql = "SELECT *, products.name as name_prod, authors.name as name_author, products.img as prod_image FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE idProduct = $key";
     $query = mysqli_query($connect, $sql);
     $item = mysqli_fetch_array($query);
     $item['amount_order'] = $value;
@@ -147,7 +147,7 @@ function edit()
   $query = mysqli_query($connect, $sql);
   foreach ($query as $each) {
     $idProduct = $each['idProduct'];
-    $sql = "SELECT *, products.name as name_prod, authors.name as name_author FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE idProduct = $idProduct";
+    $sql = "SELECT *, products.name as name_prod, authors.name as name_author, products.img as prod_image FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE idProduct = $idProduct";
     $query = mysqli_query($connect, $sql);
     $item = mysqli_fetch_array($query);
     $item['amount_order'] = $each['amount_order'];
