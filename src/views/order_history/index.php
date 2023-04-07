@@ -50,9 +50,9 @@
               </div>
             </div>
             <?php foreach ($each['data'] as $item) { ?>
-              <div class="h-[150px] px-3 flex justify-between items-end pb-3 border-b border-[#888] mb-3">
+              <div class="px-3 flex justify-between items-end pb-3 border-b border-[#888] mb-3">
                 <div class="flex h-full gap-x-4">
-                  <img src="imgs/<?= $item['img'] ?>" class="object-cover h-full w-[148px]" alt="">
+                  <img src="imgs/<?= $item['prod_image'] ?>" class="object-cover w-[148px]" alt="">
                   <div class="flex flex-col justify-between py-3">
                     <div class="text-center">
                       <h3 class="text-lg uppercase"><?= $item['productName'] ?></h3>
@@ -82,9 +82,8 @@
                 <?php if ($each['order']['status'] == PENDING) { ?> <button class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel Order</button> <?php } ?>
               </form>
               <form action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=3" method="post">
-                <button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px] <?= $each['order']['status'] != 2 ? "bg-[#888]" : "" ?>">Received The Confirme</button>
+                <?php if ($each['order']['status'] == DELIVERING) { ?><button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px] <?= $each['order']['status'] != 2 ? "!bg-[#888] !select-none" : "" ?>">Received The Confirme</button><?php } ?>
               </form>
-
             </div>
           </div>
         <?php } ?>
