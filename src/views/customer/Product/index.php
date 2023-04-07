@@ -2,8 +2,22 @@
 <html lang="en">
 
 <head>
+<<<<<<< Updated upstream
     <?php require_once 'views/layouts/head_customer.php' ?>
     <title>Book Page</title>
+=======
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Booksaw</title>
+
+>>>>>>> Stashed changes
 </head>
 
 <body class="bg-[#F3F2EC]">
@@ -12,6 +26,7 @@
     <main class="container ">
         <!-- banner -->
         <div class=" flex gap-10 w-full h-[500px] mt-10">
+<<<<<<< Updated upstream
             <!-- slide -->
             <div class=" w-[60%] bg-white h-full rounded-lg">
                 <div class="swiper SwiperHead">
@@ -36,6 +51,23 @@
                 </div>
                 <div class="bg-black w-full h-[50%] rounded-xl">
                     <img src="./imgs/banner2.png" class="object-cover w-full h-full rounded-xl">
+=======
+            <div class=" w-[60%] bg-white h-full rounded-lg shadow-lg swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                    <div class="swiper-slide">
+                        <img src="../../../imgs/banner.png" class="object-fill w-full h-full">
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class=" flex flex-col w-[50%] h-full gap-5 justify-between">
+                <div class="bg-black w-full h-[50%] rounded-xl shadow-rounded-xl ">
+                    <img class=" object-cover rounded-xl w-full h-full" src="../../../imgs/banner1.png">
+                </div>
+                <div class="bg-black w-full  h-[50%] rounded-xl shadow-rounded-xl ">
+                    <img class=" object-fill rounded-xl w-full h-full  " src="../../../imgs/banner2.png">
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -68,6 +100,7 @@
                 </div>
             </div>
             <div class="flex justify-between">
+<<<<<<< Updated upstream
                 <div class="h-40 p-3 swiper mySwiper">
                     <div class="swiper-wrapper">
                         <?php foreach ($data['genres'] as $genre) { ?>
@@ -88,6 +121,20 @@
         <!-- product list -->
         <div class="flex flex-col mt-5 ">
             <div class="flex justify-between">
+=======
+                <div
+                    class="w-[145px] h-[135px] bg-[#FBFBFB] border-solid border border-white rounded-lg flex items-center justify-center shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105 hover:bg-[#FFC43F]">
+                    <div class="flex-column">
+                        <i class="fa-solid fa-book m-5 text-2xl"></i>
+                        <p class="text-center">Novel</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- product list -->
+        <div class="flex flex-col m-10 mt-15">
+            <div class="flex  justify-between">
+>>>>>>> Stashed changes
                 <h1 class="justify-start text-2xl"></h1>
                 <div id="icon" class="justify-end">
                     <a href="?controller=productCustomer&key=<?php if ($_GET['mode'] == "search") {
@@ -117,6 +164,7 @@
                     </a>
                 </div>
             </div>
+<<<<<<< Updated upstream
         </div>
         <div>
             <div class="grid grid-cols-4 gap-16 p-12">
@@ -139,6 +187,26 @@
                                 <a id="link_add" href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add
                                     To Cart <i class="fa-solid fa-cart-shopping"></i>
                                 </a>
+=======
+            <div>
+                <div class="grid grid-cols-4 gap-10">
+                    <div>
+                        <div
+                            class="flex-colum w-[300px] h-[400px] bg-white border-solid border border-[#FBFBFB] rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
+                            <div
+                                class="w-[270px] h-[270px] bg-[#F9F9F9] rounded-lg items-center mt-3 mx-auto flex justify-center">
+                                <img src="../../../imgs/booktest.png" class="w-[200px] h-[250px] object-contain">
+                            </div>
+                            <p class="text-left font-semibold text-lg mt-1 pr-4 pl-4 ">Name</p>
+                            <p class="text-left font-italic text-xs text-[#9D9D9D] pr-4 pl-4 ">Author</p>
+                            <div class="flex justify-between pr-4 pl-4 mt-2">
+                                <p class="text-xl font-medium">8.00$</p>
+                                </p>
+                                <button class="relative rounded-lg p-1 text-[#666666] text-base hover:font-medium">
+                                    Add To Cart
+                                    <i class="fa-solid fa-cart-shopping text-xs"></i>
+                                </button>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>
@@ -199,7 +267,27 @@
             </div>
         </div>
     </main>
+<<<<<<< Updated upstream
     <?php include 'views/layouts/footer_customer.php' ?>
+=======
+    <?php include '../../layouts/footer.php' ?>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+    var mySwiper = new Swiper('.mySwiper', {
+        onInit: function(slider) {
+            debugger;
+        },
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        autoplay: {
+            delay: 5000,
+        },
+    });
+    </script>
+>>>>>>> Stashed changes
 </body>
 
 </html>
