@@ -16,16 +16,18 @@
   <?php require_once 'views/layouts/header2.php' ?>
   <div class="w-full h-full mt-10 swiper mySwiper">
     <div class="swiper-wrapper">
-      <?php for ($i = 1; $i <= 5; $i++) { ?>
+      <?php foreach ($slide_prods as $slide) { ?>
         <div class="flex items-center justify-center swiper-slide">
           <div class="container flex items-center gap-x-[200px] px-40">
             <div class="flex-1">
-              <h1 class="mb-4 font-secondary text-7xl">Life of the wild</h1>
-              <p class="text-[#7A7A7A] mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac. Urna commodo, lacus ut magna velit eleifend. Amet, quis urna, a eu.</p>
-              <button class="px-5 py-3 uppercase bg-transparent border border-[#C0C0C0]">Read More</button>
+              <h1 class="mb-4 text-6xl font-secondary"><?= $slide['name'] ?></h1>
+              <p class="text-[#7A7A7A] mb-10 truncate_cus"><?= $slide['description'] ?></p>
+              <a href="?controller=productCustomer&action=single_product&id=<?= $slide['idProduct'] ?>">
+                <button class="px-5 py-3 uppercase bg-transparent border border-[#C0C0C0]">Read More</button>
+              </a>
             </div>
             <div>
-              <img src="imgs/book.png" class="w-[300px]" alt="">
+              <img src="imgs/<?= $slide['img'] ?>" class="w-[300px]" alt="">
             </div>
           </div>
         </div>
@@ -64,22 +66,24 @@
     </div>
     <div class="w-full swiper slider-product">
       <div class="swiper-wrapper">
-        <?php for ($i = 1; $i <= 8; $i++) { ?>
+        <?php foreach ($feature_prods as $each) { ?>
           <div class="swiper-slide min-h-[466px]">
-            <div class="group px-5 py-3 bg-[#EFEEE8] relative">
-              <img src="imgs/bookdemo.png" alt="">
-              <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
+            <div class="group bg-[#EFEEE8]  relative h-[300px] mb-5">
+              <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
+              <a href="?controller=productCustomer&action=single_product&id=<?= $each['idProduct'] ?>">
+                <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
+              </a>
             </div>
             <div class="text-center">
-              <h4 class="text-[#74642F] text-[22px]">Simple way of piece life</h4>
+              <h4 class="text-[#74642F] text-[22px]"><?= $each['name'] ?></h4>
               <p class="text-[#888888] text-sm mb-3">Armor Ramsey</p>
-              <span class="text-[#74642F] text-lg">$ 40.00</span>
+              <span class="text-[#74642F] text-lg">$ <?= $each['price'] ?></span>
             </div>
           </div><?php  } ?>
       </div>
       <div class="mt-10">
         <div class="swiper-pagination"></div>
-        <a href="#" class="z-10 float-right translate-y-[-7px] hover:text-[#74642F] hover:underline">View all products</a>
+        <a href="?controller=productCustomer" class="z-10 float-right translate-y-[-7px] hover:text-[#74642F] hover:underline">View all products</a>
       </div>
     </div>
   </div>
@@ -125,16 +129,16 @@
       </ul>
     </div>
     <div class="grid grid-cols-4 gap-10 mt-10">
-      <?php for ($i = 1; $i <= 8; $i++) { ?>
+      <?php foreach ($prod_by_category as $each) { ?>
         <div class="swiper-slide min-h-[466px]">
-          <div class="group px-5 py-3 bg-[#EFEEE8] relative">
-            <img src="imgs/bookdemo.png" alt="">
+          <div class="group px-5 py-3 bg-[#EFEEE8]  h-[300px] mb-5 relative">
+            <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
             <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
           </div>
           <div class="text-center">
-            <h4 class="text-[#74642F] text-[22px]">Simple way of piece life</h4>
+            <h4 class="text-[#74642F] text-[22px]"><?= $each['name'] ?></h4>
             <p class="text-[#888888] text-sm mb-3">Armor Ramsey</p>
-            <span class="text-[#74642F] text-lg">$ 40.00</span>
+            <span class="text-[#74642F] text-lg">$ <?= $each['price'] ?></span>
           </div>
         </div><?php  } ?>
     </div>

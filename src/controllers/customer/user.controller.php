@@ -30,7 +30,7 @@ switch ($action) {
     break;
   case 'loginAccess': {
       include_once 'models/customer/userModel.php';
-      if ($test == 0) {
+      if ($test == 2) {
         echo '<script language="javascript">';
         echo 'alert("Email or password wrong");';
         echo 'window.location.href="?controller=user&action=login";';
