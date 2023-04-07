@@ -27,9 +27,8 @@
                         <label class="form-label">Amount</label>
                     </div>
                     <div class="form-field">
-                        <input id="issuingDate" type="date" id="release_date_input" value="<?= $data_product['issuingDate'] ?>" class="form-input" name="issuingDate" placeholder=" " />
+                        <input type="date" id="release_date_input" value="<?= $data_product['issuingDate'] ?>" class="form-input" name="issuingDate" placeholder=" " />
                         <label class="form-label">Issuing Date</label>
-                        <span id="message" class="text-red-600 text-xs"></span>
                     </div>
                     <div class="form-field">
                         <select name="genre" required>

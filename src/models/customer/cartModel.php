@@ -38,11 +38,7 @@ function add_to_cart()
         $_SESSION['cart'][$product_id] = $amount;
     }
     if ($_GET['mode'] == 1) {
-        header('Location: index.php?controller=productCustomer&added_to_cart&action=single_product&id=' . $product_id);
-    } elseif ($_GET['mode'] == 3) {
-        header('Location:index.php?controller=productCustomer&added_to_cart#' . $product_id);
-    } elseif ($_GET['mode'] == 4) {
-        header('Location:index.php?added_to_cart');
+        header('Location: index.php?controller=productCustomer&action=single_product&id=' . $product_id);
     } else {
         header('Location:index.php?controller=cart');
     }

@@ -6,96 +6,63 @@
 @import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
 
 @layer base {
-    body {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        background: #f3f2ec;
-        font-family: "Plus Jakarta Sans", sans-serif;
-        color: #111111;
-    }
-    .container {
-        max-width: 1280px !important;
-        margin: 0 auto;
-    }
-    input,
-    textarea {
-        outline: none;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #f3f2ec;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #111111;
+  }
+  .container {
+    max-width: 1280px !important;
+    margin: 0 auto;
+  }
+  input,
+  textarea {
+    outline: none;
+  }
 }
 
 .swiper-pagination {
-    z-index: -1 !important;
+  z-index: -1 !important;
 }
 
 .swiper-pagination-bullet {
-    display: inline-block !important;
-    border-radius: 0 !important;
-    width: 10px !important;
-    height: 10px !important;
-    border-radius: 100% !important;
-    background: #74642f !important;
+  display: inline-block !important;
+  border-radius: 0 !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 100% !important;
+  background: #74642f !important;
 }
 .swiper-pagination-bullet-active {
-    padding: 3px !important;
+  padding: 3px !important;
 }
 
 *,
 *:before,
 *:after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 * {
-    margin: 0;
-    padding: 0;
-    font: inherit;
+  margin: 0;
+  padding: 0;
+  font: inherit;
 }
 img,
 picture,
 svg,
 video {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 body {
-    min-height: 100vh;
+  min-height: 100vh;
 }
-<<<<<<< Updated upstream
 
 .list_product_pop_up::-webkit-scrollbar {
-    display: none;
-}
-.custom-alert {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 2px solid greenyellow;
-    padding: 40px;
-    font-size: medium;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    animation-name: fade-in-out;
-    animation-duration: 1.5s;
-    z-index: 10;
-}
-
-@keyframes fade-in-out {
-    0% {
-        opacity: 0;
-    }
-
-    25% {
-        opacity: 1;
-    }
-
-    75% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
+  display: none;
 }
 
 .truncate_cus {
@@ -103,8 +70,4 @@ body {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
-=======
-#main_sigle_product {
-    background-image: url("../imgs/bg-main.png");
->>>>>>> Stashed changes
 }

@@ -2,22 +2,8 @@
 <html lang="en">
 
 <head>
-<<<<<<< Updated upstream
     <?php require_once 'views/layouts/head_customer.php' ?>
     <title>Book Page</title>
-=======
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../css/output.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Booksaw</title>
-
->>>>>>> Stashed changes
 </head>
 
 <body class="bg-[#F3F2EC]">
@@ -26,7 +12,6 @@
     <main class="container ">
         <!-- banner -->
         <div class=" flex gap-10 w-full h-[500px] mt-10">
-<<<<<<< Updated upstream
             <!-- slide -->
             <div class=" w-[60%] bg-white h-full rounded-lg">
                 <div class="swiper SwiperHead">
@@ -51,41 +36,11 @@
                 </div>
                 <div class="bg-black w-full h-[50%] rounded-xl">
                     <img src="./imgs/banner2.png" class="object-cover w-full h-full rounded-xl">
-=======
-            <div class=" w-[60%] bg-white h-full rounded-lg shadow-lg swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <?php for ($i = 1; $i <= 5; $i++) { ?>
-                    <div class="swiper-slide">
-                        <img src="../../../imgs/banner.png" class="object-fill w-full h-full">
-                    </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class=" flex flex-col w-[50%] h-full gap-5 justify-between">
-                <div class="bg-black w-full h-[50%] rounded-xl shadow-rounded-xl ">
-                    <img class=" object-cover rounded-xl w-full h-full" src="../../../imgs/banner1.png">
-                </div>
-                <div class="bg-black w-full  h-[50%] rounded-xl shadow-rounded-xl ">
-                    <img class=" object-fill rounded-xl w-full h-full  " src="../../../imgs/banner2.png">
->>>>>>> Stashed changes
                 </div>
             </div>
         </div>
-        <div class="relative mt-9 mx-auto w-full max-w-md">
-            <form action="?controller=productCustomer&idG&mode=search" method="POST">
-                <label for="search" class="sr-only">Search</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                    <input id="search" name="search" value="" class="block w-full h-11 border border-black/50 bg-gray-100 rounded-xl py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-indigo-500 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search" autocomplete="off">
-                </div>
-            </form>
-        </div>
-
-
         <!-- genres -->
-        <div class="flex flex-col m-5 mt-7 gap-11">
+        <div class="flex flex-col m-5 mt-10 gap-11">
             <div class="flex justify-between">
                 <h1 class="justify-start text-2xl">Genres</h1>
                 <div id="icon" class="justify-end">
@@ -100,7 +55,6 @@
                 </div>
             </div>
             <div class="flex justify-between">
-<<<<<<< Updated upstream
                 <div class="h-40 p-3 swiper mySwiper">
                     <div class="swiper-wrapper">
                         <?php foreach ($data['genres'] as $genre) { ?>
@@ -121,98 +75,56 @@
         <!-- product list -->
         <div class="flex flex-col mt-5 ">
             <div class="flex justify-between">
-=======
-                <div
-                    class="w-[145px] h-[135px] bg-[#FBFBFB] border-solid border border-white rounded-lg flex items-center justify-center shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105 hover:bg-[#FFC43F]">
-                    <div class="flex-column">
-                        <i class="fa-solid fa-book m-5 text-2xl"></i>
-                        <p class="text-center">Novel</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- product list -->
-        <div class="flex flex-col m-10 mt-15">
-            <div class="flex  justify-between">
->>>>>>> Stashed changes
                 <h1 class="justify-start text-2xl"></h1>
                 <div id="icon" class="justify-end">
-                    <a href="?controller=productCustomer&key=<?php if ($_GET['mode'] == "search") {
-                                                                    echo $data['search'];
-                                                                }  ?>&idG=<?php if (isset($_GET['idG'])) {
-                                                                                echo $_GET['idG'];
-                                                                            }  ?>&mode=<?php if ($_GET['idG'] != "") {
-                                                                                            echo "desc";
-                                                                                        } elseif ($_GET['mode'] == 'search') {
-                                                                                            echo "search_desc";
-                                                                                        } else echo 1;
-                                                                                        ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F] mr-1 ">
+                    <a href="?controller=productCustomer&idG=<?php if (isset($_GET['idG'])) {
+                                                                    echo "" . $_GET['idG'];
+                                                                }  ?>&mode=<?php if ($_GET['idG'] != "") {
+                                                                                echo "desc";
+                                                                            } else echo 1;
+                                                                            ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F] mr-1 ">
                         <i class="fa-solid fa-arrow-down-9-1"></i>
 
                     </a>
-                    <a href="?controller=productCustomer&key=<?php if ($_GET['mode'] == "search") {
-                                                                    echo $data['search'];
-                                                                }  ?>&idG=<?php if (isset($_GET['idG'])) {
-                                                                                echo $_GET['idG'];
-                                                                            }  ?>&mode=<?php if ($_GET['idG'] != "") {
-                                                                                            echo "asc";
-                                                                                        } elseif ($_GET['mode'] == 'search') {
-                                                                                            echo "search_asc";
-                                                                                        } else echo 2;
-                                                                                        ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F]">
+                    <a href="?controller=productCustomer&idG=<?php if (isset($_GET['idG'])) {
+                                                                    echo "" . $_GET['idG'];
+                                                                }  ?>&mode=<?php if ($_GET['idG'] != "") {
+                                                                                echo "asc";
+                                                                            } else echo 2;
+                                                                            ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F]">
                         <i class="fa-solid fa-arrow-up-1-9"></i>
+
                     </a>
                 </div>
             </div>
-<<<<<<< Updated upstream
-        </div>
-        <div>
-            <div class="grid grid-cols-4 gap-16 p-12">
-                <?php foreach ($data['products'] as $product) { ?>
-                    <div id="<?= $product['idProduct'] ?>">
-                        <div class="flex-colum w-[300px] h-[400px] bg-white border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
-                            <div class="w-[270px] h-[235px] rounded-xl bg-[#F9F9F9] mx-auto hover:shadow-md duration-300 transition-all  ease-in-out ">
-                                <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>"><img src="./imgs/<?= $product['img'] ?>" class=" mt-3 w-[270px] h-[235px] pt-5 object-contain cursor-pointer"></a>
-                            </div>
-                            <div class="flex flex-col mb-3 ml-4">
-                                <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>" class="text-left font-semibold text-lg mt-3 transition-all duration-300  hover:text-[#FFA801] hover:cursor-pointer capitalize text-[#333]"><?= $product['name'] ?></a>
-                                <p class="text-left font-italic text-sm text-[#9D9D9D] ">
-                                    <?= $product['nameAuthor'] ?></p>
-                                <p class="text-left font-italic text-sm text-[#24ff10] ">
-                                    <?= $product['nameGenre'] ?></p>
-                            </div>
-                            <div class="flex justify-between pl-4 pr-4 mt-2">
-                                <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
-                                    $<?= $product['price'] ?></p>
-                                <a id="link_add" href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add
-                                    To Cart <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
-=======
             <div>
-                <div class="grid grid-cols-4 gap-10">
-                    <div>
-                        <div
-                            class="flex-colum w-[300px] h-[400px] bg-white border-solid border border-[#FBFBFB] rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
-                            <div
-                                class="w-[270px] h-[270px] bg-[#F9F9F9] rounded-lg items-center mt-3 mx-auto flex justify-center">
-                                <img src="../../../imgs/booktest.png" class="w-[200px] h-[250px] object-contain">
-                            </div>
-                            <p class="text-left font-semibold text-lg mt-1 pr-4 pl-4 ">Name</p>
-                            <p class="text-left font-italic text-xs text-[#9D9D9D] pr-4 pl-4 ">Author</p>
-                            <div class="flex justify-between pr-4 pl-4 mt-2">
-                                <p class="text-xl font-medium">8.00$</p>
-                                </p>
-                                <button class="relative rounded-lg p-1 text-[#666666] text-base hover:font-medium">
-                                    Add To Cart
-                                    <i class="fa-solid fa-cart-shopping text-xs"></i>
-                                </button>
->>>>>>> Stashed changes
+                <div class="grid grid-cols-4 gap-16 p-12">
+                    <?php foreach ($data['products'] as $product) { ?>
+                        <div>
+                            <div class="flex-colum w-[300px] h-[400px] bg-white border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
+                                <div class="w-[270px] h-[235px] rounded-xl bg-[#F9F9F9] mx-auto hover:shadow-md duration-300 transition-all  ease-in-out ">
+                                    <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>"><img src="./imgs/<?= $product['img'] ?>" class=" mt-3 w-[270px] h-[235px] pt-5 object-contain cursor-pointer"></a>
+                                </div>
+                                <div class="flex flex-col mb-3 ml-4">
+                                    <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>" class="text-left font-semibold text-lg mt-3 transition-all duration-300  hover:text-[#FFA801] hover:cursor-pointer capitalize text-[#333]"><?= $product['name'] ?></a>
+                                    <p class="text-left font-italic text-sm text-[#9D9D9D] ">
+                                        <?= $product['nameAuthor'] ?></p>
+                                    <p class="text-left font-italic text-sm text-[#24ff10] ">
+                                        <?= $product['nameGenre'] ?></p>
+                                </div>
+                                <div class="flex justify-between pl-4 pr-4 mt-2">
+                                    <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
+                                        $<?= $product['price'] ?></p>
+                                    <a href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>" class="hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add To
+                                        Cart <i class="fa-solid fa-cart-shopping"></i>
+                                    </a>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
-        </div>
         </div>
         <div class="flex items-center justify-center px-4 py-10 lg:px-6">
             <div class="flex items-center justify-between w-full border-t border-gray-200 lg:w-3/5">
@@ -267,27 +179,7 @@
             </div>
         </div>
     </main>
-<<<<<<< Updated upstream
     <?php include 'views/layouts/footer_customer.php' ?>
-=======
-    <?php include '../../layouts/footer.php' ?>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script>
-    var mySwiper = new Swiper('.mySwiper', {
-        onInit: function(slider) {
-            debugger;
-        },
-        loop: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        autoplay: {
-            delay: 5000,
-        },
-    });
-    </script>
->>>>>>> Stashed changes
 </body>
 
 </html>

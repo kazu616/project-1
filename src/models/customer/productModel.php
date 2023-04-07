@@ -140,69 +140,6 @@ function indexData()
       include_once 'connect/closeDB.php';
       return $data;
     }
-    if ($_GET['mode'] == "search" && empty($_GET['idG'])) {
-      $search = $_POST['search'];
-      include_once 'connect/openDB.php';
-      $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
-      $products_number = 16;
-      $total_page = ceil($total_product / $products_number);
-      $page = $_GET['page'];
-      $offset = ($page - 1) * $products_number;
-      $sql_genres = "SELECT * FROM genres";
-      $genres = mysqli_query($connect, $sql_genres);
-
-      $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM ((products INNER JOIN authors ON products.idAuthor = authors.idAuthor) INNER JOIN genres ON products.idGenre = genres.idGenre) WHERE products.name LIKE '%$search%' LIMIT " . $products_number . " OFFSET " . $offset;
-      $result = mysqli_query($connect, $sql);
-      include_once 'connect/closeDB.php';
-      $data = array();
-      $data['products'] = $result;
-      $data['genres'] = $genres;
-      $data['totalPage'] = $total_page;
-      $data['search'] = $search;
-      return $data;
-    }
-    if ($_GET['mode'] = 'search_desc') {
-      $search = $_GET['key'];
-      include_once 'connect/openDB.php';
-      $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
-      $products_number = 16;
-      $total_page = ceil($total_product / $products_number);
-      $page = $_GET['page'];
-      $offset = ($page - 1) * $products_number;
-      $sql_genres = "SELECT * FROM genres";
-      $genres = mysqli_query($connect, $sql_genres);
-
-      $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM ((products INNER JOIN authors ON products.idAuthor = authors.idAuthor) INNER JOIN genres ON products.idGenre = genres.idGenre)  WHERE products.name LIKE '%$search%' ORDER BY products.price DESC LIMIT " . $products_number . " OFFSET " . $offset;
-      $result = mysqli_query($connect, $sql);
-      include_once 'connect/closeDB.php';
-      $data = array();
-      $data['products'] = $result;
-      $data['genres'] = $genres;
-      $data['totalPage'] = $total_page;
-      $data['search'] = $search;
-      return $data;
-    }
-    if ($_GET['mode'] = 'search_asc') {
-      $search = $_GET['key'];
-      include_once 'connect/openDB.php';
-      $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
-      $products_number = 16;
-      $total_page = ceil($total_product / $products_number);
-      $page = $_GET['page'];
-      $offset = ($page - 1) * $products_number;
-      $sql_genres = "SELECT * FROM genres";
-      $genres = mysqli_query($connect, $sql_genres);
-
-      $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM ((products INNER JOIN authors ON products.idAuthor = authors.idAuthor) INNER JOIN genres ON products.idGenre = genres.idGenre)  WHERE products.name LIKE '%$search%' ORDER BY products.price ASC LIMIT " . $products_number . " OFFSET " . $offset;
-      $result = mysqli_query($connect, $sql);
-      include_once 'connect/closeDB.php';
-      $data = array();
-      $data['products'] = $result;
-      $data['genres'] = $genres;
-      $data['totalPage'] = $total_page;
-      $data['search'] = $search;
-      return $data;
-    }
   }
 }
 function single_product()
