@@ -18,4 +18,6 @@ switch ($action) {
       include_once 'views/customer/order/order_detail.php';
     }
     break;
+  case 'cancel_order':
+    include_once 'models/customer/orderModel.php';
 }

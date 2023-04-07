@@ -9,13 +9,15 @@
             <h3 class="title-table">
                 Add Account
             </h3>
-            <form class="form-basic" method="POST" action="index.php?controller=accountAdmin&action=add" autocomplete="off" enctype="multipart/form-data">
+            <form class="form-basic" method="POST" action="index.php?controller=accountAdmin&action=add"
+                autocomplete="off" enctype="multipart/form-data">
                 <div class="form-field">
                     <input type="text" required class="form-input" id="username" name="username" placeholder=" " />
                     <label for="username" class="form-label">Username</label>
                 </div>
                 <div class="form-field">
-                    <input type="text" required class="form-input" id="phone_number" name="phone_number" placeholder=" " />
+                    <input type="text" required class="form-input" id="phone_number" name="phone_number"
+                        placeholder=" " />
                     <label for="phone_number" class="form-label">Phone number</label>
                 </div>
                 <div class="form-field">
@@ -34,10 +36,10 @@
                 <div class="form-roles">
                     <label>Roles:</label>
                     <?php foreach ($roles as $role) { ?>
-                        <div class="form-radio">
-                            <label for="role_admin"><?= $role['name'] ?></label>
-                            <input type="radio" name="roles" value="<?= $role['idRole'] ?>" id="role_admin" />
-                        </div>
+                    <div class="form-radio">
+                        <label for="role_admin"><?= $role['name'] ?></label>
+                        <input type="radio" name="roles" value="<?= $role['idRole'] ?>" id="role_admin" />
+                    </div>
                     <?php } ?>
                 </div>
                 <div class="form-field">

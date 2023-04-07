@@ -39,8 +39,21 @@
                 </div>
             </div>
         </div>
+        <div class="relative mt-9 mx-auto w-full max-w-md">
+            <form action="?controller=productCustomer&idG&mode=search" method="POST">
+                <label for="search" class="sr-only">Search</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <input id="search" name="search" value="" class="block w-full h-11 border border-black/50 bg-gray-100 rounded-xl py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-indigo-500 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search" autocomplete="off">
+                </div>
+            </form>
+        </div>
+
+
         <!-- genres -->
-        <div class="flex flex-col m-5 mt-10 gap-11">
+        <div class="flex flex-col m-5 mt-7 gap-11">
             <div class="flex justify-between">
                 <h1 class="justify-start text-2xl">Genres</h1>
                 <div id="icon" class="justify-end">
@@ -77,54 +90,61 @@
             <div class="flex justify-between">
                 <h1 class="justify-start text-2xl"></h1>
                 <div id="icon" class="justify-end">
-                    <a href="?controller=productCustomer&idG=<?php if (isset($_GET['idG'])) {
-                                                                    echo "" . $_GET['idG'];
-                                                                }  ?>&mode=<?php if ($_GET['idG'] != "") {
-                                                                                echo "desc";
-                                                                            } else echo 1;
-                                                                            ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F] mr-1 ">
+                    <a href="?controller=productCustomer&key=<?php if ($_GET['mode'] == "search") {
+                                                                    echo $data['search'];
+                                                                }  ?>&idG=<?php if (isset($_GET['idG'])) {
+                                                                                echo $_GET['idG'];
+                                                                            }  ?>&mode=<?php if ($_GET['idG'] != "") {
+                                                                                            echo "desc";
+                                                                                        } elseif ($_GET['mode'] == 'search') {
+                                                                                            echo "search_desc";
+                                                                                        } else echo 1;
+                                                                                        ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F] mr-1 ">
                         <i class="fa-solid fa-arrow-down-9-1"></i>
 
                     </a>
-                    <a href="?controller=productCustomer&idG=<?php if (isset($_GET['idG'])) {
-                                                                    echo "" . $_GET['idG'];
-                                                                }  ?>&mode=<?php if ($_GET['idG'] != "") {
-                                                                                echo "asc";
-                                                                            } else echo 2;
-                                                                            ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F]">
+                    <a href="?controller=productCustomer&key=<?php if ($_GET['mode'] == "search") {
+                                                                    echo $data['search'];
+                                                                }  ?>&idG=<?php if (isset($_GET['idG'])) {
+                                                                                echo $_GET['idG'];
+                                                                            }  ?>&mode=<?php if ($_GET['idG'] != "") {
+                                                                                            echo "asc";
+                                                                                        } elseif ($_GET['mode'] == 'search') {
+                                                                                            echo "search_asc";
+                                                                                        } else echo 2;
+                                                                                        ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F]">
                         <i class="fa-solid fa-arrow-up-1-9"></i>
-
                     </a>
                 </div>
             </div>
-            <div>
-                <div class="grid grid-cols-4 gap-16 p-12">
-                    <?php foreach ($data['products'] as $product) { ?>
-                        <div>
-                            <div class="flex-colum w-[300px] h-[400px] bg-white border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
-                                <div class="w-[270px] h-[235px] rounded-xl bg-[#F9F9F9] mx-auto hover:shadow-md duration-300 transition-all  ease-in-out ">
-                                    <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>"><img src="./imgs/<?= $product['img'] ?>" class=" mt-3 w-[270px] h-[235px] pt-5 object-contain cursor-pointer"></a>
-                                </div>
-                                <div class="flex flex-col mb-3 ml-4">
-                                    <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>" class="text-left font-semibold text-lg mt-3 transition-all duration-300  hover:text-[#FFA801] hover:cursor-pointer capitalize text-[#333]"><?= $product['name'] ?></a>
-                                    <p class="text-left font-italic text-sm text-[#9D9D9D] ">
-                                        <?= $product['nameAuthor'] ?></p>
-                                    <p class="text-left font-italic text-sm text-[#24ff10] ">
-                                        <?= $product['nameGenre'] ?></p>
-                                </div>
-                                <div class="flex justify-between pl-4 pr-4 mt-2">
-                                    <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
-                                        $<?= $product['price'] ?></p>
-                                    <a href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>" class="hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add To
-                                        Cart <i class="fa-solid fa-cart-shopping"></i>
-                                    </a>
-
-                                </div>
+        </div>
+        <div>
+            <div class="grid grid-cols-4 gap-16 p-12">
+                <?php foreach ($data['products'] as $product) { ?>
+                    <div id="<?= $product['idProduct'] ?>">
+                        <div class="flex-colum w-[300px] h-[400px] bg-white border-solid border border-white rounded-lg shadow-md transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105">
+                            <div class="w-[270px] h-[235px] rounded-xl bg-[#F9F9F9] mx-auto hover:shadow-md duration-300 transition-all  ease-in-out ">
+                                <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>"><img src="./imgs/<?= $product['img'] ?>" class=" mt-3 w-[270px] h-[235px] pt-5 object-contain cursor-pointer"></a>
+                            </div>
+                            <div class="flex flex-col mb-3 ml-4">
+                                <a href="?controller=productCustomer&action=single_product&id=<?= $product['idProduct'] ?>" class="text-left font-semibold text-lg mt-3 transition-all duration-300  hover:text-[#FFA801] hover:cursor-pointer capitalize text-[#333]"><?= $product['name'] ?></a>
+                                <p class="text-left font-italic text-sm text-[#9D9D9D] ">
+                                    <?= $product['nameAuthor'] ?></p>
+                                <p class="text-left font-italic text-sm text-[#24ff10] ">
+                                    <?= $product['nameGenre'] ?></p>
+                            </div>
+                            <div class="flex justify-between pl-4 pr-4 mt-2">
+                                <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
+                                    $<?= $product['price'] ?></p>
+                                <a id="link_add" href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add
+                                    To Cart <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
                             </div>
                         </div>
-                    <?php } ?>
-                </div>
+                    </div>
+                <?php } ?>
             </div>
+        </div>
         </div>
         <div class="flex items-center justify-center px-4 py-10 lg:px-6">
             <div class="flex items-center justify-between w-full border-t border-gray-200 lg:w-3/5">

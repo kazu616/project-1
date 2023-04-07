@@ -12,10 +12,21 @@
                 <i class="fa-regular fa-user"></i>
                 <p class="uppercase">Account</p>
             </a>
-            <span class="flex items-center gap-x-2">
+            <div id="search" class="hidden">
+                <form action="?controller=productCustomer&idG&mode=search" method="POST">
+                    <label for="search-input" class="sr-only">Search</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <input name="search" id="search-input" class="block border h-7 border-black/50 bg-gray-100 rounded-xl py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-indigo-500 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search" autocomplete="off">
+                    </div>
+                </form>
+            </div>
+            <button id="toggle-search" class="search-button flex items-center gap-x-2 uppercase">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <p class="uppercase">Search</p>
-            </span>
+                Search
+            </button>
             <a href="?controller=cart" class="flex items-center gap-x-2">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <p class="uppercase">Cart</p>

@@ -27,11 +27,11 @@
         <?php foreach ($array as $each) { ?>
           <div class="w-full rounded-[20px] bg-white p-5">
             <div class="flex justify-end uppercase gap-x-5 border-b border-[#888888] pb-3 mb-5">
-              <div class="flex gap-x-2 pr-5 border-r border-[#888888] uppercase">
+              <div class="flex gap-x-2 pr-5 border-r font-semibold border-[#888888] uppercase">
                 <p>bill of lading code:</p>
                 <span class="text-red-500"><?= $each['order']['bill_code'] ?></span>
               </div>
-              <div class="flex gap-x-2">
+              <div class="flex gap-x-2 font-semibold">
                 <p>Status:</p>
                 <?php switch ($each['order']['status']) {
                   case PENDING:
@@ -79,15 +79,18 @@
             </div>
             <div class="flex justify-end gap-x-5">
               <form action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=4" method="post">
-                <?php if ($each['order']['status'] == PENDING) { ?> <button class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel Order</button> <?php } ?>
+                <?php if ($each['order']['status'] == PENDING) { ?> <button class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel
+                    Order</button> <?php } ?>
               </form>
               <form action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=3" method="post">
-                <button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px] <?= $each['order']['status'] != 2 ? "bg-[#888]" : "" ?>">Received The Confirme</button>
+                <button class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px] <?= $each['order']['status'] != 2 ? "bg-[#888]" : "" ?>">Received
+                  The Confirme</button>
               </form>
 
             </div>
           </div>
         <?php } ?>
+
       </div>
 
     </div>

@@ -46,6 +46,7 @@ function addProduct()
     $price = $_POST['price'];
     $amount = $_POST['amount'];
     $issuingDate = $_POST['issuingDate'];
+    $currentDate = date("Y-m-d");
     $genre = $_POST['genre'];
     $description = $_POST['description'];
     $img = $_FILES["image"]["name"];
@@ -79,6 +80,11 @@ function addProduct()
             mysqli_stmt_execute($stmt);
             echo "Product added successfully!";
             header('Location:?controller=productAdmin');
+        } elseif ($issuingDate > $currentDate) {
+            echo '<script language="javascript">';
+            echo 'alert("Issuing date cannot be later than current date!");';
+            echo 'window.location.href="?controller=productAdmin&action=show_formAdd";';
+            echo '</script>';
         } else {
             echo '<script language="javascript">';
             echo 'alert("Price and amount must be non-negative!");';
@@ -112,6 +118,7 @@ function edit()
     $author = $_POST['author'];
     $price = $_POST['price'];
     $amount = $_POST['amount'];
+    $currentDate = date("Y-m-d");
     $issuingDate = $_POST['issuingDate'];
     $genre = $_POST['genre'];
     $description = $_POST['description'];
@@ -139,6 +146,11 @@ function edit()
         // Product name already exists, notify user
         echo '<script language="javascript">';
         echo 'alert("Name book is created");';
+        echo 'window.location.href="?controller=productAdmin&action=clone_data_edit&id=' . $id . '";';
+        echo '</script>';
+    } elseif ($issuingDate > $currentDate) {
+        echo '<script language="javascript">';
+        echo 'alert("Issuing date cannot be later than current date!");';
         echo 'window.location.href="?controller=productAdmin&action=clone_data_edit&id=' . $id . '";';
         echo '</script>';
     } else {
