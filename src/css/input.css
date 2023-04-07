@@ -60,7 +60,6 @@ video {
 body {
     min-height: 100vh;
 }
-<<<<<<< Updated upstream
 
 .list_product_pop_up::-webkit-scrollbar {
     display: none;
@@ -99,12 +98,8 @@ body {
 }
 
 .truncate_cus {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-=======
-#main_sigle_product {
-    background-image: url("../imgs/bg-main.png");
->>>>>>> Stashed changes
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
