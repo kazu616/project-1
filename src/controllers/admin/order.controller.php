@@ -45,4 +45,8 @@ switch ($action) {
       include_once 'models/admin/orderModel.php';
     }
     break;
+  case 'changeAmount': {
+      include_once 'models/admin/orderModel.php';
+    }
+    break;
 }

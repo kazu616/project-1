@@ -69,8 +69,10 @@
         <?php foreach ($feature_prods as $each) { ?>
           <div class="swiper-slide min-h-[466px]">
             <div class="group bg-[#EFEEE8]  relative h-[300px] mb-5">
-              <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
-              <a href="?controller=productCustomer&action=single_product&id=<?= $each['idProduct'] ?>">
+              <a href="?controller=productCustomer&action=single_product&id=<?= $each['idProduct'] ?>" class="cursor-pointer">
+                <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
+              </a>
+              <a href="?controller=cart&action=add_to_cart&id=<?= $each['idProduct'] ?>&mode=3">
                 <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
               </a>
             </div>
@@ -131,9 +133,13 @@
     <div class="grid grid-cols-4 gap-10 mt-10">
       <?php foreach ($prod_by_category as $each) { ?>
         <div class="swiper-slide min-h-[466px]">
-          <div class="group px-5 py-3 bg-[#EFEEE8]  h-[300px] mb-5 relative">
-            <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
-            <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
+          <div class="group px-5 py-3 bg-[#EFEEE8] h-[300px] mb-5 relative">
+            <a href="?controller=productCustomer&action=single_product&id=<?= $each['idProduct'] ?>" class="cursor-pointer">
+              <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
+            </a>
+            <a href="?controller=cart&action=add_to_cart&id=<?= $each['idProduct'] ?>&mode=3">
+              <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
+            </a>
           </div>
           <div class="text-center">
             <h4 class="text-[#74642F] text-[22px]"><?= $each['name'] ?></h4>
@@ -153,10 +159,10 @@
     <p class="text-2xl mt-12 mb-5 text-[#7A7A7A]">“The more that you read, the more things you will know. The more that you learn, the more places you’ll go.”</p>
     <span class="text-xl font-secondary">Dr. Seuss</span>
   </div>
-  <div class="bg-[#EDEBE4] min-h-[400px] flex justify-center items-center">
+  <div class="bg-[#EDEBE4] min-h-[400px] flex justify-center items-center" id="subcribe">
     <div class="flex gap-x-48">
       <div class="max-w-[330px]">
-        <h1 class="text-5xl leading-[60px] capitalize font-secondary">Subscribe to our newsletter</h1>
+        <h1 class="text-5xl leading-[60px] capitalize font-secondary">Subcribe to our newsletter</h1>
         <svg width="48" height="8" viewBox="0 0 48 8" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1.94092C1 1.94092 4.36355 6.94092 7.57143 6.94092C10.7793 6.94092 10.935 1.94092 14.1429 1.94092C17.3507 1.94092 17.5064 6.94092 20.7143 6.94092C23.9222 6.94092 24.0778 1.94092 27.2857 1.94092C30.4936 1.94092 30.6493 6.94092 33.8571 6.94092C37.065 6.94092 37.2207 1.94092 40.4286 1.94092C43.6365 1.94092 47 6.94092 47 6.94092" stroke="#74642F" stroke-width="2" />
         </svg>
@@ -164,9 +170,9 @@
       </div>
       <div class="max-w-[550px]">
         <p class="text-[#7A7A7A] mb-[40px]">Sed eu feugiat amet, libero ipsum enim pharetra hac dolor sit amet, consectetur. Elit adipiscing enim pharetra hac.</p>
-        <form class="w-[400px] relative">
-          <input type="text" placeholder="Enter your email addresss here" class="outline-none pr-16 text-xl w-full py-2 bg-transparent border-b border-[#6F6F6F]">
-          <button class="absolute font-medium uppercase -translate-y-1/2 right-2 top-1/2">Send</button>
+        <form class="w-[400px] relative" action="index.php?action=seo" method="post">
+          <input type="email" placeholder="Enter your email addresss here" name="email" class="outline-none pr-16 text-xl w-full py-2 bg-transparent border-b border-[#6F6F6F]">
+          <button class="absolute font-medium uppercase -translate-y-1/2 right-2 top-1/2" type="submit">Send</button>
         </form>
       </div>
     </div>

@@ -9,4 +9,7 @@ switch ($action) {
       include_once 'views/home/index.php';
     }
     break;
+  case 'seo': {
+      include_once 'models/customer/customerModel.php';
+    }
 }

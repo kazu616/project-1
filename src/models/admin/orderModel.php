@@ -20,7 +20,7 @@ function index()
   $number_of_page = ceil($total_order / $prod_per_page);
   $prod_offset = ($page - 1) * $prod_per_page;
 
-  $sqlGetOrders = "SELECT * FROM `order` WHERE bill_code LIKE '$search_bill%' LIMIT $prod_per_page OFFSET $prod_offset";
+  $sqlGetOrders = "SELECT * FROM `order` WHERE bill_code LIKE '$search_bill%' ORDER BY createdDate DESC LIMIT $prod_per_page OFFSET $prod_offset";
   $queryGetOrders = mysqli_query($connect, $sqlGetOrders);
   $result['data'] = $queryGetOrders;
   foreach ($queryGetOrders as $each) {
@@ -42,7 +42,7 @@ function index()
 function getProducts()
 {
   include "connect/openDB.php";
-  $sql = "SELECT *, products.name as name_prod,authors.name as name_author, products.img as prod_image FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor";
+  $sql = "SELECT *, products.name as name_prod,authors.name as name_author, products.img as prod_image FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE amount > 0";
   $result = mysqli_query($connect, $sql);
   include "connect/closeDB.php";
   $array = array();
@@ -113,14 +113,16 @@ function store()
       $sold_price = $result['price'];
       $amount = $result['amount'];
       $amount_remain = $amount - $value;
-      $sqlUpdateAmount = "UPDATE products SET amount = $amount_remain WHERE idProduct = $key";
-      mysqli_query($connect, $sqlUpdateAmount);
       $sqlInsertOrderDetail = "INSERT INTO order_detail(amount, sold_price, idOrder, idProduct) VALUES($value, $sold_price, $last_id, $key)";
       $query = mysqli_query($connect, $sqlInsertOrderDetail);
-      header("Location: ?controller=orderAdmin");
+      $sqlUpdateAmount = "UPDATE products SET amount = $amount_remain WHERE idProduct = $key";
+      mysqli_query($connect, $sqlUpdateAmount);
     }
     unset($_SESSION['order']);
-    echo "New record created successfully. Last inserted ID is: " . $last_id;
+    echo '<script language="javascript">
+    alert("Add order successfully!!");
+    window.location.href="?controller=orderAdmin";
+    </script>';
   } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($connect);
   }
@@ -136,6 +138,17 @@ function edit()
   $data = [];
   $total_price = 0;
   include "connect/openDB.php";
+  $sqlCheck = "SELECT status FROM `order` WHERE idOrder = $id";
+  $query = mysqli_query($connect, $sqlCheck);
+  $result = mysqli_fetch_array($query);
+  $status_old = $result['status'];
+  if ($status_old == COMPLETED || $status_old == CANCELED) {
+    echo '<script language="javascript">
+    alert("Update failed!!");
+    window.location.href="?controller=orderAdmin";
+    </script>';
+    return;
+  }
   $sql = "SELECT * FROM `order` WHERE idOrder = $id";
   $query = mysqli_query($connect, $sql);
   $order = mysqli_fetch_array($query);
@@ -204,6 +217,49 @@ function handleSearch()
   header("location: ?controller=orderAdmin&search=$search");
 }
 
+function changeAmount()
+{
+  if (!isset($_GET['id']) ||  !isset($_GET['func']) || !isset($_SESSION['order'][$_GET['id']])) {
+    echo '<script language="javascript">
+    alert("Change amount error!!");
+    window.location.href="?controller=orderAdmin&action=add";
+    </script>';
+    return;
+  }
+  $id = $_GET['id'];
+  $amount = (int)$_SESSION['order'][$id];
+  if ($amount >= 10) {
+    echo '<script language="javascript">
+    alert("Quantity does not exceed 10 products!!");
+    window.location.href="?controller=orderAdmin&action=add";
+    </script>';
+    return;
+  }
+  $func = $_GET['func'];
+  switch ($func) {
+    case 'add':
+      $amount = 1 + $amount;
+      break;
+    case 'minus':
+      if ($amount <= 1) {
+        unset($_SESSION['order'][$id]);
+        header("Location: ?controller=orderAdmin&action=add");
+        return;
+      }
+      $amount = $amount - 1;
+      break;
+    default: {
+        echo '<script language="javascript">
+        alert("Change amount error!!");
+        window.location.href="?controller=orderAdmin&action=add";
+        </script>';
+        return;
+      }
+  }
+  $_SESSION['order'][$id] = $amount;
+  header("Location: ?controller=orderAdmin&action=add");
+}
+
 switch ($action) {
   case '': {
       $result = index();
@@ -244,6 +300,10 @@ switch ($action) {
     break;
   case 'search': {
       handleSearch();
+    }
+    break;
+  case 'changeAmount': {
+      changeAmount();
     }
     break;
 }

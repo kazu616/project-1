@@ -15,6 +15,7 @@ const page = queryString.split("=")[1];
 let pre_url;
 const search_bill_code = document.querySelector("#search_bill_code");
 const input_search_bill = document.querySelector(".search-header");
+const minus_amount_order = document.querySelector("#minus_amount_order");
 
 if (search_bill_code && input_search_bill) {
   search_bill_code.addEventListener("click", () => {
@@ -113,3 +114,16 @@ $(".pagination-inner a").on("click", function () {
   $(this).siblings().removeClass("pagination-active");
   $(this).addClass("pagination-active");
 });
+
+if (minus_amount_order) {
+  minus_amount_order.addEventListener("click", (e) => {
+    const amount = Number(e.currentTarget.nextElementSibling.innerHTML);
+    const id = Number(e.currentTarget.previousElementSibling.innerHTML);
+    if (amount <= 1) {
+      if (confirm("Are you sure?")) {
+        window.location.href = `?controller=orderAdmin&action=changeAmount&id=${id}&func=minus`;
+      }
+    }
+    return;
+  });
+}

@@ -10,10 +10,10 @@
       </div>
     </div>
     <div class="avt">
-      <img src="imgs/avt.png" alt="" />
+      <img src="imgs/<?= $_SESSION['customer_img'] ?>" alt="" />
       <ul class="dropdown-avt">
         <div class="avt-detail">
-          <img src="imgs/avt.png" alt="" />
+          <img src="imgs/<?= $_SESSION['customer_img'] ?>" alt="" />
           <div class="info">
             <h3>John Wick</h3>
             <p>Admin</p>

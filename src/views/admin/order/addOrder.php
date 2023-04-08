@@ -42,13 +42,26 @@
                 <p class="text-sm text-[#dacfcf] "><?= $each['name_author'] ?></p>
               </div>
             </div>
-            <div class="flex flex-col pb-1 mr-10 gap-y-1">
-              <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
+            <div class="flex flex-col pb-1 mr-10 gap-y-4">
+              <div class="text-[18px] uppercase w-[230px] flex justify-between items-center">
                 <p>Amount:</p>
-                <span class="text-xl font-secondary"><?= $each['amount_order'] ?></span>
+                <div class="flex items-center bg-[#E2E2E2] rounded-[5px] gap-x-4 py-2">
+                  <p class="hidden"><?= $each['idProduct'] ?></p>
+                  <div class="py-2 cursor-pointer w-7" id="minus_amount_order">
+                    <svg class="relative left-[13px]" width="11" height="2" viewBox="0 0 11 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.71875 1H1.28125" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                  <span class="text-xl text-black font-secondary"><?= $each['amount_order'] ?></span>
+                  <a href="?controller=orderAdmin&action=changeAmount&id=<?= $each['idProduct'] ?>&func=add" class="inline-block py-2 w-7">
+                    <svg class="relative left-[5px]" width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M5.5 1.0625V8.9375M9.71875 5H1.28125" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </a>
+                </div>
               </div>
               <!-- <p class="flex items-end mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span>$ 45.00</span></p> -->
-              <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
+              <div class="text-[18px] uppercase w-[230px] flex justify-between items-center">
                 <p>Price:</p>
                 <span class="text-xl font-secondary"> $ <?= number_format($each['price']) ?></span>
               </div>

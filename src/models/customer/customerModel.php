@@ -14,7 +14,7 @@ function index()
 function getProducts($limit = 10)
 {
   include 'connect/openDB.php';
-  $sql = "SELECT * FROM products LIMIT $limit";
+  $sql = "SELECT * FROM products WHERE amount > 0 LIMIT $limit";
   $products = mysqli_query($connect, $sql);
   include 'connect/closeDB.php';
   return $products;
@@ -23,7 +23,7 @@ function getProducts($limit = 10)
 function getAllProducts()
 {
   include 'connect/openDB.php';
-  $sql = "SELECT * FROM products";
+  $sql = "SELECT * FROM products WHERE amount > 0";
   $products = mysqli_query($connect, $sql);
   include 'connect/closeDB.php';
   return $products;
@@ -31,15 +31,35 @@ function getAllProducts()
 
 function getProductByCategory()
 {
-  $sql = "SELECT * FROM products LIMIT 8";
+  $sql = "SELECT * FROM products WHERE amount > 0 LIMIT 8";
   include 'connect/openDB.php';
   if (isset($_GET['genre'])) {
     $genre = $_GET['genre'];
-    $sql = "SELECT * FROM products WHERE idGenre = $genre LIMIT 8";
+    $sql = "SELECT * FROM products WHERE amount > 0 AND idGenre = $genre LIMIT 8";
   }
   $products = mysqli_query($connect, $sql);
   include 'connect/closeDB.php';
   return $products;
+}
+
+function seo()
+{
+  if (!isset($_POST['email'])) {
+    echo '<script language="javascript">
+    alert("Subcribe Error!!");
+    window.location.href="index.php#subcribe";
+    </script>';
+    return;
+  }
+  $email = $_POST['email'];
+  include 'connect/openDB.php';
+  $sql = "INSERT INTO ceo(email) VALUES ('$email')";
+  mysqli_query($connect, $sql);
+  include 'connect/closeDB.php';
+  echo '<script language="javascript">
+    alert("Subcribe Successfully!!");
+    window.location.href="index.php#subcribe";
+  </script>';
 }
 
 switch ($action) {
@@ -50,4 +70,7 @@ switch ($action) {
       $prod_by_category = getProductByCategory();
     }
     break;
+  case 'seo': {
+      seo();
+    }
 }
