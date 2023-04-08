@@ -134,8 +134,43 @@ function delete()
 {
     $id = $_GET['id'];
     include_once 'connect/openDB.php';
-    $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 1";
-    $data_clone = mysqli_query($connect, $sql);
+    $sql_check = "SELECT COUNT(idCustomer) AS countUser FROM `order` WHERE idCustomer = '$id'";
+    $sql_check1 = "SELECT COUNT(idAdmin) AS countAdmin FROM `order` WHERE idAdmin = '$id'";
+    $count_user = mysqli_fetch_assoc(mysqli_query($connect, $sql_check));
+    $count_admin = mysqli_fetch_assoc(mysqli_query($connect, $sql_check1));
+
+    if ($count_user['countUser'] == 0) {
+        $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 2";
+        $result = mysqli_query($connect, $sql);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            header('Location:?controller=accountAdmin');
+        } else {
+            echo 'alert("Delete unsuccessful");';
+        }
+    } else {
+        include_once 'connect/closeDB.php';
+        echo '<script language="javascript">';
+        echo 'alert("Cannot delete user account have order");';
+        echo 'window.location.href="?controller=accountAdmin"';
+        echo '</script>';
+    }
+    if ($count_admin['countAdmin'] == 0) {
+        $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 1";
+        $result = mysqli_query($connect, $sql);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            header('Location:?controller=accountAdmin');
+        } else {
+            echo 'alert("Delete unsuccessful");';
+        }
+    } else {
+        include_once 'connect/closeDB.php';
+        echo '<script language="javascript">';
+        echo 'alert("Cannot delete admin account handle order");';
+        echo 'window.location.href="?controller=accountAdmin"';
+        echo '</script>';
+    }
     include_once 'connect/closeDB.php';
 }
 

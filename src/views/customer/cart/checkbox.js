@@ -1,6 +1,6 @@
 window.onload = function () {
     // Get all the checkboxes by class name
-    const checkboxes = document.getElementsByClassName("check");
+    const checkboxes = document.querySelectorAll(".check");
 
     // Add an event listener to each checkbox
     Array.from(checkboxes).forEach(function (checkbox) {
@@ -61,7 +61,6 @@ window.onload = function () {
             });
         }
         // Log the checkedId_product array to console
-        console.log(checkbox);
         console.log(checkedId_product);
 
         // Calculate the total value of all checked boxes

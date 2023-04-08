@@ -71,9 +71,9 @@
                     </div>
             </div>
             <div class="bg-[#e1dfd6] absolute rounded-sm w-[80%] translate-x-[15%] h-[1px] mt-3"></div>
-            <div class="mt-10">
-                <p class=" ml-40 text-xl font-medium text-left text-[#3d3d3d] capitalize ">Book description</p>
-                <p class="text-[#7a7a7a] ml-40 mt-3 text-left text-base"><?= $product['description'] ?></p>
+            <div class="pl-40 pb-36 pt-10 pr-24">
+                <p class=" text-xl font-medium text-left text-[#3d3d3d] capitalize ">Book description</p>
+                <p class="text-[#7a7a7a] mt-3 text-left text-base"><?= $product['description'] ?></p>
             </div>
         </div>
     <?php } ?>

@@ -42,19 +42,19 @@
                             <div class="flex gap-x-2">
                                 <p>Status:</p>
                                 <?php switch ($each['order']['status']) {
-                    case PENDING:
-                      echo "<span class='text-orange-500'>Pending</span>";
-                      break;
-                    case DELIVERING:
-                      echo "<span class='text-blue-500'>Delivering</span>";
-                      break;
-                    case COMPLETED:
-                      echo "<span class='text-green-500'>Completed</span>";
-                      break;
-                    case CANCELED:
-                      echo "<span class='text-red-500'>Canceled</span>";
-                      break;
-                  } ?>
+                                        case PENDING:
+                                            echo "<span class='text-orange-500'>Pending</span>";
+                                            break;
+                                        case DELIVERING:
+                                            echo "<span class='text-blue-500'>Delivering</span>";
+                                            break;
+                                        case COMPLETED:
+                                            echo "<span class='text-green-500'>Completed</span>";
+                                            break;
+                                        case CANCELED:
+                                            echo "<span class='text-red-500'>Canceled</span>";
+                                            break;
+                                    } ?>
                             </div>
                         </div>
                         <?php foreach ($each['data'] as $item) { ?>
@@ -77,9 +77,9 @@
                         <?php } ?>
                         <div class="flex items-center justify-between mb-5 text-xl">
                             <p class="text-[#888888]">Created Day: <?php
-                                                        $date = date_create(explode(" ", $each['order']['createdDate'])[0]);
-                                                        echo date_format($date, "d/m/Y");
-                                                        ?></p>
+                                                                        $date = date_create(explode(" ", $each['order']['createdDate'])[0]);
+                                                                        echo date_format($date, "d/m/Y");
+                                                                        ?></p>
                             <div class="flex items-center gap-x-3">
                                 <p class="text-[#888]">Total:</p>
                                 <span class="text-red-500">$ <?= $each['total_price'] ?></span>
@@ -119,13 +119,37 @@
                             <p class="ml-3 text-lg font-medium leading-none ">Previous</p>
                         </div>
                         <div class="hidden lg:flex">
-                            <p
-                                class="px-2 pt-3 mr-4 text-lg font-medium leading-none text-gray-600 border-t border-transparent cursor-pointer hover:text-indigo-700 hover:border-indigo-400">
-                                1</p>
-                            <p
-                                class="px-2 pt-3 mr-4 text-lg font-medium leading-none text-indigo-700 border-t border-indigo-400 cursor-pointer">
-                                4</p>
-
+                            <?php
+                            if (empty($array)) {
+                                $totalPage = 1;
+                            } else {
+                                $totalPage = end($array)['totalPage'];
+                            }
+                            for ($page = 1; $page <= $totalPage; $page++) {
+                                if ($page == 1 || $page == $totalPage || ($page >= $_GET['page'] - 2 && $page <= $_GET['page'] + 2)) {
+                            ?>
+                            <a href="?controller=order_history&page=<?= $page ?>&<?php if (isset($_GET['status'])) {
+                                                                                                echo "status=" . $_GET['status'];
+                                                                                            } ?>"
+                                class="<?php if ($_GET['page'] == $page) {
+                                                                                                                    echo "text-lg font-medium leading-none cursor-pointer text-indigo-700 border-t border-indigo-400 pt-3 mr-4 px-2";
+                                                                                                                } else echo "text-lg font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2" ?>">
+                                <?php
+                                        if ($page == $_GET['page']) {
+                                            echo "$page";
+                                        } else {
+                                            echo "$page";
+                                        }
+                                        ?>
+                            </a>
+                            <?php
+                                } elseif (($page == $_GET['page'] - 3 && $_GET['page'] > 4) || ($page == $_GET['page'] + 3 && $_GET['page'] < $totalPage - 3)) {
+                                ?>
+                            <span class="pt-2 pr-4 text-xl ">...</span>
+                            <?php
+                                }
+                            }
+                            ?>
                         </div>
                         <div class="flex items-center pt-3 text-gray-600 cursor-pointer hover:text-indigo-700">
                             <p class="mr-3 text-lg font-medium leading-none">Next</p>

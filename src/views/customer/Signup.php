@@ -95,7 +95,7 @@
                         </label>
                         <a href="?controller=user&action=login"
                             class="text-base font-semibold text-left text-[#7f265b] hover:text-black">
-                            Sing in here
+                            Sign in here
                         </a>
                     </div>
                 </div>

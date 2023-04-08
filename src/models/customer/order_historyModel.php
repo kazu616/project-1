@@ -3,13 +3,30 @@
 function index()
 {
   $status = 0;
+  // phân trang mặc đinh
+  isset($_GET['page']) ? $_GET['page'] : $_GET['page'] = 1;
   $id = $_SESSION['customer_id'];
-  $sql = "SELECT * FROM `order` WHERE idCustomer = $id ORDER BY createdDate DESC";
+  include_once 'connect/openDB.php';
+  $total_order = mysqli_query($connect, "SELECT * FROM `order`")->num_rows;
+  $order_number = 8;
+  $total_page = ceil($total_order / $order_number);
+  $page = $_GET['page'];
+  $offset = ($page - 1) * $order_number;
+  $sql = "SELECT * FROM `order` WHERE idCustomer = $id ORDER BY createdDate DESC  LIMIT " . $order_number . " OFFSET " . $offset;
+
+  // phân trang khi có status
   if (isset($_GET['status'])) {
     $status = $_GET['status'];
-    $sql = "SELECT * FROM `order` WHERE idCustomer = $id AND status = $status ORDER BY createdDate DESC";
+    $total_order = mysqli_query($connect, "SELECT * FROM `order` WHERE status = $status")->num_rows;
+    $order_number = 6;
+    $page = $_GET['page'];
+    $offset = ($page - 1) * $order_number;
+    $total_page = ceil($total_order / $order_number);
+
+    $sql = "SELECT * FROM `order` WHERE idCustomer = $id AND status = $status ORDER BY createdDate DESC  LIMIT " . $order_number . " OFFSET " . $offset;
   }
-  include_once 'connect/openDB.php';
+
+  // kết quả 1 trong 2
   $result = mysqli_query($connect, $sql);
   $array = [];
   foreach ($result as $each) {
@@ -24,6 +41,7 @@ function index()
     $order['data'] = $query;
     $order['order'] = $each;
     $order['total_price'] = $total_price;
+    $order['totalPage'] = $total_page;
     $array[] = $order;
   }
   include_once 'connect/closeDB.php';

@@ -101,9 +101,24 @@ function delete()
 {
     $id = $_GET['id'];
     include_once 'connect/openDB.php';
-    $sql = "DELETE FROM authors WHERE idAuthor = '$id'";
-    $data_clone = mysqli_query($connect, $sql);
-    include_once 'connect/closeDB.php';
+    $sql_check = "SELECT COUNT(idAuthor) AS countAuthor FROM `products` WHERE idAuthor = '$id'";
+    $count_author = mysqli_fetch_assoc(mysqli_query($connect, $sql_check));
+    if ($count_author['countAuthor'] == 0) {
+        $sql = "DELETE FROM authors WHERE idAuthor = '$id'";
+        $result = mysqli_query($connect, $sql);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            header('Location:?controller=authorAdmin');
+        } else {
+            echo 'alert("Delete unsuccessful");';
+        }
+    } else {
+        include_once 'connect/closeDB.php';
+        echo '<script language="javascript">';
+        echo 'alert("Cannot delete this author (because the book has a name this author created)");';
+        echo 'window.location.href="?controller=authorAdmin"';
+        echo '</script>';
+    }
 }
 
 

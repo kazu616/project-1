@@ -20,5 +20,4 @@ switch ($action) {
     break;
   case 'delete':
     include_once 'models/admin/authorModel.php';
-    header('Location:?controller=authorAdmin');
 }
