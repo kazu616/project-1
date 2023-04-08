@@ -65,13 +65,13 @@
     </ul>
     <span class="title-link">Form</span>
     <ul>
-        <a href="?controller=add_product">
+        <a href="#">
             <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "add_product" ? "activeLink" : "") : "" ?>>
                 <box-icon name="folder-plus"></box-icon>
                 <span>Add Product</span>
             </li>
         </a>
-        <a href="?controller=add_user">
+        <a href="#">
             <li class=<?php echo isset($_GET["controller"])  ? ($_GET["controller"] == "add_user" ? "activeLink" : "") : "" ?>>
                 <box-icon name="folder-plus"></box-icon>
                 <span>Add User</span>

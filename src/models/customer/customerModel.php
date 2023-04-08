@@ -62,12 +62,29 @@ function seo()
   </script>';
 }
 
+function bestSellingProduct()
+{
+  include 'connect/openDB.php';
+  $sql = "SELECT products.*,products.img as prod_image,products.name as prod_name,authors.name as name_author, SUM(order_detail.amount) AS total_amount
+  FROM order_detail
+  JOIN products ON order_detail.idProduct = products.idProduct
+  JOIN authors ON products.idAuthor = authors.idAuthor
+  GROUP BY order_detail.idProduct
+  ORDER BY total_amount DESC
+  LIMIT 1;";
+  $query = mysqli_query($connect, $sql);
+  $result = mysqli_fetch_array($query);
+  include 'connect/closeDB.php';
+  return $result;
+}
+
 switch ($action) {
   case '': {
       $array = index();
       $slide_prods = getProducts(5);
       $feature_prods = getAllProducts();
       $prod_by_category = getProductByCategory();
+      $prod_best_selling = bestSellingProduct();
     }
     break;
   case 'seo': {

@@ -15,7 +15,7 @@
         <div class="avt-detail">
           <img src="imgs/<?= $_SESSION['customer_img'] ?>" alt="" />
           <div class="info">
-            <h3>John Wick</h3>
+            <h3><?= $_SESSION['customer_name'] ?></h3>
             <p>Admin</p>
           </div>
         </div>

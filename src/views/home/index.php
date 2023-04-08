@@ -91,20 +91,24 @@
   </div>
   <div class="mt-20"></div>
   <div class="flex items-center justify-center gap-x-[100px] bg-[#EDEBE4] py-[100px]">
-    <img src="imgs/best-selling.png" class="h-[550px]" alt="">
+    <img src="imgs/<?= $prod_best_selling['prod_image'] ?>" class="h-[550px]" alt="">
     <div class="max-w-[450px]">
       <div class="flex flex-col mb-[34px]">
         <h1 class="text-[48px] capitalize font-secondary">Best selling book</h1>
-        <span class="text-[#888888] text-sm">By Timbur Hood</span>
+        <span class="text-[#888888] text-sm">By <?= $prod_best_selling['name_author'] ?></span>
       </div>
       <div class="mb-10">
-        <h2 class="text-2xl font-secondary">Birds gonna be happy</h2>
-        <span class="text-[#7A7A7A] text-sm mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu feugiat amet, libero ipsum enim pharetra hac.</span>
-        <p class="flex items-end mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span class="text-[#74642F] text-4xl">$ 45.00</span></p>
+        <h2 class="mb-5 text-3xl font-secondary"><?= $prod_best_selling['prod_name'] ?></h2>
+        <span class="text-[#7A7A7A] text-sm mb-3 truncate_cus"><?= $prod_best_selling['description'] ?></span>
+        <p class="flex items-end mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span class="text-[#74642F] text-4xl">$ <?= $prod_best_selling['price'] ?></span></p>
       </div>
       <div>
-        <button class="px-5 min-w-[150px] py-3 border border-[#a50000] text-[#a50000] bg-white rounded-xl">Add To Cart</button>
-        <button class="px-5 min-w-[150px] py-3 border border-white text-white bg-[#a50000] rounded-xl">Buy Now</button>
+        <a href="?controller=cart&action=add_to_cart&id=<?= $prod_best_selling['idProduct'] ?>&mode=2">
+          <button class="px-5 min-w-[150px] py-3 border border-[#a50000] text-[#a50000] bg-white rounded-xl">Add To Cart</button>
+        </a>
+        <a href="?controller=cart&action=add_to_cart&id=<?= $prod_best_selling['idProduct'] ?>&mode=2">
+          <button class="px-5 min-w-[150px] py-3 border border-white text-white bg-[#a50000] rounded-xl">Buy Now</button>
+        </a>
       </div>
     </div>
   </div>

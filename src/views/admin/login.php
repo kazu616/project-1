@@ -48,7 +48,7 @@
       </div>
       <div class="error-login">
         <div class="form-field" style="margin-bottom: 5px">
-          <input type="password" value="10102003" class="form-input" name="password_login" id="password" placeholder=" " />
+          <input type="password" value="123456" class="form-input" name="password_login" id="password" placeholder=" " />
           <label for="password" class="form-label">Password</label>
           <box-icon name='low-vision' class="hide_eyes" style="right: 15px"></box-icon>
         </div>
