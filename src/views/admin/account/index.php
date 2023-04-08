@@ -77,19 +77,19 @@
             </table>
             <div class="pagination-container">
                 <div class="flex items-center justify-center pagination">
-                    <a class="pagination-newer" href="?controller=orderAdmin&page=<?= $array['page'] == 1 ? 1 : $array['page'] - 1 ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>"><i class="fa-solid fa-arrow-left"></i></a>
+                    <a class="pagination-newer" href="?controller=accountAdmin&page=<?= $array['page'] == 1 ? 1 : $array['page'] - 1 ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>"><i class="fa-solid fa-arrow-left"></i></a>
                     <span class="flex items-center pagination-inner gap-x-2">
-                        <?php if ($array['page'] >= 3) {   ?><a href="?controller=orderAdmin&page=1<?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>">1</a>
+                        <?php if ($array['page'] >= 3) {   ?><a href="?controller=accountAdmin&page=1<?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>">1</a>
                             <p class="px-4">...</p><?php } ?>
                         <?php
                         for ($i = $array['page'] != 1 ? $array['page'] - 1 : 1; $i <= ($array['page'] + 1 > $array['number_of_page'] ? $array['page'] : ($array['page'] + 1)); $i++) {
                         ?>
-                            <a href="?controller=orderAdmin&page=<?= $i ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>" class=<?= isset($_GET["page"]) ? ($_GET["page"] == $i ? "pagination-active" : "") : ($i == 1 ? "pagination-active" : "") ?>><?= $i ?></a>
+                            <a href="?controller=accountAdmin&page=<?= $i ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>" class=<?= isset($_GET["page"]) ? ($_GET["page"] == $i ? "pagination-active" : "") : ($i == 1 ? "pagination-active" : "") ?>><?= $i ?></a>
                         <?php } ?>
                     </span>
                     <?php if ($array['page'] <= $array['number_of_page'] - 2) {   ?><p class="px-4">...</p>
-                        <a href="?controller=orderAdmin&page=<?= $array['number_of_page'] ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>"><?= $array['number_of_page'] ?></a><?php } ?>
-                    <a class="pagination-older" href="?controller=orderAdmin&page=<?= $array['page'] != $array['number_of_page'] ?  ($array['page'] + 1) : $array['page'] ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>"><i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="?controller=accountAdmin&page=<?= $array['number_of_page'] ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>"><?= $array['number_of_page'] ?></a><?php } ?>
+                    <a class="pagination-older" href="?controller=accountAdmin&page=<?= $array['page'] < $array['number_of_page'] ?  ($array['page'] + 1) : $array['page'] ?><?= isset($_GET['search']) ? "&search=" . $_GET['search'] : '' ?>"><i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>

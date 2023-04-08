@@ -1,11 +1,29 @@
 <?php
 function indexAuthor()
 {
-    include_once 'connect/openDB.php';
-    $sql = "SELECT * FROM authors";
+    $result = [];
+    $search_bill = '';
+    $page = 1;
+    $prod_per_page = 5;
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    }
+    if (isset($_GET['search'])) {
+        $search_bill = $_GET['search'];
+    }
+    include_once "connect/openDB.php";
+    $sqlGetTotalOrder = "SELECT COUNT(*) FROM authors WHERE name LIKE '$search_bill%'";
+    $query = mysqli_query($connect, $sqlGetTotalOrder);
+    $total_order = mysqli_fetch_array($query)[0];
+    $number_of_page = ceil($total_order / $prod_per_page);
+    $prod_offset = ($page - 1) * $prod_per_page;
+    $sql = "SELECT * FROM authors WHERE name LIKE '$search_bill%' LIMIT $prod_per_page OFFSET $prod_offset";
     $authors = mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
-    return $authors;
+    $result['data'] = $authors;
+    $result['page'] = $page;
+    $result['number_of_page'] = $number_of_page;
+    return $result;
 }
 function addAuthor()
 {
@@ -96,6 +114,12 @@ function edit()
     }
 }
 
+function handleSearch()
+{
+    if (!isset($_POST['search'])) return;
+    $search = $_POST['search'];
+    header("location: ?controller=authorAdmin&search=$search");
+}
 
 function delete()
 {
@@ -109,7 +133,7 @@ function delete()
 
 switch ($action) {
     case '':
-        $authors = indexAuthor();
+        $result = indexAuthor();
         break;
     case 'add':
         addAuthor();
@@ -122,5 +146,9 @@ switch ($action) {
         break;
     case 'delete':
         delete();
+        break;
+    case 'search': {
+            handleSearch();
+        }
         break;
 }

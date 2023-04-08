@@ -120,9 +120,11 @@ if (minus_amount_order) {
     const amount = Number(e.currentTarget.nextElementSibling.innerHTML);
     const id = Number(e.currentTarget.previousElementSibling.innerHTML);
     if (amount <= 1) {
-      if (confirm("Are you sure?")) {
+      if (confirm("Do you want to delete this product?")) {
         window.location.href = `?controller=orderAdmin&action=changeAmount&id=${id}&func=minus`;
       }
+    } else {
+      window.location.href = `?controller=orderAdmin&action=changeAmount&id=${id}&func=minus`;
     }
     return;
   });

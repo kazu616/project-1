@@ -12,17 +12,18 @@ switch ($action) {
     break;
   case "add": {
       include_once "models/admin/genreModel.php";
-      header('Location:?controller=genreAdmin');
     }
     break;
   case "destroy": {
       include_once "models/admin/genreModel.php";
-      header('Location:?controller=genreAdmin');
     }
     break;
   case "edit": {
       include_once "models/admin/genreModel.php";
-      header('Location:?controller=genreAdmin');
+    }
+    break;
+  case 'search': {
+      include_once "models/admin/genreModel.php";
     }
     break;
 }

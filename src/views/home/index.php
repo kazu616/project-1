@@ -210,6 +210,40 @@
         dynamicMainBullets: 4
       },
     });
+    // search
+    let search_bar = document.getElementById("search");
+    let btn_search = document.getElementById("toggle-search");
+
+    btn_search.addEventListener("click", function() {
+      btn_search.classList.add('hidden');
+      search_bar.classList.remove('hidden');
+    })
+
+    document.addEventListener("click", (event) => {
+      if (!search_bar.contains(event.target) && !event.target.closest("#toggle-search") && !event.target.closest(
+          "#search")) {
+        btn_search.classList.remove('hidden');
+        search_bar.classList.add('hidden');
+        console.log("Clicked outside of search box");
+      }
+    });
+    // alert custome
+
+    function showAlert(message) {
+      var alertElement = document.createElement('div');
+      alertElement.classList.add('custom-alert');
+      alertElement.innerHTML = '<p>' + message + '</p>';
+      document.body.appendChild(alertElement);
+      setTimeout(function() {
+        alertElement.remove();
+      }, 1500);
+
+    }
+    // check if the URL contains the added_to_cart parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('added_to_cart')) {
+      showAlert('Product added to cart successfully!');
+    }
   </script>
 </body>
 

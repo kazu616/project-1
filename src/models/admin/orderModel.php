@@ -126,7 +126,6 @@ function store()
   } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($connect);
   }
-
   include "connect/closeDB.php";
 }
 //function lấy dữ liệu trên db dựa theo id
@@ -180,10 +179,24 @@ function update()
   $status = $_POST['status'];
   $idAdmin = $_SESSION['customer_id'];
   include "connect/openDB.php";
+  $sqlCheck = "SELECT status FROM `order` WHERE idOrder = $id";
+  $query = mysqli_query($connect, $sqlCheck);
+  $result = mysqli_fetch_array($query);
+  $status_old = $result['status'];
+  if ($status_old == COMPLETED || $status_old == CANCELED) {
+    echo '<script language="javascript">
+    alert("Update failed!!");
+    window.location.href="?controller=orderAdmin";
+    </script>';
+    return;
+  }
   $sql = "UPDATE `order` SET status = $status, idAdmin = $idAdmin WHERE idOrder = $id";
   mysqli_query($connect, $sql);
   include "connect/openDB.php";
-  header("Location: ?controller=orderAdmin");
+  echo '<script language="javascript">
+  alert("Update order successfully!!");
+  window.location.href="?controller=orderAdmin";
+  </script>';
 }
 
 function storeSession()
@@ -228,16 +241,16 @@ function changeAmount()
   }
   $id = $_GET['id'];
   $amount = (int)$_SESSION['order'][$id];
-  if ($amount >= 10) {
-    echo '<script language="javascript">
-    alert("Quantity does not exceed 10 products!!");
-    window.location.href="?controller=orderAdmin&action=add";
-    </script>';
-    return;
-  }
   $func = $_GET['func'];
   switch ($func) {
     case 'add':
+      if ($amount >= 10) {
+        echo '<script language="javascript">
+        alert("Quantity does not exceed 10 products!!");
+        window.location.href="?controller=orderAdmin&action=add";
+        </script>';
+        return;
+      }
       $amount = 1 + $amount;
       break;
     case 'minus':

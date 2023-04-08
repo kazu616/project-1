@@ -7,12 +7,12 @@
   </h1>
   <div class="flex gap-x-[60px] items-center">
     <div class="flex items-center uppercase gap-x-5">
-      <a href="index.php" class="text-[#74642F]">Home</a>
+      <a href="index.php" class="<?= isset($_GET['controller']) ? "" : "text-[#74642F]" ?>">Home</a>
       <a href="#">About</a>
       <a href="#">Pages</a>
-      <a href="?controller=productCustomer">Shop</a>
+      <a href="?controller=productCustomer" class="<?= isset($_GET['controller']) ? ($_GET['controller'] == "productCustomer" ? "text-[#74642F]" : "") : "" ?>">Shop</a>
       <a href="#">Articles</a>
-      <a href="#">Contact</a>
+      <a href="#subcribe">Contact</a>
     </div>
     <!-- <span>
       <i class="fa-solid fa-bars"></i>
