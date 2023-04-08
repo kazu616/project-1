@@ -19,28 +19,51 @@ function indexCart()
         }
     }
     include_once 'connect/closeDB.php';
+    $count = count($cart);
     $infor['cart'] = $cart;
+    $infor['count'] = $count;
     return $infor;
 }
 
 function add_to_cart()
 {
+    function header_mode($product_id)
+    {
+        if ($_GET['mode'] == 1) {
+            header('Location: index.php?controller=productCustomer&added_to_cart&action=single_product&id=' . $product_id);
+        } elseif ($_GET['mode'] == 3) {
+            header('Location:index.php?controller=productCustomer&added_to_cart#' . $product_id);
+        } elseif ($_GET['mode'] == 4) {
+            header('Location:index.php?added_to_cart');
+        } else {
+            header('Location:index.php?controller=cart');
+        }
+    }
     $product_id = $_GET['id'];
     isset($_GET['amount']) ? $amount = $_GET['amount'] : $amount = 1;
+    include_once 'connect/openDB.php';
+    $sql = "SELECT amount FROM products WHERE idProduct = $product_id";
+    $amount_DB = mysqli_fetch_assoc(mysqli_query($connect, $sql));
+    include_once 'connect/closeDB.php';
     if (isset($_SESSION['cart'])) {
         if (isset($_SESSION['cart'][$product_id])) {
-            $_SESSION['cart'][$product_id] = $_SESSION['cart'][$product_id] + $amount;
+            if ($_SESSION['cart'][$product_id] < $amount_DB['amount']) {
+                $_SESSION['cart'][$product_id] = $_SESSION['cart'][$product_id] + $amount;
+                header_mode($product_id);
+            } else {
+                echo '<script language="javascript">';
+                echo 'alert("Product out of stock");';
+                echo 'window.location.href="?controller=productCustomer&added_to_cart&action=single_product&id=' . $product_id . '"';
+                echo '</script>';
+            }
         } else {
             $_SESSION['cart'][$product_id] = $amount;
+            header_mode($product_id);
         }
     } else {
         $_SESSION['cart'] = array();
         $_SESSION['cart'][$product_id] = $amount;
-    }
-    if ($_GET['mode'] == 1) {
-        header('Location: index.php?controller=productCustomer&action=single_product&id=' . $product_id);
-    } else {
-        header('Location:index.php?controller=cart');
+        header_mode($product_id);
     }
 }
 function change_amount()

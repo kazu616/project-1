@@ -17,16 +17,13 @@
                 <div class="swiper SwiperHead">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img class="object-cover w-full h-full" src="./imgs/banner.png" alt="image" />
+                            <img class="object-contain w-full h-full" src="./imgs/banner.png" alt="image" />
                         </div>
                         <div class="swiper-slide">
-                            <img class="object-cover w-full h-full" src="./imgs/banner.png" alt="image" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="object-cover w-full h-full" src="./imgs/banner.png" alt="image" />
+                            <img class="object-contain w-full h-full" src="./imgs/sales-books-1.png" alt="image" />
                         </div>
                     </div>
-                    <!-- <div class="swiper-pagination1 absolute bottom-[20px]"></div> -->
+                    <div class="swiper-pagination1 w-20 absolute p-3 "></div>
                 </div>
             </div>
             <!-- banner -->
@@ -39,19 +36,21 @@
                 </div>
             </div>
         </div>
-        <div class="relative w-full max-w-md mx-auto mt-9">
+        <div class="relative mt-9 mx-auto w-full max-w-md">
             <form action="?controller=productCustomer&idG&mode=search" method="POST">
                 <label for="search" class="sr-only">Search</label>
                 <div class="relative">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <input id="search" name="search" value="" class="block w-full py-2 pl-10 pr-3 text-sm placeholder-gray-500 bg-gray-100 border h-11 border-black/50 rounded-xl focus:outline-none focus:bg-white focus:border-indigo-500 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search" autocomplete="off">
+                    <input id="search" name="search" value="" class="block w-full h-11 border border-black/50 bg-gray-100 rounded-xl py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-indigo-500 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search" autocomplete="off">
                 </div>
             </form>
         </div>
+
+
         <!-- genres -->
-        <div class="flex flex-col m-5 mt-10 gap-11">
+        <div class="flex flex-col m-5 mt-7 gap-11">
             <div class="flex justify-between">
                 <h1 class="justify-start text-2xl">Genres</h1>
                 <div id="icon" class="justify-end">
@@ -93,11 +92,11 @@
                                                                 }  ?>&idG=<?php if (isset($_GET['idG'])) {
                                                                                 echo $_GET['idG'];
                                                                             }  ?>&mode=<?php if ($_GET['idG'] != "") {
-                                                                                                echo "desc";
-                                                                                            } elseif ($_GET['mode'] == 'search') {
-                                                                                                echo "search_desc";
-                                                                                            } else echo 1;
-                                                                                            ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F] mr-1 ">
+                                                                                            echo "desc";
+                                                                                        } elseif ($_GET['mode'] == 'search') {
+                                                                                            echo "search_desc";
+                                                                                        } else echo 1;
+                                                                                        ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F] mr-1 ">
                         <i class="fa-solid fa-arrow-down-9-1"></i>
 
                     </a>
@@ -106,13 +105,12 @@
                                                                 }  ?>&idG=<?php if (isset($_GET['idG'])) {
                                                                                 echo $_GET['idG'];
                                                                             }  ?>&mode=<?php if ($_GET['idG'] != "") {
-                                                                                                echo "asc";
-                                                                                            } elseif ($_GET['mode'] == 'search') {
-                                                                                                echo "search_asc";
-                                                                                            } else echo 2;
-                                                                                            ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F]">
+                                                                                            echo "asc";
+                                                                                        } elseif ($_GET['mode'] == 'search') {
+                                                                                            echo "search_asc";
+                                                                                        } else echo 2;
+                                                                                        ?>&page=1" class="bg-white w-[28px] h-[28px] p-1 rounded-lg hover:bg-[#FFC43F]">
                         <i class="fa-solid fa-arrow-up-1-9"></i>
-
                     </a>
                 </div>
             </div>
@@ -135,14 +133,15 @@
                             <div class="flex justify-between pl-4 pr-4 mt-2">
                                 <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
                                     $<?= $product['price'] ?></p>
-                                <a id="link_add" href="?controller=cart&action=add_to_cart&id=<?= $product['idProduct'] ?>&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add
-                                    To Cart <i class="fa-solid fa-cart-shopping"></i>
-                                </a>
+                                <?php if ($product['amount'] > 0) {
+                                    echo '<a id="link_add" href="?controller=cart&action=add_to_cart&id=' . $product['idProduct'] . '&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add To Cart <i class="fa-solid fa-cart-shopping"></i></a>';
+                                } else echo '<p class="text-gray-600 font-semibold pt-1 ">Out of stock</p>'; ?>
                             </div>
                         </div>
                     </div>
                 <?php } ?>
             </div>
+        </div>
         </div>
         <div class="flex items-center justify-center px-4 py-10 lg:px-6">
             <div class="flex items-center justify-between w-full border-t border-gray-200 lg:w-3/5">

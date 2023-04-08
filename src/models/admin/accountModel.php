@@ -17,7 +17,7 @@ function indexAccount()
     $total_prod = mysqli_fetch_array($query)[0];
     $number_of_page = ceil($total_prod / $prod_per_page);
     $prod_offset = ($page - 1) * $prod_per_page;
-    $sql = "SELECT accounts.*, roles.name AS nameRole FROM accounts INNER JOIN roles ON accounts.idRole = roles.idRole WHERE email LIKE '$search%' LIMIT $prod_per_page OFFSET $prod_offset";
+    $sql = "SELECT accounts.*, roles.name AS nameRole FROM accounts INNER JOIN roles ON accounts.idRole = roles.idRole WHERE email LIKE '$search%' ORDER BY idAccount DESC LIMIT $prod_per_page OFFSET $prod_offset";
     $accounts = mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
     $array['accounts'] = $accounts;
@@ -134,7 +134,7 @@ function delete()
 {
     $id = $_GET['id'];
     include_once 'connect/openDB.php';
-    $sql = "DELETE FROM accounts WHERE idAccount = '$id'";
+    $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 1";
     $data_clone = mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
 }

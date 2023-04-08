@@ -37,19 +37,19 @@
                                 products: </span>
                             <span id="totalProduct" class="text-base font-bold font-secondary text-left text-[#888]"><?= $product['amount'] ?></span>
                         </p>
-                        <p class="pt-2 pb-5">
+                        <p class="pb-5 pt-2">
                             <span class="text-sm font-medium text-left text-[#888] pr-2">Price: </span>
                             <span class="text-3xl text-left capitalize text-[#74642f] font-secondary ">$ 45.00</span>
                         </p>
                         <div class="flex gap-4 pt-2 pb-3">
                             <p class="text-sm font-medium text-left text-[#888] pr-2">Amount: </p>
                             <div class="flex items-center bg-[#E2E2E2] h-8 rounded-md text-center relative bottom-[10px] font-secondary">
-                                <button id="minus" class="cursor-pointer w-7">
-                                    <i class="text-xs fa-solid fa-minus"></i>
+                                <button id="minus" class=" w-7 cursor-pointer">
+                                    <i class="fa-solid fa-minus text-xs"></i>
                                 </button>
                                 <input class="input_amount w-10 bg-[#E2E2E2] text-center" value="1" />
                                 <button id="plus" class="w-7">
-                                    <i class="text-xs fa-solid fa-plus"></i>
+                                    <i class="fa-solid fa-plus text-xs"></i>
                                 </button>
                             </div>
                         </div>
@@ -69,11 +69,6 @@
                                 Buy Now</a>
                         </div>
                     </div>
-            </div>
-            <div class="bg-[#e1dfd6] absolute rounded-sm w-[80%] translate-x-[15%] h-[1px] mt-3"></div>
-            <div class="mt-10">
-                <p class=" ml-40 text-xl font-medium text-left text-[#3d3d3d] capitalize ">Book description</p>
-                <p class="text-[#7a7a7a] ml-40 mt-3 text-left text-base"><?= $product['description'] ?></p>
             </div>
             <div class="bg-[#e1dfd6] absolute rounded-sm w-[80%] translate-x-[15%] h-[1px] mt-3"></div>
             <div class="mt-10">

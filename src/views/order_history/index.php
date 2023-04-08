@@ -32,75 +32,77 @@
             </div>
             <div class="flex flex-col w-full gap-10 min-h-[500px]">
                 <?php foreach ($array as $each) { ?>
-                <div class="w-full rounded-[20px] bg-white p-5">
-                    <div class="flex justify-end uppercase gap-x-5 border-b border-[#888888] pb-3 mb-5">
-                        <div class="flex gap-x-2 pr-5 border-r border-[#888888] uppercase">
-                            <p>bill of lading code:</p>
-                            <span class="text-red-500"><?= $each['order']['bill_code'] ?></span>
-                        </div>
-                        <div class="flex gap-x-2">
-                            <p>Status:</p>
-                            <?php switch ($each['order']['status']) {
-                  case PENDING:
-                    echo "<span class='text-orange-500'>Pending</span>";
-                    break;
-                  case DELIVERING:
-                    echo "<span class='text-blue-500'>Delivering</span>";
-                    break;
-                  case COMPLETED:
-                    echo "<span class='text-green-500'>Completed</span>";
-                    break;
-                  case CANCELED:
-                    echo "<span class='text-red-500'>Canceled</span>";
-                    break;
-                } ?>
-                        </div>
-                    </div>
-                    <?php foreach ($each['data'] as $item) { ?>
-                    <div class="px-3 flex justify-between items-end pb-3 border-b border-[#888] mb-3">
-                        <div class="flex h-full gap-x-4">
-                            <img src="imgs/<?= $item['prod_image'] ?>" class="object-cover w-[148px]" alt="">
-                            <div class="flex flex-col justify-between py-3">
-                                <div class="text-center">
-                                    <h3 class="text-lg uppercase"><?= $item['productName'] ?></h3>
-                                    <p class="text-sm text-[#dacfcf]"><?= $item['authorName'] ?></p>
-                                </div>
-                                <span>Amount: <?= $item['amount_order'] ?></span>
+                <a href="?controller=order&action=order_detail&id=<?= $each['order']['idOrder'] ?>">
+                    <div class="w-full rounded-[20px] bg-white p-5">
+                        <div class="flex justify-end uppercase gap-x-5 border-b border-[#888888] pb-3 mb-5">
+                            <div class="flex gap-x-2 pr-5 border-r border-[#888888] uppercase">
+                                <p>bill of lading code:</p>
+                                <span class="text-red-500"><?= $each['order']['bill_code'] ?></span>
+                            </div>
+                            <div class="flex gap-x-2">
+                                <p>Status:</p>
+                                <?php switch ($each['order']['status']) {
+                    case PENDING:
+                      echo "<span class='text-orange-500'>Pending</span>";
+                      break;
+                    case DELIVERING:
+                      echo "<span class='text-blue-500'>Delivering</span>";
+                      break;
+                    case COMPLETED:
+                      echo "<span class='text-green-500'>Completed</span>";
+                      break;
+                    case CANCELED:
+                      echo "<span class='text-red-500'>Canceled</span>";
+                      break;
+                  } ?>
                             </div>
                         </div>
-                        <div class="flex items-center py-3 gap-x-3">
-                            <p class="text-[#888]">Price:</p>
-                            <span>$ <?= $item['sold_price'] ?></span>
+                        <?php foreach ($each['data'] as $item) { ?>
+                        <div class="px-3 flex justify-between items-end pb-3 border-b border-[#888] mb-3">
+                            <div class="flex h-full gap-x-4">
+                                <img src="imgs/<?= $item['prod_image'] ?>" class="object-cover w-[148px]" alt="">
+                                <div class="flex flex-col justify-between py-3">
+                                    <div class="text-center">
+                                        <h3 class="text-lg uppercase"><?= $item['productName'] ?></h3>
+                                        <p class="text-sm text-[#dacfcf]"><?= $item['authorName'] ?></p>
+                                    </div>
+                                    <span>Amount: <?= $item['amount_order'] ?></span>
+                                </div>
+                            </div>
+                            <div class="flex items-center py-3 gap-x-3">
+                                <p class="text-[#888]">Price:</p>
+                                <span>$ <?= $item['sold_price'] ?></span>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <div class="flex items-center justify-between mb-5 text-xl">
+                            <p class="text-[#888888]">Created Day: <?php
+                                                        $date = date_create(explode(" ", $each['order']['createdDate'])[0]);
+                                                        echo date_format($date, "d/m/Y");
+                                                        ?></p>
+                            <div class="flex items-center gap-x-3">
+                                <p class="text-[#888]">Total:</p>
+                                <span class="text-red-500">$ <?= $each['total_price'] ?></span>
+                            </div>
+                        </div>
+                        <div class="flex justify-end gap-x-5">
+                            <form
+                                action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=4"
+                                method="post">
+                                <?php if ($each['order']['status'] == PENDING) { ?> <button
+                                    class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel
+                                    Order</button> <?php } ?>
+                            </form>
+                            <form
+                                action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=3"
+                                method="post">
+                                <?php if ($each['order']['status'] == DELIVERING) { ?><button
+                                    class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px] <?= $each['order']['status'] != 2 ? "!bg-[#888] !select-none" : "" ?>">Received
+                                    The Confirme</button><?php } ?>
+                            </form>
                         </div>
                     </div>
-                    <?php } ?>
-                    <div class="flex items-center justify-between mb-5 text-xl">
-                        <p class="text-[#888888]">Created Day: <?php
-                                                      $date = date_create(explode(" ", $each['order']['createdDate'])[0]);
-                                                      echo date_format($date, "d/m/Y");
-                                                      ?></p>
-                        <div class="flex items-center gap-x-3">
-                            <p class="text-[#888]">Total:</p>
-                            <span class="text-red-500">$ <?= $each['total_price'] ?></span>
-                        </div>
-                    </div>
-                    <div class="flex justify-end gap-x-5">
-                        <form
-                            action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=4"
-                            method="post">
-                            <?php if ($each['order']['status'] == PENDING) { ?> <button
-                                class="px-3 py-2 bg-red-500 text-white font-semibold rounded-[10px]">Cancel
-                                Order</button> <?php } ?>
-                        </form>
-                        <form
-                            action="?controller=order_history&action=update&id=<?= $each['order']['idOrder'] ?>&status=3"
-                            method="post">
-                            <?php if ($each['order']['status'] == DELIVERING) { ?><button
-                                class="px-3 py-2 bg-[#FF6B00] text-white font-semibold rounded-[10px] <?= $each['order']['status'] != 2 ? "!bg-[#888] !select-none" : "" ?>">Received
-                                The Confirme</button><?php } ?>
-                        </form>
-                    </div>
-                </div>
+                </a>
                 <?php } ?>
                 <div class="flex items-center justify-center px-4 py-10 lg:px-0 ">
                     <div class="flex items-center justify-between w-full border-t border-gray-200 lg:w-3/5">
@@ -144,6 +146,7 @@
     </div>
     <div class="mt-10"></div>
     <?php include 'views/layouts/footer.php' ?>
+    <?php include 'views/layouts/footer_customer.php' ?>
 </body>
 
 </html>

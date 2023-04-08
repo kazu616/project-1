@@ -10,11 +10,11 @@
     <?php require_once 'views/layouts/header1.php' ?>
     <?php require_once 'views/layouts/header2.php' ?>
     <div class="container mt-10">
-        <h2 class="mb-10 text-2xl uppercase font-secondary">Cart page (2 products)</h2>
+        <h2 class="mb-10 text-2xl uppercase font-secondary">Cart page (<?= $carts['count'] ?> products)</h2>
         <div class="px-10 rounded-[10px] py-8 bg-[#EDEBE4] flex justify-between items-center w-[75%] mb-10">
             <div class="flex items-center gap-x-5">
                 <input id="all-checkbox" type="checkbox" class="w-6 h-6 rounded-[10px]">
-                <span>Choose all product (2 products)</span>
+                <span>Choose all product (<?= $carts['count'] ?> products)</span>
             </div>
             <div class="flex items-center pr-28 gap-x-[90px]">
                 <span>Quantity</span>

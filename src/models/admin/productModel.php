@@ -17,7 +17,7 @@ function indexProduct()
     $total_prod = mysqli_fetch_array($query)[0];
     $number_of_page = ceil($total_prod / $prod_per_page);
     $prod_offset = ($page - 1) * $prod_per_page;
-    $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM products INNER JOIN authors ON products.idAuthor = authors.idAuthor INNER JOIN genres ON products.idGenre = genres.idGenre WHERE products.name LIKE '$search%' LIMIT $prod_per_page OFFSET $prod_offset";
+    $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM products INNER JOIN authors ON products.idAuthor = authors.idAuthor INNER JOIN genres ON products.idGenre = genres.idGenre WHERE products.name LIKE '$search%' ORDER BY idProduct DESC LIMIT $prod_per_page OFFSET $prod_offset";
     $products = mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
     $array['products'] = $products;
@@ -156,8 +156,18 @@ function delete()
 {
     $id = $_GET['id'];
     include_once 'connect/openDB.php';
-    $sql = "DELETE FROM products WHERE idProduct = '$id'";
-    mysqli_query($connect, $sql);
+    $sql_check = "SELECT COUNT(idProduct) AS countPr FROM order_detail WHERE idProduct = '$id'";
+    $count_product = mysqli_fetch_assoc(mysqli_query($connect, $sql_check));
+    if ($count_product['countPr'] == 0) {
+        $sql = "DELETE FROM products WHERE idProduct = '$id'";
+        mysqli_query($connect, $sql);
+    } else {
+        echo '<script language="javascript">';
+        echo 'alert("Products cannot be deleted because an order already contains a product that was created");';
+        echo 'window.location.href="?controller=productAdmin"';
+        echo '</script>';
+    }
+
     include_once 'connect/closeDB.php';
 }
 

@@ -22,7 +22,7 @@ function checkout()
         if (empty($inf_customer['name']) || empty($inf_customer['address']) || empty($inf_customer['phoneNumber'])) {
             echo '<script language="javascript">';
             echo 'alert("You need to enter the full address before placing an order");';
-            echo 'window.location.href="?controller=productCustomer";';
+            echo 'window.location.href="?controller=account";';
             echo '</script>';
         } else {
             foreach ($_SESSION['cart'] as $product_id => $amount) {
@@ -69,21 +69,60 @@ function add_data()
         foreach ($listId as $id) {
             if ($id == $product_id) {
                 $sql_get_price = "SELECT price FROM products WHERE idProduct = '$id'";
-                $result = mysqli_fetch_assoc(mysqli_query($connect, $sql_get_price));
-                $price_DB = $result['price'];
-                $sql_detail_order = "INSERT INTO `order_detail`(amount, sold_price, idOrder, idProduct) VALUES ('$amount','$price_DB','$idOrder','$id')";
-                mysqli_query($connect, $sql_detail_order);
-                unset($_SESSION['cart'][$product_id]);
-                $sql_delete_amount = "SELECT amount FROM products WHERE idProduct = '$id'";
-                $amount_db = mysqli_fetch_assoc(mysqli_query($connect, $sql_delete_amount));
-                $amount_new = $amount_db['amount'] - $amount;
-                $sql_set_new = "UPDATE `products` SET amount = '$amount_new' WHERE idProduct = '$id'";
-                mysqli_query($connect, $sql_set_new);
+                $result = mysqli_query($connect, $sql_get_price);
+                if ($result) {
+                    $price_DB = mysqli_fetch_assoc($result)['price'];
+                    $sql_detail_order = "INSERT INTO `order_detail`(amount, sold_price, idOrder, idProduct) VALUES ('$amount','$price_DB','$idOrder','$id')";
+                    $result = mysqli_query($connect, $sql_detail_order);
+                    if ($result) {
+                        $rows_affected = mysqli_affected_rows($connect);
+                        if ($rows_affected > 0) {
+                            echo "1";
+                        }
+                        unset($_SESSION['cart'][$product_id]);
+                        $sql_delete_amount = "SELECT amount FROM products WHERE idProduct = '$id'";
+                        $result = mysqli_query($connect, $sql_delete_amount);
+                        if ($result) {
+                            $amount_db = mysqli_fetch_assoc($result)['amount'];
+                            $amount_new = $amount_db - $amount;
+
+                            $sql_set_new = "UPDATE `products` SET amount = '$amount_new' WHERE idProduct = '$id'";
+                            $result = mysqli_query($connect, $sql_set_new);
+                            if ($result) {
+                                $rows_affected = mysqli_affected_rows($connect);
+                                if ($rows_affected > 0) {
+                                    include_once 'connect/closeDB.php';
+                                    echo '<script language="javascript">';
+                                    echo 'alert("Successful ordering!");';
+                                    echo 'window.location.href="?controller=order_history&status=1";';
+                                    echo '</script>';
+                                } else {
+                                    include_once 'connect/closeDB.php';
+                                    echo '<script language="javascript">';
+                                    echo 'alert("Successful ordering!");';
+                                    echo 'window.location.href="?controller=order_history&status=1";';
+                                    echo '</script>';
+                                }
+                            } else {
+                                include_once 'connect/closeDB.php';
+                                echo "Error executing query 4: " . mysqli_error($connect);
+                            }
+                        } else {
+                            include_once 'connect/closeDB.php';
+                            echo "Error executing query 3: " . mysqli_error($connect);
+                        }
+                    } else {
+                        include_once 'connect/closeDB.php';
+                        echo "Error executing query 2: " . mysqli_error($connect);
+                    }
+                } else {
+                    include_once 'connect/closeDB.php';
+                    echo "Error executing query 1: " . mysqli_error($connect);
+                }
             }
         }
     }
     include_once 'connect/closeDB.php';
-    header('Location:index.php?controller=cart');
 }
 function order_detail()
 {
@@ -98,16 +137,33 @@ function order_detail()
     ";
     $infor = mysqli_fetch_assoc(mysqli_query($connect, $sql));
     $data_DB = mysqli_fetch_all(mysqli_query($connect, $sql), MYSQLI_ASSOC);
-    // foreach ($data_DB as $data) {
-    //     echo $data['idProduct'];
-    //     echo $data['img'];
-    //     echo $data['name'];
-    //     echo $data['nameAuthor'] . '<br>';
-    // }
+    include_once 'connect/closeDB.php';
+
     $data = array();
     $data['DB'] = $data_DB;
     $data['info'] = $infor;
     return $data;
+}
+function cancel_order()
+{
+    $id = $_GET['id'];
+    include_once 'connect/openDB.php';
+    $sql_getOder = "SELECT * FROM `order` WHERE idOrder = '$id'";
+    $order = mysqli_fetch_assoc(mysqli_query($connect, $sql_getOder));
+    if ($order['status'] == 1) {
+        $sql = "UPDATE `order` SET `status`='4' WHERE idOrder = '$id'";
+        if (mysqli_query($connect, $sql) && mysqli_affected_rows($connect) > 0) {
+            echo '<script language="javascript">';
+            echo 'alert("Update successful!");';
+            echo 'window.location.href="?controller=order&action=order_detail&id=' . $id . '";';
+            echo '</script>';
+        } else {
+            echo "<script>alert('Update failed!');</script>";
+        }
+    } else {
+        header('Location:?controller=order&action=order_detail&id=' . $id);
+    }
+    include_once 'connect/closeDB.php';
 }
 switch ($action) {
     case '':
@@ -118,5 +174,8 @@ switch ($action) {
         break;
     case 'order_detail':
         $data = order_detail();
+        break;
+    case 'cancel_order':
+        cancel_order();
         break;
 }
