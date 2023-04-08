@@ -72,7 +72,7 @@
               <a href="?controller=productCustomer&action=single_product&id=<?= $each['idProduct'] ?>" class="cursor-pointer">
                 <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
               </a>
-              <a href="?controller=cart&action=add_to_cart&id=<?= $each['idProduct'] ?>&mode=3">
+              <a href="?controller=cart&action=add_to_cart&id=<?= $each['idProduct'] ?>&mode=2">
                 <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
               </a>
             </div>
@@ -137,7 +137,7 @@
             <a href="?controller=productCustomer&action=single_product&id=<?= $each['idProduct'] ?>" class="cursor-pointer">
               <img src="imgs/<?= $each['img'] ?>" class="absolute object-cover h-full -translate-x-1/2 left-1/2" alt="">
             </a>
-            <a href="?controller=cart&action=add_to_cart&id=<?= $each['idProduct'] ?>&mode=3">
+            <a href="?controller=cart&action=add_to_cart&id=<?= $each['idProduct'] ?>&mode=2">
               <button class="absolute invisible py-2 text-white uppercase duration-200 ease-in bg-black opacity-0 cursor-pointer bottom-20 group-hover:visible group-hover:opacity-100 w-[220px] left-1/2 -translate-x-1/2">Add to cart</button>
             </a>
           </div>
