@@ -85,7 +85,6 @@ function add_data()
                         if ($result) {
                             $amount_db = mysqli_fetch_assoc($result)['amount'];
                             $amount_new = $amount_db - $amount;
-
                             $sql_set_new = "UPDATE `products` SET amount = '$amount_new' WHERE idProduct = '$id'";
                             $result = mysqli_query($connect, $sql_set_new);
                             if ($result) {

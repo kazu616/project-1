@@ -160,15 +160,20 @@ function delete()
     $count_product = mysqli_fetch_assoc(mysqli_query($connect, $sql_check));
     if ($count_product['countPr'] == 0) {
         $sql = "DELETE FROM products WHERE idProduct = '$id'";
-        mysqli_query($connect, $sql);
+        $result = mysqli_query($connect, $sql);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            header('Location:?controller=productAdmin');
+        } else {
+            echo 'alert("Delete unsuccessful");';
+        }
     } else {
+        include_once 'connect/closeDB.php';
         echo '<script language="javascript">';
         echo 'alert("Products cannot be deleted because an order already contains a product that was created");';
         echo 'window.location.href="?controller=productAdmin"';
         echo '</script>';
     }
-
-    include_once 'connect/closeDB.php';
 }
 
 function handleSearch()
