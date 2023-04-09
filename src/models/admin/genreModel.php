@@ -43,19 +43,28 @@ function store()
     $sql_check = "SELECT * FROM genres WHERE name = '$name_genre'";
     $query = mysqli_query($connect, $sql_check);
     if ($query && mysqli_num_rows($query) > 0) {
+        include_once "connect/closeDB.php";
         echo '<script language="javascript">
         alert("Name genre duplicate!!");
         window.location.href="?controller=genreAdmin";
         </script>';
     } else {
         $sql = "INSERT INTO genres (name) VALUES ('$name_genre')";
-        mysqli_query($connect, $sql);
-        echo '<script language="javascript">
+        $result = mysqli_query($connect, $sql);
+        if ($result) {
+            include_once "connect/closeDB.php";
+            echo '<script language="javascript">
         alert("Add genre successfully!!");
         window.location.href="?controller=genreAdmin";
         </script>';
+        } else {
+            include_once "connect/closeDB.php";
+            echo '<script language="javascript">
+        alert("Add genre error!!");
+        window.location.href="?controller=genreAdmin";
+        </script>';
+        }
     }
-    include_once "connect/closeDB.php";
 }
 
 function edit()
@@ -68,19 +77,28 @@ function edit()
         $sql_check = "SELECT * FROM genres WHERE idGenre != $id AND name = '$name_edit'";
         $query = mysqli_query($connect, $sql_check);
         if ($query && mysqli_num_rows($query) > 0) {
+            include_once "connect/closeDB.php";
             echo '<script language="javascript">
             alert("Name genre duplicate!!");
             window.location.href="?controller=genreAdmin&edit=true&id=' . $id . '";
             </script>';
         } else {
             $sql = "UPDATE genres SET name = '$name_edit' WHERE idGenre = $id";
-            mysqli_query($connect, $sql);
-            echo '<script language="javascript">
-            alert("Edit genre sucessfully!!");
-            window.location.href="?controller=genreAdmin";
-            </script>';
+            $result = mysqli_query($connect, $sql);
+            if ($result) {
+                include_once "connect/closeDB.php";
+                echo '<script language="javascript">
+                alert("Edit genre sucessfully!!");
+                window.location.href="?controller=genreAdmin";
+                </script>';
+            } else {
+                include_once "connect/closeDB.php";
+                echo '<script language="javascript">
+                alert("Edit genre error!!");
+                window.location.href="?controller=genreAdmin&edit=true&id=' . $id . '";
+                </script>';
+            }
         }
-        include_once "connect/closeDB.php";
     }
 }
 

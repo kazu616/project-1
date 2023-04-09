@@ -98,7 +98,6 @@ function store()
       alert("Quantity exceeds the number of products please add again ❤️❤️");
       window.location.href="?controller=orderAdmin&action=add";
       </script>';
-      // header("Location: ?controller=orderAdmin&action=add");
       return;
     }
   }

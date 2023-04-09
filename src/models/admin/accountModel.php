@@ -65,11 +65,21 @@ function addAccount()
     } else {
         $stmt = mysqli_prepare($connect, "INSERT INTO accounts (name, img, phoneNumber, password, email, address, idRole) VALUES (?, ?, ?, ?, ?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, trim($phoneNumber), trim($password), trim($email), trim($address), $roles);
-        mysqli_stmt_execute($stmt);
-        header('Location:?controller=accountAdmin');
-        include_once 'connect/closeDB.php';
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Add successfull");';
+            echo 'window.location.href="?controller=accountAdmin";';
+            echo '</script>';
+        } else {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Add error");';
+            echo 'window.location.href="?controller=accountAdmin&action=show_formAdd";';
+            echo '</script>';
+        }
     }
-    include_once 'connect/closeDB.php';
 }
 function clone_data_edit()
 {
@@ -122,9 +132,20 @@ function edit()
         $sql_update = "UPDATE `accounts` SET email=?, name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
         $stmt = mysqli_prepare($connect, $sql_update);
         mysqli_stmt_bind_param($stmt, 'ssssssii', $trimed_email, $trimed_name, $image_name, $trimed_phoneNumber, trim($password), trim($address), $roles, $id);
-        mysqli_stmt_execute($stmt);
-        include_once 'connect/closeDB.php';
-        header('Location:?controller=accountAdmin');
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Edit error");';
+            echo 'window.location.href="?controller=accountAdmin";';
+            echo '</script>';
+        } else {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Edit error");';
+            echo 'window.location.href="?controller=accountAdmin&action=clone_data_edit&id=' . $id . '";';
+            echo '</script>';
+        }
     }
     include_once 'connect/closeDB.php';
 }

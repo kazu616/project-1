@@ -53,9 +53,20 @@ function addAuthor()
     } else {
         $stmt = mysqli_prepare($connect, "INSERT INTO authors(name,img,country) VALUES (?, ?, ?)");
         mysqli_stmt_bind_param($stmt, 'sss', trim($name), $image_name, $country);
-        mysqli_stmt_execute($stmt);
-        include_once 'connect/closeDB.php';
-        header('Location:?controller=authorAdmin');
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Add successfull");';
+            echo 'window.location.href="?controller=authorAdmin';
+            echo '</script>';
+        } else {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Add error");';
+            echo 'window.location.href="?controller=authorAdmin';
+            echo '</script>';
+        }
     }
 }
 function clone_data_edit()
@@ -108,7 +119,18 @@ function edit()
         $sql_update = "UPDATE authors SET name = ?, img = ?, country = ? WHERE idAuthor = ?";
         $stmt = mysqli_prepare($connect, $sql_update);
         mysqli_stmt_bind_param($stmt, "sssi", trim($name), $image_name, $country, $id);
-        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            echo '<script language="javascript">';
+            echo 'alert("Edit successfull");';
+            echo 'window.location.href="?controller=authorAdmin";';
+            echo '</script>';
+        } else {
+            echo '<script language="javascript">';
+            echo 'alert("Edit error");';
+            echo 'window.location.href="?controller=authorAdmin&action=clone_data_edit&id=' . $id . '";';
+            echo '</script>';
+        }
         include_once 'connect/closeDB.php';
         header('Location:?controller=authorAdmin');
     }

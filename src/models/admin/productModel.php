@@ -76,9 +76,18 @@ function addProduct()
             VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($connect, $sql);
             mysqli_stmt_bind_param($stmt, "ssddssii", trim($name), $image_name, $price, $amount, $issuingDate, $description, $genre, $author);
-            mysqli_stmt_execute($stmt);
-            echo "Product added successfully!";
-            header('Location:?controller=productAdmin');
+            $result = mysqli_stmt_execute($stmt);
+            if ($result) {
+                echo '<script language="javascript">';
+                echo 'alert("Add successfull");';
+                echo 'window.location.href="?controller=productAdmin";';
+                echo '</script>';
+            } else {
+                echo '<script language="javascript">';
+                echo 'alert("Add error");';
+                echo 'window.location.href="?controller=productAdmin&action=show_formAdd";';
+                echo '</script>';
+            }
         } else {
             echo '<script language="javascript">';
             echo 'alert("Price and amount must be non-negative!");';
@@ -146,9 +155,19 @@ function edit()
         $sql_update = "UPDATE products SET name = ?, img = ?, amount = ?, price = ?, idAuthor = ?, idGenre = ?, issuingDate = ?, description = ? WHERE idProduct = ?";
         $stmt = mysqli_prepare($connect, $sql_update);
         mysqli_stmt_bind_param($stmt, "ssddiissi", trim($name), $image_name, $amount, $price, $author, $genre, $issuingDate, $description, $id);
-        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            echo '<script language="javascript">';
+            echo 'alert("Edit successful");';
+            echo 'window.location.href="?controller=productAdmin";';
+            echo '</script>';
+        } else {
+            echo '<script language="javascript">';
+            echo 'alert("Error edit");';
+            echo 'window.location.href="?controller=productAdmin&action=clone_data_edit&id=' . $id . '";';
+            echo '</script>';
+        }
         include_once 'connect/closeDB.php';
-        header('Location:?controller=productAdmin');
     }
 }
 
