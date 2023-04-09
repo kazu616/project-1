@@ -63,6 +63,9 @@ function addAccount()
         echo 'window.location.href="?controller=accountAdmin&action=show_formAdd";';
         echo '</script>';
     } else {
+        if (empty($image_name)) {
+            $image_name = "avt.png";
+        }
         $stmt = mysqli_prepare($connect, "INSERT INTO accounts (name, img, phoneNumber, password, email, address, idRole) VALUES (?, ?, ?, ?, ?, ?, ?)");
         mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, trim($phoneNumber), trim($password), trim($email), trim($address), $roles);
         $result = mysqli_stmt_execute($stmt);
