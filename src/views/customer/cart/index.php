@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="flex gap-x-[40px] items-start">
-            <div class="w-[75%] bg-[#EDEBE4] min-h-[500px] px-10 rounded-[10px] overflow-y-scroll scrollbar scrollbar-thumb-rose-50 ">
+            <div class="w-[75%] bg-[#EDEBE4] h-[800px] scrollbar-thin px-10 rounded-[10px] overflow-y-auto scrollbar-thumb-gray-500 ">
                 <?php foreach ($carts['cart'] as $product_id => $value) {  ?>
                     <div id="<?= $product_id ?>" class="flex items-center item pb-5 gap-x-20 border-b border-[#a8a1a1] mt-10 mb-10">
                         <div class="inf_offline">
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center bg-[#E2E2E2] rounded-[5px] py-2">
-                                <a href="?controller=cart&action=change_amount&amount=<?= $value['amount'] ?>&mode=1&id=<?= $product_id ?>" class=" w-7 cursor-pointer">
+                                <a href="?controller=cart&action=change_amount&amount=<?= $value['amount'] ?>&mode=1&id=<?= $product_id ?>" class="cursor-pointer w-7">
                                     <svg class="relative left-[13px]" width="11" height="2" viewBox="0 0 11 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.71875 1H1.28125" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>

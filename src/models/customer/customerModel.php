@@ -73,7 +73,13 @@ function bestSellingProduct()
   ORDER BY total_amount DESC
   LIMIT 1;";
   $query = mysqli_query($connect, $sql);
-  $result = mysqli_fetch_array($query);
+  if ($query && mysqli_num_rows($query) > 0) {
+    $result = mysqli_fetch_array($query);
+  } else {
+    $sql = "SELECT products.*, products.amount as amount_prod, products.img as prod_image, products.name as prod_name,authors.name as name_author FROM products JOIN authors ON products.idAuthor = authors.idAuthor WHERE amount > 0 LIMIT 1";
+    $query = mysqli_query($connect, $sql);
+    $result = mysqli_fetch_array($query);
+  }
   include 'connect/closeDB.php';
   return $result;
 }

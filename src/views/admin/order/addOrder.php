@@ -120,7 +120,7 @@
                   <p class="text-sm text-[#dacfcf] "><?= $item['name_author'] ?> </p>
                 </div>
               </div>
-              <input type="number" max=10 name="<?= $item['idProduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
+              <input type="number" max=10 min=1 name="<?= $item['idProduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
               <div class="price">$ <?= $item['price'] ?></div>
             </div>
           <?php } ?>
