@@ -22,7 +22,7 @@
             <div
                 class="flex flex-col justify-center items-center w-[723.2px] h-[631.328px] absolute left-[-30px] top-0 gap-5">
                 <!-- logo -->
-                <p class="text-[36.8px] text-left uppercase text-[#0a0a0a] mb-5">
+                <p class="text-[36.8px] text-left uppercase text-[#0a0a0a] mb-2">
                     <span class="text-[36.8px] font-bold text-left uppercase text-[#0a0a0a]">Book</span><span
                         class="text-[36.8px] font-light text-left uppercase text-[#0a0a0a]">saw</span>
                 </p>
@@ -44,7 +44,7 @@
                 <p class="text-xs font-semibold text-left text-[#ddd]">
                     ------------- or Sign in with Email -------------
                 </p>
-                <div class="flex flex-col justify-start items-start h-[245px] gap-6">
+                <div class="flex flex-col justify-start items-start h-[19rem] gap-6">
                     <form class="flex flex-col justify-start items-start gap-5" id="form_signup"
                         onsubmit="return validate_signup()" method="POST"
                         action="index.php?controller=user&action=signupAccess">

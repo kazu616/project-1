@@ -36,7 +36,7 @@ function add_to_cart()
         } elseif ($_GET['mode'] == 4) {
             header('Location:index.php?added_to_cart');
         } else {
-            header('Location:index.php?controller=cart');
+            header('Location:index.php?controller=cart&added_to_cart#' . $product_id);
         }
     }
     $product_id = $_GET['id'];
@@ -53,7 +53,7 @@ function add_to_cart()
             } else {
                 echo '<script language="javascript">';
                 echo 'alert("Product out of stock");';
-                echo 'window.location.href="?controller=productCustomer&added_to_cart&action=single_product&id=' . $product_id . '"';
+                echo 'window.location.href="?controller=productCustomer&action=single_product&id=' . $product_id . '"';
                 echo '</script>';
             }
         } else {
@@ -132,11 +132,18 @@ function change_amount()
 function trashPr()
 {
     $id =  $_GET['id'];
-    foreach ($_SESSION['cart'] as $product_id => $amount_old) {
-        if ($id == $product_id) {
+    print_r($_SESSION['cart']);
+    $previous_key = null;
+    foreach ($_SESSION['cart'] as $product_id => $value) {
+        if ($product_id == $id) {
+            echo '<script language="javascript">';
+            echo 'alert("Delete successfull");';
+            echo 'window.location.href="?controller=cart#" + ' . $previous_key . ';';
+            echo '</script>';
             unset($_SESSION['cart'][$product_id]);
             break;
         }
+        $previous_key = $product_id;
     }
 }
 
