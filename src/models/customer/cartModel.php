@@ -51,10 +51,17 @@ function add_to_cart()
                 $_SESSION['cart'][$product_id] = $_SESSION['cart'][$product_id] + $amount;
                 header_mode($product_id);
             } else {
-                echo '<script language="javascript">';
-                echo 'alert("Product out of stock");';
-                echo 'window.location.href="?controller=productCustomer&action=single_product&id=' . $product_id . '"';
-                echo '</script>';
+                if ($_GET['mode'] == 3) {
+                    echo '<script language="javascript">';
+                    echo 'alert("Product out of stock");';
+                    echo 'window.location.href="?controller=productCustomer#' . $product_id . '"';
+                    echo '</script>';
+                } else {
+                    echo '<script language="javascript">';
+                    echo 'alert("Product out of stock");';
+                    echo 'window.location.href="?controller=productCustomer&action=single_product&id=' . $product_id . '"';
+                    echo '</script>';
+                }
             }
         } else {
             $_SESSION['cart'][$product_id] = $amount;
