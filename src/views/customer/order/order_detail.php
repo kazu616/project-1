@@ -13,7 +13,8 @@
         <h2 class="mb-10 text-2xl uppercase font-secondary">bill of product</h2>
         <div class="flex items-center justify-between w-full  bg-[#EDEBE4] py-5 px-10 rounded-[10px] ">
             <div>
-                <a href="#" class=" text-xl text-black/80 font-bold">
+                <a href="?controller=order_history" class=" text-xl text-black/80">
+                    <i class="fa-solid fa-arrow-left font-semibold" size="xs"></i>
                     Back
                 </a>
             </div>

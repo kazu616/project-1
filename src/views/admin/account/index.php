@@ -65,7 +65,7 @@
                                         <box-icon name="edit"></box-icon>
                                     </button>
                                 </a>
-                                <a href="index.php?controller=accountAdmin&action=delete&id=<?= $account['idAccount'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
+                                <a href="index.php?controller=accountAdmin&action=delete&mode=<?= $account['idRole'] ?>&id=<?= $account['idAccount'] ?>" onclick="return confirm('Are you sure?');" title="Delete Product">
                                     <button type="button">
                                         <box-icon type="solid" name="trash"></box-icon>
                                     </button>

@@ -51,10 +51,14 @@ function addAccount()
     }
 
     include_once 'connect/openDB.php';
-
+    $trimed_email = trim($email);
+    $trimed_name = trim($name);
+    $trimed_phoneNumber = trim($phoneNumber);
+    $trimed_password = trim($password);
+    $trimed_address = trim($address);
     $sql_check = "SELECT * FROM accounts WHERE email = ?";
     $stmt = mysqli_prepare($connect, $sql_check);
-    mysqli_stmt_bind_param($stmt, "s", trim($email));
+    mysqli_stmt_bind_param($stmt, "s", $trimed_email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
@@ -67,7 +71,7 @@ function addAccount()
             $image_name = "avt.png";
         }
         $stmt = mysqli_prepare($connect, "INSERT INTO accounts (name, img, phoneNumber, password, email, address, idRole) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, "ssssssi", trim($name), $image_name, trim($phoneNumber), trim($password), trim($email), trim($address), $roles);
+        mysqli_stmt_bind_param($stmt, "ssssssi", $trimed_name, $image_name, $trimed_phoneNumber, $trimed_password, $trimed_email, $trimed_address, $roles);
         $result = mysqli_stmt_execute($stmt);
         if ($result) {
             include_once 'connect/closeDB.php';
@@ -121,6 +125,8 @@ function edit()
     $trimed_email = trim($email);
     $trimed_name = trim($name);
     $trimed_phoneNumber = trim($phoneNumber);
+    $trimed_password = trim($password);
+    $trimed_address = trim($address);
     $sql_check = "SELECT * FROM accounts WHERE email = ? AND idAccount != ?";
     $stmt = mysqli_prepare($connect, $sql_check);
     mysqli_stmt_bind_param($stmt, "si", $trimed_email, $id);
@@ -134,12 +140,12 @@ function edit()
     } else {
         $sql_update = "UPDATE `accounts` SET email=?, name=?, img=?, phoneNumber=?, password=?, address=?, idRole=? WHERE idAccount=?";
         $stmt = mysqli_prepare($connect, $sql_update);
-        mysqli_stmt_bind_param($stmt, 'ssssssii', $trimed_email, $trimed_name, $image_name, $trimed_phoneNumber, trim($password), trim($address), $roles, $id);
+        mysqli_stmt_bind_param($stmt, 'ssssssii', $trimed_email, $trimed_name, $image_name, $trimed_phoneNumber, $trimed_password,  $trimed_address, $roles, $id);
         $result = mysqli_stmt_execute($stmt);
         if ($result) {
             include_once 'connect/closeDB.php';
             echo '<script language="javascript">';
-            echo 'alert("Edit error");';
+            echo 'alert("Edit successfull");';
             echo 'window.location.href="?controller=accountAdmin";';
             echo '</script>';
         } else {
@@ -157,46 +163,60 @@ function edit()
 function delete()
 {
     $id = $_GET['id'];
+    $mode = $_GET['mode'];
     include_once 'connect/openDB.php';
-    $sql_check = "SELECT COUNT(idCustomer) AS countUser FROM `order` WHERE idCustomer = '$id'";
-    $sql_check1 = "SELECT COUNT(idAdmin) AS countAdmin FROM `order` WHERE idAdmin = '$id'";
-    $count_user = mysqli_fetch_assoc(mysqli_query($connect, $sql_check));
-    $count_admin = mysqli_fetch_assoc(mysqli_query($connect, $sql_check1));
-
-    if ($count_user['countUser'] == 0) {
-        $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 2";
-        $result = mysqli_query($connect, $sql);
-        if ($result) {
-            include_once 'connect/closeDB.php';
-            header('Location:?controller=accountAdmin');
+    if ($mode == 1) {
+        $sql_check1 = "SELECT COUNT(idAdmin) AS countAdmin FROM `order` WHERE idAdmin = '$id'";
+        $count_admin = mysqli_fetch_assoc(mysqli_query($connect, $sql_check1));
+        if ($count_admin['countAdmin'] == 0) {
+            $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 1";
+            $result = mysqli_query($connect, $sql);
+            if ($result) {
+                include_once 'connect/closeDB.php';
+                echo '<script language="javascript">';
+                echo 'alert("Delete successfull");';
+                echo 'window.location.href="?controller=accountAdmin"';
+                echo '</script>';
+            } else {
+                include_once 'connect/closeDB.php';
+                echo '<script language="javascript">';
+                echo 'alert("Delete error");';
+                echo 'window.location.href="?controller=accountAdmin"';
+                echo '</script>';
+            }
         } else {
-            echo 'alert("Delete unsuccessful");';
-        }
-    } else {
-        include_once 'connect/closeDB.php';
-        echo '<script language="javascript">';
-        echo 'alert("Cannot delete user account have order");';
-        echo 'window.location.href="?controller=accountAdmin"';
-        echo '</script>';
-    }
-    if ($count_admin['countAdmin'] == 0) {
-        $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 1";
-        $result = mysqli_query($connect, $sql);
-        if ($result) {
             include_once 'connect/closeDB.php';
-            header('Location:?controller=accountAdmin');
-        } else {
-            echo 'alert("Delete unsuccessful");';
+            echo '<script language="javascript">';
+            echo 'alert("Cannot delete admin account handle order");';
+            echo 'window.location.href="?controller=accountAdmin"';
+            echo '</script>';
         }
-    } else {
-        include_once 'connect/closeDB.php';
-        echo '<script language="javascript">';
-        echo 'alert("Cannot delete admin account handle order");';
-        echo 'window.location.href="?controller=accountAdmin"';
-        echo '</script>';
     }
-    include_once 'connect/closeDB.php';
+    if ($mode == 2) {
+        $sql_check = "SELECT COUNT(idCustomer) AS countUser FROM `order` WHERE idCustomer = '$id'";
+        $count_user = mysqli_fetch_assoc(mysqli_query($connect, $sql_check));
+        if ($count_user['countUser'] == 0) {
+            $sql = "DELETE FROM accounts WHERE idAccount = '$id' AND idRole = 2";
+            $result = mysqli_query($connect, $sql);
+            if ($result) {
+                include_once 'connect/closeDB.php';
+                echo '<script language="javascript">';
+                echo 'alert("Delete successfull");';
+                echo 'window.location.href="?controller=accountAdmin"';
+                echo '</script>';
+            } else {
+                echo 'alert("Delete unsuccessful");';
+            }
+        } else {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Cannot delete user account have order");';
+            echo 'window.location.href="?controller=accountAdmin"';
+            echo '</script>';
+        }
+    }
 }
+
 
 function handleSearch()
 {

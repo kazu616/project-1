@@ -39,9 +39,10 @@ function addAuthor()
     }
     include_once 'connect/openDB.php';
     // check if the product name already exists
+    $trimed_name = trim($name);
     $sql_check = "SELECT * FROM authors WHERE name = ?";
     $stmt = mysqli_prepare($connect, $sql_check);
-    mysqli_stmt_bind_param($stmt, "s", trim($name));
+    mysqli_stmt_bind_param($stmt, "s", $trimed_name);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
@@ -52,7 +53,7 @@ function addAuthor()
         include_once 'connect/closeDB.php';
     } else {
         $stmt = mysqli_prepare($connect, "INSERT INTO authors(name,img,country) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, 'sss', trim($name), $image_name, $country);
+        mysqli_stmt_bind_param($stmt, 'sss', $trimed_name, $image_name, $country);
         $result = mysqli_stmt_execute($stmt);
         if ($result) {
             include_once 'connect/closeDB.php';
@@ -89,6 +90,7 @@ function edit()
     $name = $_POST['name'];
     $country = $_POST['country'];
     $old_image = $_POST['old_img'];
+    $trimed_name = trim($name);
 
     if ((!file_exists($_FILES['image']['tmp_name']) || !is_uploaded_file($_FILES['image']['tmp_name'])) && isset($_POST["old_img"])) {
         $image_name = $old_image;
@@ -105,7 +107,7 @@ function edit()
     include_once 'connect/openDB.php';
     $sql_check = "SELECT * FROM authors WHERE name = ? AND idAuthor != ?";
     $stmt = mysqli_prepare($connect, $sql_check);
-    mysqli_stmt_bind_param($stmt, "si", trim($name), $id);
+    mysqli_stmt_bind_param($stmt, "si", $trimed_name, $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
@@ -118,7 +120,7 @@ function edit()
         // Product name doesn't exist, proceed with update
         $sql_update = "UPDATE authors SET name = ?, img = ?, country = ? WHERE idAuthor = ?";
         $stmt = mysqli_prepare($connect, $sql_update);
-        mysqli_stmt_bind_param($stmt, "sssi", trim($name), $image_name, $country, $id);
+        mysqli_stmt_bind_param($stmt, "sssi", $trimed_name, $image_name, $country, $id);
         $result = mysqli_stmt_execute($stmt);
         if ($result) {
             echo '<script language="javascript">';

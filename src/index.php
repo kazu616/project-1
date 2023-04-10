@@ -13,42 +13,42 @@ if (isset($_GET['controller'])) {
 //Kiểm tra đó là controller nào
 switch ($controller) {
   case 'admin':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1 && chechAuth()) {
       include_once 'controllers/admin/admin.controller.php';
     } else {
       header('Location:index.php?controller=auth_admin');
     }
     break;
   case 'productAdmin':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1 && chechAuth()) {
       include_once 'controllers/admin/product.controller.php';
     } else {
       header('Location:index.php?controller=auth_admin');
     }
     break;
   case 'accountAdmin':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1 && chechAuth()) {
       include_once 'controllers/admin/account.controller.php';
     } else {
       header('Location:index.php?controller=auth_admin');
     }
     break;
   case 'authorAdmin':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1 && chechAuth()) {
       include_once 'controllers/admin/author.controller.php';
     } else {
       header('Location:index.php?controller=auth_admin');
     }
     break;
   case 'orderAdmin':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1 && chechAuth()) {
       include_once 'controllers/admin/order.controller.php';
     } else {
       header('Location:index.php?controller=auth_admin');
     }
     break;
   case 'genreAdmin':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1 && chechAuth()) {
       include_once 'controllers/admin/genre.controller.php';
     } else {
       header('Location:index.php?controller=auth_admin');
@@ -58,7 +58,7 @@ switch ($controller) {
     include_once 'controllers/customer/user.controller.php';
     break;
   case 'order_history': {
-      if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+      if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2 && chechAuth()) {
         include_once 'controllers/customer/order_history.controller.php';
       } else {
         header('Location:index.php?controller=user&action=login');
@@ -66,7 +66,7 @@ switch ($controller) {
     }
     break;
   case 'order':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2 && chechAuth()) {
       include_once 'controllers/customer/order.controller.php';
     } else {
       header('Location:index.php?controller=user&action=login');
@@ -79,7 +79,7 @@ switch ($controller) {
     include_once 'controllers/customer/cart.controller.php';
     break;
   case 'order_detail':
-    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2 && chechAuth()) {
       include_once 'controllers/customer/order_detail.controller.php';
     } else {
       header('Location:index.php?controller=user&action=login');
@@ -90,7 +90,7 @@ switch ($controller) {
     }
     break;
   case 'account': {
-      if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2) {
+      if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 2 && chechAuth()) {
         include_once 'controllers/customer/account.controller.php';
       } else {
         header('Location:index.php?controller=user&action=login');

@@ -43,7 +43,9 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <input id="search" name="search" value="" class="block w-full h-11 border border-black/50 bg-gray-100 rounded-xl py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-indigo-500 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search" autocomplete="off">
+                    <input id="search" name="search" value="<?php if (empty($data['search'])) {
+                                                                echo "";
+                                                            } else echo $data['search'];  ?>" class="block w-full h-11 border border-black/50 bg-gray-100 rounded-xl py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-indigo-500 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search" autocomplete="off">
                 </div>
             </form>
         </div>
