@@ -132,7 +132,6 @@ function change_amount()
 function trashPr()
 {
     $id =  $_GET['id'];
-    print_r($_SESSION['cart']);
     $previous_key = null;
     foreach ($_SESSION['cart'] as $product_id => $value) {
         if ($product_id == $id) {
