@@ -58,7 +58,7 @@ function update()
   $query = mysqli_query($connect, $sqlCheck);
   $result = mysqli_fetch_array($query);
   $status_old = $result['status'];
-  if ($status_old == COMPLETED || $status_old == CANCELED) {
+  if ($status_old != PENDING) {
     echo '<script language="javascript">
     alert("Update failed!!");
     window.location.href="?controller=order_history";
