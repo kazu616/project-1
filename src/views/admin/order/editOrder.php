@@ -26,7 +26,9 @@
             <div class="form-field">
               <select name="status" id="status" required>
                 <option value="">Select status</option>
-                <option value="<?= PENDING ?>" <?= $array['order']['status'] == PENDING ? 'selected' : '' ?>>Pending</option>
+                <?php if ($array['order']['status'] != DELIVERING) { ?>
+                  <option value="<?= PENDING ?>" <?= $array['order']['status'] == PENDING ? 'selected' : '' ?>>Pending</option>"
+                <?php }  ?>
                 <option value="<?= DELIVERING ?>" <?= $array['order']['status'] == DELIVERING ? 'selected' : '' ?>>Delivering</option>
                 <option value="<?= COMPLETED ?>" <?= $array['order']['status'] == COMPLETED ? 'selected' : '' ?>>Completed</option>
                 <option value="<?= CANCELED ?>" <?= $array['order']['status'] == CANCELED ? 'selected' : '' ?>>Canceled</option>
@@ -49,8 +51,8 @@
           </div>
           <?php foreach ($array['data'] as $key => $value) { ?>
             <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative">
-              <div class="flex gap-x-5">
-                <div class=" w-[148px]">
+              <div class="flex gap-x-5 min-h-[180px] mb-7">
+                <div class="w-[148px]">
                   <img src="imgs/<?= $value['prod_image'] ?>" class="object-cover w-full h-full" alt="">
                 </div>
                 <div class="pt-10 text-center">

@@ -65,7 +65,7 @@ function seo()
 function bestSellingProduct()
 {
   include 'connect/openDB.php';
-  $sql = "SELECT products.*,products.img as prod_image,products.name as prod_name,authors.name as name_author, SUM(order_detail.amount) AS total_amount
+  $sql = "SELECT products.*, products.amount as amount_prod, products.img as prod_image, products.name as prod_name,authors.name as name_author, SUM(order_detail.amount) AS total_amount
   FROM order_detail
   JOIN products ON order_detail.idProduct = products.idProduct
   JOIN authors ON products.idAuthor = authors.idAuthor

@@ -38,7 +38,7 @@
               <option value="">Select status</option>
               <option value="<?= PENDING ?>">Pending</option>
               <option value="<?= DELIVERING ?>">Delivering</option>
-              <option value="<?= COMPLETED ?>">Completed</option>
+              <option value="<?= COMPLETED ?>" selected>Completed</option>
               <option value="<?= CANCELED ?>">Canceled</option>
             </select>
           </div>
@@ -46,28 +46,6 @@
         <div class="w-full max-w-[1150px] rounded-[10px] border-white border mt-8 min-h-[500px] px-10 pt-5 pb-10">
           <h3 class="mb-10 text-2xl font-semibold">Products of order:</h3>
           <?php foreach ($array['data'] as $key => $value) { ?>
-            <!-- <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative">
-              <div class="flex gap-x-5">
-                <div class=" w-[148px] max-h-[208px]">
-                  <img src="imgs/<?= $value['prod_image'] ?>" class="object-cover w-full h-full" alt="">
-                </div>
-                <div class="pt-10 text-center">
-                  <h3 class="text-xl uppercase"><?= $value['name_prod'] ?></h3>
-                  <p class="text-sm text-[#dacfcf] "><?= $value['name_author'] ?></p>
-                </div>
-              </div>
-              <div class="flex flex-col pb-1 mr-10 gap-y-1">
-                <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
-                  <p>Amount:</p>
-                  <span class="text-xl font-secondary"><?= $value['amount_order'] ?></span>
-                </div>
-                <!-- <p class="flex items-end mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span>$ 45.00</span></p> -->
-            <!-- <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
-              <p>Price:</p>
-              <span class="text-xl font-secondary"> $ <?= number_format($value['price']) ?></span>
-            </div>
-        </div>
-    </div> -->
             <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative mt-10">
               <a href="?controller=orderAdmin&action=deleteProd&id=<?= $value['idProduct'] ?>" onclick="return confirm('Are you sure?');" class="absolute text-red-500 right-4 top-4">
                 <i class="fa-solid fa-circle-xmark fa-lg"></i>

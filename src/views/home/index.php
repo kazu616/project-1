@@ -103,12 +103,12 @@
         <p class="flex items-end mt-5 font-secondary gap-x-5"><span class="text-lg text-[#888888] font-medium ">Price:</span> <span class="text-[#74642F] text-4xl">$ <?= $prod_best_selling['price'] ?></span></p>
       </div>
       <div>
-        <a href="?controller=cart&action=add_to_cart&id=<?= $prod_best_selling['idProduct'] ?>&mode=2">
-          <button class="px-5 min-w-[150px] py-3 border border-[#a50000] text-[#a50000] bg-white rounded-xl">Add To Cart</button>
-        </a>
-        <a href="?controller=cart&action=add_to_cart&id=<?= $prod_best_selling['idProduct'] ?>&mode=2">
-          <button class="px-5 min-w-[150px] py-3 border border-white text-white bg-[#a50000] rounded-xl">Buy Now</button>
-        </a>
+
+        <button class="min-w-[150px] border font-bold  rounded-xl <?= $prod_best_selling['amount_prod'] == 0 ? 'disabled bg-gray-300 text-gray-500' : 'bg-white text-[#a50000] border-[#a50000]' ?>"><a href="?controller=cart&action=add_to_cart&id=<?= $prod_best_selling['idProduct'] ?>&mode=2" class="px-5 py-3 inline-block <?= $prod_best_selling['amount_prod'] == 0 ? 'disabled' : '' ?>">Add To Cart</a></button>
+
+
+        <button class="min-w-[150px] border font-bold  rounded-xl <?= $prod_best_selling['amount_prod'] == 0 ? 'disabled bg-gray-300 text-gray-500' : 'border-white bg-[#a50000] text-white' ?>"><a href="?controller=cart&action=add_to_cart&id=<?= $prod_best_selling['idProduct'] ?>&mode=2" class="px-5 py-3 inline-block <?= $prod_best_selling['amount_prod'] == 0 ? 'disabled' : '' ?>">Buy Now </a></button>
+
       </div>
     </div>
   </div>
