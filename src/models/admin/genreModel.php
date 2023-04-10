@@ -107,10 +107,23 @@ function destroy()
     if (!isset($_GET['id'])) return;
     $id = $_GET['id'];
     include_once "connect/openDB.php";
-    $sql = "DELETE FROM genres WHERE idGenre = $id";
-    mysqli_query($connect, $sql);
+    $sql_check = "SELECT COUNT(idGenre) AS countGenre FROM `products` WHERE idGenre = '$id'";
+    $count_genre = mysqli_fetch_assoc(mysqli_query($connect, $sql_check));
+    if ($count_genre['countGenre'] == 0) {
+        $sql = "DELETE FROM genres WHERE idGenre = $id";
+        $result = mysqli_query($connect, $sql);
+        if ($result) {
+            header('Location:?controller=genreAdmin');
+        } else {
+            echo 'alert("Delete unsuccessful");';
+        }
+    } else {
+        echo '<script language="javascript">';
+        echo 'alert("Cannot delete this genre (because the book has a name this genre created)");';
+        echo 'window.location.href="?controller=genreAdmin"';
+        echo '</script>';
+    }
     include_once "connect/closeDB.php";
-    header("location: ?controller=categoryAdmin");
 }
 
 function handleSearch()

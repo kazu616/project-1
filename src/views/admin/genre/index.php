@@ -78,7 +78,7 @@
                         <input type="text" required value="<?= isset($_GET["id"]) ? $array['itemEdit']['name'] : "" ?>" class="form-input" id="product-genre" name="name" placeholder=" " />
                         <label for="product-genre" class="form-label">Genre name</label>
                     </div>
-                    <button name="sbm"><?= isset($_GET['edit']) ? "Edit Genre" : "Add Genre" ?></button>
+                    <button name="sbm" class="<?= isset($_GET['edit']) ? '!bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500' : '' ?>"><?= isset($_GET['edit']) ? "Edit Genre" : "Add Genre" ?></button>
                 </form>
             </div>
         </div>
