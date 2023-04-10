@@ -808,6 +808,10 @@ input,
   margin-bottom: 3.5rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mb-20 {
   margin-bottom: 5rem;
 }
@@ -1004,6 +1008,10 @@ input,
   height: 150px;
 }
 
+.h-\[19rem\] {
+  height: 19rem;
+}
+
 .h-\[1px\] {
   height: 1px;
 }
@@ -1014,10 +1022,6 @@ input,
 
 .h-\[235px\] {
   height: 235px;
-}
-
-.h-\[245px\] {
-  height: 245px;
 }
 
 .h-\[28px\] {
@@ -1082,10 +1086,6 @@ input,
 
 .h-full {
   height: 100%;
-}
-
-.h-\[500vh\] {
-  height: 500vh;
 }
 
 .max-h-\[208px\] {
@@ -2010,6 +2010,30 @@ input,
   --tw-bg-opacity: 0.5;
 }
 
+.\!bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important;
+}
+
+.from-indigo-500 {
+  --tw-gradient-from: #6366f1 var(--tw-gradient-from-position);
+  --tw-gradient-from-position:  ;
+  --tw-gradient-to: rgb(99 102 241 / 0)  var(--tw-gradient-from-position);
+  --tw-gradient-to-position:  ;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.via-purple-500 {
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to: rgb(168 85 247 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-to-position:  ;
+  --tw-gradient-stops: var(--tw-gradient-from), #a855f7 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
+.to-pink-500 {
+  --tw-gradient-to: #ec4899 var(--tw-gradient-to-position);
+  --tw-gradient-to-position:  ;
+}
+
 .fill-white {
   fill: #fff;
 }
@@ -2825,6 +2849,22 @@ body {
   z-index: 10;
 }
 
+.custom-alert_deleted {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  color: red;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 2px solid rgb(255, 0, 0);
+  padding: 40px;
+  font-size: medium;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  animation-name: fade-in-out;
+  animation-duration: 1.5s;
+  z-index: 10;
+}
+
 @keyframes fade-in-out {
   0% {
     opacity: 0;
@@ -2841,6 +2881,14 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+a.disabled {
+  pointer-events: none;
+}
+
+button.disabled {
+  cursor: not-allowed !important;
 }
 
 .focus\:border-blue-500:focus {

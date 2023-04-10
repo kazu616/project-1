@@ -132,13 +132,10 @@ function change_amount()
 function trashPr()
 {
     $id =  $_GET['id'];
-    $previous_key = null;
+    $previous_key = 0;
     foreach ($_SESSION['cart'] as $product_id => $value) {
         if ($product_id == $id) {
-            echo '<script language="javascript">';
-            echo 'alert("Delete successfull");';
-            echo 'window.location.href="?controller=cart#" + ' . $previous_key . ';';
-            echo '</script>';
+            header('Location:index.php?controller=cart&deleted_from_cart#' . $previous_key);
             unset($_SESSION['cart'][$product_id]);
             break;
         }

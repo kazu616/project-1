@@ -16,6 +16,5 @@ switch ($action) {
     break;
   case 'trashPr':
     include_once 'models/customer/cartModel.php';
-    // header('Location:index.php?controller=cart');
     break;
 }
