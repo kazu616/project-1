@@ -17,7 +17,7 @@ function index()
     $total_order = mysqli_fetch_array($query)[0];
     $number_of_page = ceil($total_order / $prod_per_page);
     $prod_offset = ($page - 1) * $prod_per_page;
-    $sql = "SELECT * FROM genres WHERE name LIKE '$search_bill%' LIMIT $prod_per_page OFFSET $prod_offset";
+    $sql = "SELECT * FROM genres WHERE name LIKE '$search_bill%' ORDER BY idGenre DESC LIMIT $prod_per_page OFFSET $prod_offset";
     $result = mysqli_query($connect, $sql);
     $array = array();
     $array['data'] = $result;
