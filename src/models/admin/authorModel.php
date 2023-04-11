@@ -17,7 +17,7 @@ function indexAuthor()
     $total_order = mysqli_fetch_array($query)[0];
     $number_of_page = ceil($total_order / $prod_per_page);
     $prod_offset = ($page - 1) * $prod_per_page;
-    $sql = "SELECT * FROM authors WHERE name LIKE '$search_bill%' LIMIT $prod_per_page OFFSET $prod_offset";
+    $sql = "SELECT * FROM authors WHERE name LIKE '$search_bill%' ORDER BY idAuthor DESC LIMIT $prod_per_page OFFSET $prod_offset";
     $authors = mysqli_query($connect, $sql);
     include_once 'connect/closeDB.php';
     $result['data'] = $authors;
