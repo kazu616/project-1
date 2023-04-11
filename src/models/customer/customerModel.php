@@ -53,7 +53,7 @@ function seo()
   }
   $email = $_POST['email'];
   include 'connect/openDB.php';
-  $sql = "INSERT INTO ceo(email) VALUES ('$email')";
+  $sql = "INSERT INTO seo(email) VALUES ('$email')";
   mysqli_query($connect, $sql);
   include 'connect/closeDB.php';
   echo '<script language="javascript">

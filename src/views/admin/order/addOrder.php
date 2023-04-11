@@ -29,7 +29,7 @@
           </button>
         </div>
         <?php foreach ($array['data'] as $each) { ?>
-          <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative mt-10">
+          <div class="border-b border-[#d3d2cd88] flex justify-between items-center mb-5 relative mt-10" id="<?= $each['idProduct'] ?>">
             <a href="?controller=orderAdmin&action=deleteProd&id=<?= $each['idProduct'] ?>" onclick="return confirm('Do you want to delete this product?');" class="absolute text-red-500 right-4 top-4">
               <i class="fa-solid fa-circle-xmark fa-lg"></i>
             </a>
@@ -120,7 +120,7 @@
                   <p class="text-sm text-[#dacfcf] "><?= $item['name_author'] ?> </p>
                 </div>
               </div>
-              <input type="number" max=10 min=1 name="<?= $item['idProduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
+              <input type="number" max=<?= $item['amount'] ?> min=1 name="<?= $item['idProduct'] ?>" class="bg-transparent border border-[#D9D9D9] rounded-lg max-w-[130px] py-2 px-3" placeholder="Amount">
               <div class="price">$ <?= $item['price'] ?></div>
             </div>
           <?php } ?>
