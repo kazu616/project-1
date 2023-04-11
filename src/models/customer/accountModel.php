@@ -44,6 +44,7 @@ function update()
     alert("Duplicate emails");
     window.location.href="?controller=account";
     </script>';
+    return;
   } else {
     if ((!file_exists($_FILES['image']['tmp_name']) || !is_uploaded_file($_FILES['image']['tmp_name'])) && isset($_POST["old_img"])) {
       $image_name = $old_image;
@@ -59,10 +60,20 @@ function update()
     }
     $sql_update = "UPDATE accounts SET email='$email', name='$name', img='$image_name', phoneNumber='$phoneNumber', password='$password', address='$address' WHERE idAccount=$id";
     mysqli_query($connect, $sql_update);
-    $_SESSION['customer_name'] = $name;
-    $_SESSION['email'] = $email;
+    if (mysqli_errno($connect) == 0) {
+      $_SESSION['customer_name'] = $name;
+      $_SESSION['email'] = $email;
+      echo '<script language="javascript">
+      alert("Update successfully!");
+      window.location.href="?controller=account";
+      </script>';
+    } else {
+      echo '<script language="javascript">
+      alert("Update error⚠️⚠️");
+      window.location.href="?controller=account";
+      </script>';
+    }
     include_once 'connect/closeDB.php';
-    header('Location:?controller=account');
   }
 }
 

@@ -72,10 +72,10 @@
                 </div>
             </div>
             <div class="content" style="flex-direction: column">
-                <h3><?= isset($_GET['edit']) ? "Edit Genre" : "Add Genre" ?></h3>
+                <h3 class=" <?= isset($_GET["id"]) ? "text-gradient-edit" : "" ?>"><?= isset($_GET['edit']) ? "Edit Genre" : "Add Genre" ?></h3>
                 <form method="POST" class="form-advance" action="?controller=genreAdmin&action=<?= isset($_GET['edit']) ? "edit&id=" . $_GET['id'] : "add"  ?>" autocomplete="off">
                     <div class="form-field">
-                        <input type="text" required value="<?= isset($_GET["id"]) ? $array['itemEdit']['name'] : "" ?>" class="form-input" id="product-genre" name="name" placeholder=" " />
+                        <input type="text" required value="<?= isset($_GET["id"]) ? $array['itemEdit']['name'] : "" ?>" class="form-input <?= isset($_GET["id"]) ? "input_border_garadient" : "" ?>" id="product-genre" name="name" placeholder=" " />
                         <label for="product-genre" class="form-label">Genre name</label>
                     </div>
                     <button name="sbm" class="<?= isset($_GET['edit']) ? '!bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500' : '' ?>"><?= isset($_GET['edit']) ? "Edit Genre" : "Add Genre" ?></button>

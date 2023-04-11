@@ -58,7 +58,7 @@ function update()
   $query = mysqli_query($connect, $sqlCheck);
   $result = mysqli_fetch_array($query);
   $status_old = $result['status'];
-  if ($status_old != PENDING) {
+  if ($status_old > DELIVERING || ($status_old == DELIVERING && $status == CANCELED)) {
     echo '<script language="javascript">
     alert("Update failed!!");
     window.location.href="?controller=order_history";
@@ -68,7 +68,10 @@ function update()
   $sql = "UPDATE `order` SET status = $status WHERE idOrder = $id";
   mysqli_query($connect, $sql);
   include_once 'connect/closeDB.php';
-  header("Location: ?controller=order_history");
+  echo '<script language="javascript">
+    alert("Update successfully!!");
+    window.location.href="?controller=order_history";
+    </script>';
 }
 
 switch ($action) {
