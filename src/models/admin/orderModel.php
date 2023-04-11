@@ -239,14 +239,20 @@ function changeAmount()
     return;
   }
   $id = $_GET['id'];
+  include "connect/openDB.php";
+  $sql = "SELECT * FROM products WHERE idProduct = $id";
+  $query = mysqli_query($connect, $sql);
+  $result = mysqli_fetch_array($query);
+  $amount_prod = $result['amount'];
+  include "connect/closeDB.php";
   $amount = (int)$_SESSION['order'][$id];
   $func = $_GET['func'];
   switch ($func) {
     case 'add':
-      if ($amount >= 10) {
+      if ($amount >= $amount_prod) {
         echo '<script language="javascript">
-        alert("Quantity does not exceed 10 products!!");
-        window.location.href="?controller=orderAdmin&action=add";
+        alert("Quantity does not exceed ' . $amount_prod . ' products!!");
+        window.location.href="?controller=orderAdmin&action=add#' . $id . '";
         </script>';
         return;
       }
