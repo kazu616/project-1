@@ -61,67 +61,53 @@ function add_data()
     $bill_code = generate_string('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', 10);
     include_once 'connect/openDB.php';
     $sql = "INSERT INTO `order`(createdDate, idPayment, idDelivery, idCustomer, name_customer, phone_number, address_customer, bill_code) VALUES (NOW(),'1','1','$id_customer','$name','$phone','$address','$bill_code') ";
-    mysqli_query($connect, $sql);
+    $result_order = mysqli_query($connect, $sql);
     $sql_get_idOrder = "SELECT idOrder FROM `order` ORDER BY idOrder DESC LIMIT 1";
     $id_DB = mysqli_fetch_assoc(mysqli_query($connect, $sql_get_idOrder));
     $idOrder = $id_DB['idOrder'];
-    foreach ($_SESSION['cart'] as $product_id => $amount) {
-        foreach ($listId as $id) {
-            if ($id == $product_id) {
-                $sql_get_price = "SELECT price FROM products WHERE idProduct = '$id'";
-                $result = mysqli_query($connect, $sql_get_price);
-                if ($result) {
-                    $price_DB = mysqli_fetch_assoc($result)['price'];
+    if ($result_order) {
+        foreach ($_SESSION['cart'] as $product_id => $amount) {
+            foreach ($listId as $id) {
+                if ($id == $product_id) {
+                    $sql_get_price = "SELECT price FROM products WHERE idProduct = '$id'";
+                    $result = mysqli_fetch_assoc(mysqli_query($connect, $sql_get_price));
+                    $price_DB = $result['price'];
                     $sql_detail_order = "INSERT INTO `order_detail`(amount, sold_price, idOrder, idProduct) VALUES ('$amount','$price_DB','$idOrder','$id')";
-                    $result = mysqli_query($connect, $sql_detail_order);
-                    if ($result) {
-                        $rows_affected = mysqli_affected_rows($connect);
-                        if ($rows_affected > 0) {
-                            echo "1";
-                        }
-                        unset($_SESSION['cart'][$product_id]);
-                        $sql_delete_amount = "SELECT amount FROM products WHERE idProduct = '$id'";
-                        $result = mysqli_query($connect, $sql_delete_amount);
-                        if ($result) {
-                            $amount_db = mysqli_fetch_assoc($result)['amount'];
-                            $amount_new = $amount_db - $amount;
-                            $sql_set_new = "UPDATE `products` SET amount = '$amount_new' WHERE idProduct = '$id'";
-                            $result = mysqli_query($connect, $sql_set_new);
-                            if ($result) {
-                                $rows_affected = mysqli_affected_rows($connect);
-                                if ($rows_affected > 0) {
-                                    include_once 'connect/closeDB.php';
-                                    echo '<script language="javascript">';
-                                    echo 'alert("Successful ordering!");';
-                                    echo 'window.location.href="?controller=order_history&status=1";';
-                                    echo '</script>';
-                                } else {
-                                    include_once 'connect/closeDB.php';
-                                    echo '<script language="javascript">';
-                                    echo 'alert("Successful ordering!");';
-                                    echo 'window.location.href="?controller=order_history&status=1";';
-                                    echo '</script>';
-                                }
-                            } else {
-                                include_once 'connect/closeDB.php';
-                                echo "Error executing query 4: " . mysqli_error($connect);
-                            }
-                        } else {
-                            include_once 'connect/closeDB.php';
-                            echo "Error executing query 3: " . mysqli_error($connect);
-                        }
+                    $result_add_order_detail = mysqli_query($connect, $sql_detail_order);
+                    unset($_SESSION['cart'][$product_id]);
+                    $sql_delete_amount = "SELECT amount FROM products WHERE idProduct = '$id'";
+                    $amount_db = mysqli_fetch_assoc(mysqli_query($connect, $sql_delete_amount));
+                    $amount_new = $amount_db['amount'] - $amount;
+                    $sql_set_new = "UPDATE `products` SET amount = '$amount_new' WHERE idProduct = '$id'";
+                    $result_amount = mysqli_query($connect, $sql_set_new);
+                    if ($result_amount == true && $result_add_order_detail == true) {
+                        $check = true;
                     } else {
-                        include_once 'connect/closeDB.php';
-                        echo "Error executing query 2: " . mysqli_error($connect);
+                        $check = false;
                     }
-                } else {
-                    include_once 'connect/closeDB.php';
-                    echo "Error executing query 1: " . mysqli_error($connect);
                 }
             }
         }
+        if ($check) {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Successful ordering!");';
+            echo 'window.location.href="?controller=order_history&status=1";';
+            echo '</script>';
+        } else {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Error ordering!");';
+            echo 'window.location.href="?controller=cart";';
+            echo '</script>';
+        }
+    } else {
+        include_once 'connect/closeDB.php';
+        echo '<script language="javascript">';
+        echo 'alert("Error ordering!");';
+        echo 'window.location.href="?controller=cart";';
+        echo '</script>';
     }
-    include_once 'connect/closeDB.php';
 }
 function order_detail()
 {
@@ -137,7 +123,6 @@ function order_detail()
     $infor = mysqli_fetch_assoc(mysqli_query($connect, $sql));
     $data_DB = mysqli_fetch_all(mysqli_query($connect, $sql), MYSQLI_ASSOC);
     include_once 'connect/closeDB.php';
-
     $data = array();
     $data['DB'] = $data_DB;
     $data['info'] = $infor;

@@ -21,7 +21,7 @@
             <div class="flex uppercase gap-x-5">
                 <div class="flex gap-x-2 pr-5 border-r border-[#888888] uppercase">
                     <p class="text-lg font-medium">bill of lading code:</p>
-                    <span class="text-red-500 text-lg">79087987987987</span>
+                    <span class="text-red-500 text-lg"><?= $data['info']['bill_code'] ?></span>
                 </div>
                 <div class="flex gap-x-2">
                     <p>Status:
