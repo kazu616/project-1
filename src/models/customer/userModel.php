@@ -3,14 +3,15 @@ function loginCustomer()
 {
     $email = $_POST['email_login'];
     $password = $_POST['password_login'];
-
+    $trimed_email = trim($email);
+    $trimed_password = trim($password);
     // Open database connection
     include_once 'connect/openDB.php';
 
     // Prepare and execute SQL query
     $sql = "SELECT * FROM accounts WHERE email = ? AND password = ? AND idRole = 2";
     $stmt = mysqli_prepare($connect, $sql);
-    mysqli_stmt_bind_param($stmt, "ss", $email, $password);
+    mysqli_stmt_bind_param($stmt, "ss", $trimed_email, $trimed_password);
     mysqli_stmt_execute($stmt);
     // Retrieve result set as associative array
     $result = mysqli_stmt_get_result($stmt);
@@ -42,11 +43,16 @@ function signUp()
     $phone = $_POST['phoneNumber'];
     $password = $_POST['password_signup'];
     include_once 'connect/openDB.php';
+    $trimed_email = trim($email);
+    $trimed_password = trim($password);
+    $trimed_phone = trim($phone);
+
     $sql_check = "SELECT * FROM accounts WHERE email = ?";
     $stmt = mysqli_prepare($connect, $sql_check);
-    mysqli_stmt_bind_param($stmt, "s", trim($email));
+    mysqli_stmt_bind_param($stmt, "s", $trimed_email);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
+
     if (mysqli_num_rows($result) > 0) {
         echo '<script language="javascript">';
         echo 'alert("Duplicate email");';
@@ -54,12 +60,22 @@ function signUp()
         echo '</script>';
     } else {
         $stmt = mysqli_prepare($connect, "INSERT INTO accounts (phoneNumber, password, email) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, "iss", $phone, trim($password), trim($email));
-        mysqli_stmt_execute($stmt);
-        include_once 'connect/closeDB.php';
-        header('Location:index.php?controller=user&action=login');
+        mysqli_stmt_bind_param($stmt, "iss", $trimed_phone, $trimed_password, $trimed_email);
+        $result = mysqli_stmt_execute($stmt);
+        if ($result) {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Sign up  successfull");';
+            echo 'window.location.href="?controller=user&action=signup";';
+            echo '</script>';
+        } else {
+            include_once 'connect/closeDB.php';
+            echo '<script language="javascript">';
+            echo 'alert("Sign up  error");';
+            echo 'window.location.href="?controller=user&action=signup";';
+            echo '</script>';
+        }
     }
-    include_once 'connect/closeDB.php';
 }
 switch ($action) {
     case 'loginAccess': {

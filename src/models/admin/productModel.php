@@ -154,23 +154,29 @@ function edit()
         echo 'window.location.href="?controller=productAdmin&action=clone_data_edit&id=' . $id . '";';
         echo '</script>';
     } else {
-        // Product name doesn't exist, proceed with update
-        $sql_update = "UPDATE products SET name = ?, img = ?, amount = ?, price = ?, idAuthor = ?, idGenre = ?, issuingDate = ?, description = ? WHERE idProduct = ?";
-        $stmt = mysqli_prepare($connect, $sql_update);
-        mysqli_stmt_bind_param($stmt, "ssddiissi", $trimed_name, $image_name, $amount, $price, $author, $genre, $issuingDate, $description, $id);
-        $result = mysqli_stmt_execute($stmt);
-        if ($result) {
-            echo '<script language="javascript">';
-            echo 'alert("Edit successful");';
-            echo 'window.location.href="?controller=productAdmin";';
-            echo '</script>';
+        if ($price >= 0 && $amount >= 0) {
+            $sql_update = "UPDATE products SET name = ?, img = ?, amount = ?, price = ?, idAuthor = ?, idGenre = ?, issuingDate = ?, description = ? WHERE idProduct = ?";
+            $stmt = mysqli_prepare($connect, $sql_update);
+            mysqli_stmt_bind_param($stmt, "ssddiissi", $trimed_name, $image_name, $amount, $price, $author, $genre, $issuingDate, $description, $id);
+            $result = mysqli_stmt_execute($stmt);
+            if ($result) {
+                echo '<script language="javascript">';
+                echo 'alert("Edit successful");';
+                echo 'window.location.href="?controller=productAdmin";';
+                echo '</script>';
+            } else {
+                echo '<script language="javascript">';
+                echo 'alert("Error edit");';
+                echo 'window.location.href="?controller=productAdmin&action=clone_data_edit&id=' . $id . '";';
+                echo '</script>';
+            }
+            include_once 'connect/closeDB.php';
         } else {
             echo '<script language="javascript">';
-            echo 'alert("Error edit");';
+            echo 'alert("Price and amount must be non-negative!");';
             echo 'window.location.href="?controller=productAdmin&action=clone_data_edit&id=' . $id . '";';
             echo '</script>';
         }
-        include_once 'connect/closeDB.php';
     }
 }
 
