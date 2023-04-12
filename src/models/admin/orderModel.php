@@ -278,6 +278,35 @@ function changeAmount()
   header("Location: ?controller=orderAdmin&action=add");
 }
 
+function func_order_detail()
+{
+  if (!isset($_GET['id'])) return;
+  $id = $_GET['id'];
+  $array = [];
+  $data = [];
+  $total_price = 0;
+  include "connect/openDB.php";
+  $sql = "SELECT * FROM `order` WHERE idOrder = $id";
+  $query = mysqli_query($connect, $sql);
+  $order = mysqli_fetch_array($query);
+  $array['order'] = $order;
+  $sql = "SELECT *, order_detail.amount as amount_order FROM order_detail INNER JOIN products ON order_detail.idProduct = products.idProduct WHERE idOrder = $id";
+  $query = mysqli_query($connect, $sql);
+  foreach ($query as $each) {
+    $idProduct = $each['idProduct'];
+    $sql = "SELECT *, products.name as name_prod, authors.name as name_author, products.img as prod_image FROM products INNER JOIN authors on products.idAuthor = authors.idAuthor WHERE idProduct = $idProduct";
+    $query = mysqli_query($connect, $sql);
+    $item = mysqli_fetch_array($query);
+    $item['amount_order'] = $each['amount_order'];
+    $total_price += $each['sold_price'] * $each['amount_order'];
+    $data[] = $item;
+  }
+  include "connect/openDB.php";
+  $array['data'] = $data;
+  $array['total_price'] = $total_price;
+  return $array;
+}
+
 switch ($action) {
   case '': {
       $result = index();
@@ -322,6 +351,10 @@ switch ($action) {
     break;
   case 'changeAmount': {
       changeAmount();
+    }
+    break;
+  case 'detail': {
+      $array = func_order_detail();
     }
     break;
 }

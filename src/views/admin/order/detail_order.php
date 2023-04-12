@@ -17,23 +17,44 @@
     <?php include_once "views/layouts/header_admin.php" ?>
     <div class="content" style="flex-direction: column">
       <h3 class="title-table">
-        Edit Order
+        Order Detail
       </h3>
+      <div class="flex items-center justify-between w-full border border-white py-5 px-10 rounded-[10px] text-white bg-transparent max-w-[1150px]">
+        <div>
+          <a href="?controller=orderAdmin" class="text-xl">
+            <i class="font-semibold fa-solid fa-arrow-left" size="xs"></i>
+            Back
+          </a>
+        </div>
+        <div class="flex uppercase gap-x-5">
+          <div class="flex gap-x-2 pr-5 border-r border-[#888888] uppercase">
+            <p class="text-lg font-medium">bill of lading code:</p>
+            <span class="text-lg text-red-500"><?= $array['order']['bill_code'] ?></span>
+          </div>
+          <div class="flex gap-x-2">
+            <p>Status:
+              <?php switch ($array['order']['status']) {
+                case 1:
+                  echo "<span class='text-orange-500'>Pending</span>";
+                  break;
+                case 2:
+                  echo "<span class='text-blue-500'>Delivering</span>";
+                  break;
+                case 3:
+                  echo "<span class='text-green-500'>Completed</span>";
+                  break;
+                case 4:
+                  echo "<span class='text-red-500'>Canceled</span>";
+                  break;
+              } ?>
+            </p>
+          </div>
+        </div>
+      </div>
       <form method="POST" autocomplete="off" action="?controller=orderAdmin&action=update&id=<?= $_GET['id'] ?>">
-        <div class="w-full max-w-[1150px] rounded-[10px] border-white border min-h-[500px] px-10 pt-5 pb-10">
+        <div class="w-full max-w-[1150px] rounded-[10px] border-white border  min-h-[500px] px-10 pt-5 pb-10 mb-10">
           <div class="flex items-center justify-between">
             <h3 class="mb-5 text-2xl font-semibold">Delivery address:</h3>
-            <div class="form-field">
-              <select name="status" id="status" required>
-                <option value="">Select status</option>
-                <?php if ($array['order']['status'] != DELIVERING) { ?>
-                  <option value="<?= PENDING ?>" <?= $array['order']['status'] == PENDING ? 'selected' : '' ?>>Pending</option>"
-                <?php }  ?>
-                <option value="<?= DELIVERING ?>" <?= $array['order']['status'] == DELIVERING ? 'selected' : '' ?>>Delivering</option>
-                <option value="<?= COMPLETED ?>" <?= $array['order']['status'] == COMPLETED ? 'selected' : '' ?>>Completed</option>
-                <option value="<?= CANCELED ?>" <?= $array['order']['status'] == CANCELED ? 'selected' : '' ?>>Canceled</option>
-              </select>
-            </div>
           </div>
           <div class="flex flex-col gap-2 mb-10">
             <div class="flex items-center !w-[270px] justify-between gap-x-2">
@@ -98,9 +119,6 @@
             </div>
           </div>
         </div>
-        <button name="sbm" class="px-5 py-[10px] outline-none text-white rounded-[5px] bg-[#6a5af9] border-0 cursor-pointer min-w-[200px] mt-8 mb-8" type="submit">
-          Save
-        </button>
         <!-- <?= isset($error) ? $error : "" ?> -->
       </form>
     </div>

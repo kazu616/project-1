@@ -46,16 +46,25 @@
         </thead>
         <tbody>
           <?php foreach ($result['data'] as $each) { ?>
-            <tr>
-              <td><?= $each['idOrder'] ?></td>
-              <td><?= $each['bill_code'] ?></td>
-              <td><?= $each['createdDate'] ?></td>
-              <td><?= $each['status'] == PENDING ? '<span class="px-5 py-3 text-white rounded-[5px] bg-orange-400">PENDING</span>' : ($each['status'] == DELIVERING ? '<span class="px-5 py-3 text-white bg-blue-400 rounded-[5px]">DELIVERING</span>' : ($each['status'] == COMPLETED ? '<span class="px-5 py-3 text-white bg-green-400 rounded-[5px]">COMPLETED</span>' : '<span class="px-5 py-3 rounded-[5px] text-white bg-red-400">CANCELED</span>')) ?>
-              </td>
-              <td><?= $result[$each['idOrder']] ?></td>
+            <tr id="item_order">
               <td>
-                <button class="edit-btn <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled' : '' ?>">
-                  <a href="?controller=orderAdmin&action=edit&id=<?= $each['idOrder'] ?>" class="fill-white <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled"' : '' ?>" title="Edit Product">
+                <?= $each['idOrder'] ?>
+              </td>
+              <td>
+                <?= $each['bill_code'] ?>
+              </td>
+              <td>
+                <?= $each['createdDate'] ?>
+              </td>
+              <td>
+                <?= $each['status'] == PENDING ? '<span class="px-5 py-3 text-white rounded-[5px] bg-orange-400">PENDING</span>' : ($each['status'] == DELIVERING ? '<span class="px-5 py-3 text-white bg-blue-400 rounded-[5px]">DELIVERING</span>' : ($each['status'] == COMPLETED ? '<span class="px-5 py-3 text-white bg-green-400 rounded-[5px]">COMPLETED</span>' : '<span class="px-5 py-3 rounded-[5px] text-white bg-red-400">CANCELED</span>')) ?>
+              </td>
+              <td>
+                <?= $result[$each['idOrder']] ?>
+              </td>
+              <td>
+                <button class="edit-btn !px-0 !py-0 <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled' : '' ?>">
+                  <a href="?controller=orderAdmin&action=edit&id=<?= $each['idOrder'] ?>" class="fill-white inline-block py-[10px] px-5 <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled"' : '' ?>" title="Edit Product">
                     <box-icon name="edit"></box-icon>
                   </a>
                 </button>

@@ -16,6 +16,16 @@ let pre_url;
 const search_bill_code = document.querySelector("#search_bill_code");
 const input_search_bill = document.querySelector(".search-header");
 const minus_amount_orders = document.querySelectorAll("#minus_amount_order");
+const item_orders = document.querySelectorAll("#item_order");
+
+if (item_orders) {
+  item_orders.forEach((item_order) => {
+    item_order.addEventListener("click", (e) => {
+      const value = Number(e.currentTarget.querySelectorAll("td")[0].textContent.trim());
+      window.location = `?controller=orderAdmin&action=detail&id=${value}`;
+    });
+  });
+}
 
 if (search_bill_code && input_search_bill) {
   search_bill_code.addEventListener("click", () => {
