@@ -54,6 +54,13 @@ switch ($controller) {
       header('Location:index.php?controller=auth_admin');
     }
     break;
+  case 'seo':
+    if (isset($_SESSION['email']) && $_SESSION['customer_role'] == 1 && chechAuth()) {
+      include_once 'controllers/admin/seo.controller.php';
+    } else {
+      header('Location:index.php?controller=auth_admin');
+    }
+    break;
   case 'user':
     include_once 'controllers/customer/user.controller.php';
     break;
