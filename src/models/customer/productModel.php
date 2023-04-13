@@ -211,6 +211,9 @@ function single_product()
   include_once 'connect/openDB.php';
   $sql = "SELECT products.*, authors.name AS nameAuthor, genres.name AS nameGenre FROM ((products INNER JOIN authors ON products.idAuthor = authors.idAuthor) INNER JOIN genres ON products.idGenre = genres.idGenre) WHERE idProduct = $id ";
   $data =  mysqli_query($connect, $sql);
+  if ($data->num_rows == 0) {
+    header('Location:?controller=error_404');
+  }
   include_once 'connect/closeDB.php';
   return $data;
 }

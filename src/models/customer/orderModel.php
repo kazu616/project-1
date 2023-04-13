@@ -120,8 +120,12 @@ function order_detail()
     JOIN authors ON products.idAuthor = authors.idAuthor
     WHERE `order`.idOrder = $id_order
     ";
-    $infor = mysqli_fetch_assoc(mysqli_query($connect, $sql));
-    $data_DB = mysqli_fetch_all(mysqli_query($connect, $sql), MYSQLI_ASSOC);
+    $order = mysqli_query($connect, $sql);
+    if ($order->num_rows == 0) {
+        header('Location:?controller=error_404');
+    }
+    $infor = mysqli_fetch_assoc($order);
+    $data_DB = mysqli_fetch_all($order, MYSQLI_ASSOC);
     include_once 'connect/closeDB.php';
     $data = array();
     $data['DB'] = $data_DB;

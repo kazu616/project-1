@@ -97,6 +97,9 @@ switch ($controller) {
       }
     }
     break;
+  case 'error_404':
+    include_once '404.php';
+    break;
   default:
     include_once 'controllers/customer/customer.controller.php';
     break;
