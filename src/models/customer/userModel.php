@@ -66,7 +66,7 @@ function signUp()
             include_once 'connect/closeDB.php';
             echo '<script language="javascript">';
             echo 'alert("Sign up  successfull");';
-            echo 'window.location.href="?controller=user&action=signup";';
+            echo 'window.location.href="?controller=user&action=login";';
             echo '</script>';
         } else {
             include_once 'connect/closeDB.php';
