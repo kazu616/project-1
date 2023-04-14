@@ -64,7 +64,7 @@
               </td>
               <td>
                 <button class="edit-btn !px-0 !py-0 <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled' : '' ?>">
-                  <a href="?controller=orderAdmin&action=edit&id=<?= $each['idOrder'] ?>" class="fill-white inline-block py-[10px] px-5 <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled"' : '' ?>" title="Edit Product">
+                  <a href="?controller=orderAdmin&action=edit&id=<?= $each['idOrder'] ?>" class="fill-white inline-block py-[10px] px-5 <?= ($each['status'] == CANCELED || $each['status'] == COMPLETED) ? 'disabled' : '' ?>" title="Edit Product">
                     <box-icon name="edit"></box-icon>
                   </a>
                 </button>
