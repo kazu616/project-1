@@ -125,7 +125,7 @@ function order_detail()
         header('Location:?controller=error_404');
     }
     $infor = mysqli_fetch_assoc($order);
-    $data_DB = mysqli_fetch_all($order, MYSQLI_ASSOC);
+    $data_DB = mysqli_fetch_all(mysqli_query($connect, $sql), MYSQLI_ASSOC);
     include_once 'connect/closeDB.php';
     $data = array();
     $data['DB'] = $data_DB;
