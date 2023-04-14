@@ -71,7 +71,7 @@ function bestSellingProduct()
   JOIN authors ON products.idAuthor = authors.idAuthor
   GROUP BY order_detail.idProduct
   ORDER BY total_amount DESC
-  LIMIT 1;";
+  LIMIT 1";
   $query = mysqli_query($connect, $sql);
   if ($query && mysqli_num_rows($query) > 0) {
     $result = mysqli_fetch_array($query);
