@@ -27,19 +27,20 @@ function indexCart()
 
 function add_to_cart()
 {
-    function header_mode($product_id)
+    function header_mode($product_id, $page)
     {
         if ($_GET['mode'] == 1) {
-            header('Location: index.php?controller=productCustomer&added_to_cart&action=single_product&id=' . $product_id);
+            header('Location: index.php?controller=productCustomer&added_to_cart&action=single_product&page=' . $page . '&id=' . $product_id);
         } elseif ($_GET['mode'] == 3) {
-            header('Location:index.php?controller=productCustomer&added_to_cart#' . $product_id);
+            header('Location:index.php?controller=productCustomer&added_to_cart&page=' . $page . '#' . $product_id);
         } elseif ($_GET['mode'] == 4) {
             header('Location:index.php?added_to_cart');
         } else {
-            header('Location:index.php?controller=cart&added_to_cart#' . $product_id);
+            header('Location:index.php?controller=cart&added_to_cart&page=' . $page . '#' . $product_id);
         }
     }
     $product_id = $_GET['id'];
+    isset($_GET['page']) ? $page = $_GET['page'] : $page = 1;
     isset($_GET['amount']) ? $amount = $_GET['amount'] : $amount = 1;
     include_once 'connect/openDB.php';
     $sql = "SELECT amount FROM products WHERE idProduct = $product_id";
@@ -49,17 +50,17 @@ function add_to_cart()
         if (isset($_SESSION['cart'][$product_id])) {
             if ($_SESSION['cart'][$product_id] < $amount_DB['amount']) {
                 $_SESSION['cart'][$product_id] = $_SESSION['cart'][$product_id] + $amount;
-                header_mode($product_id);
+                header_mode($product_id, $page);
             } else {
                 if ($_GET['mode'] == 3) {
                     echo '<script language="javascript">';
                     echo 'alert("Product out of stock");';
-                    echo 'window.location.href="?controller=productCustomer#' . $product_id . '"';
+                    echo 'window.location.href="?controller=productCustomer&page=' . $page . '#' . $product_id . '"';
                     echo '</script>';
                 } elseif ($_GET['mode'] == 1) {
                     echo '<script language="javascript">';
                     echo 'alert("Product out of stock");';
-                    echo 'window.location.href="?controller=productCustomer&action=single_product&id=' . $product_id . '"';
+                    echo 'window.location.href="?controller=productCustomer&action=single_product&page=' . $page . '&id=' . $product_id . '"';
                     echo '</script>';
                 } elseif ($_GET['mode'] == 4) {
                     echo '<script language="javascript">';
@@ -69,18 +70,18 @@ function add_to_cart()
                 } else {
                     echo '<script language="javascript">';
                     echo 'alert("Product out of stock");';
-                    echo 'window.location.href="?controller=cart&added_to_cart#' . $product_id . '"';
+                    echo 'window.location.href="?controller=cart&added_to_cart&page=' . $page . '#' . $product_id . '"';
                     echo '</script>';
                 }
             }
         } else {
             $_SESSION['cart'][$product_id] = $amount;
-            header_mode($product_id);
+            header_mode($product_id, $page);
         }
     } else {
         $_SESSION['cart'] = array();
         $_SESSION['cart'][$product_id] = $amount;
-        header_mode($product_id);
+        header_mode($product_id, $page);
     }
 }
 function change_amount()

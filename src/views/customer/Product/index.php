@@ -136,7 +136,7 @@
                                 <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
                                     $<?= $product['price'] ?></p>
                                 <?php if ($product['amount'] > 0) {
-                                    echo '<a id="link_add" href="?controller=cart&action=add_to_cart&id=' . $product['idProduct'] . '&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add To Cart <i class="fa-solid fa-cart-shopping"></i></a>';
+                                    echo '<a id="link_add" href="?controller=cart&action=add_to_cart&page=' . $_GET['page'] . '&id=' . $product['idProduct'] . '&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add To Cart <i class="fa-solid fa-cart-shopping"></i></a>';
                                 } else echo '<p class="text-gray-600 font-semibold pt-1 ">Out of stock</p>'; ?>
                             </div>
                         </div>
