@@ -56,7 +56,7 @@
                     </select>
                 </div>
                 <div class="form-field">
-                    <textarea type="text" required class="form-input" style="height: 150px;" name="description" placeholder=" "></textarea>
+                    <textarea type="text" required class="!pt-4 form-input" style="height: 150px;" name="description" placeholder=" "></textarea>
                     <label class="form-label">Description</label>
                 </div>
                 <div></div>
