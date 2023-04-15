@@ -8,7 +8,7 @@ function indexData()
     if ($_GET['mode'] == 0 && empty($_GET['idG'])) {
       include_once 'connect/openDB.php';
       $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
-      $products_number = 16;
+      $products_number = 1;
       $total_page = ceil($total_product / $products_number);
       $page = $_GET['page'];
       $offset = ($page - 1) * $products_number;
