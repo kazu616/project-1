@@ -62,7 +62,6 @@
 
     </div>
     <div class="mt-10"></div>
-    <?php include 'views/layouts/footer.php' ?>
     <?php include 'views/layouts/footer_customer.php' ?>
     <script src="js/jquery.js"></script>
     <script src="js/test.js"></script>

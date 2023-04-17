@@ -7,7 +7,7 @@ function index()
   isset($_GET['page']) ? $_GET['page'] : $_GET['page'] = 1;
   $id = $_SESSION['customer_id'];
   include_once 'connect/openDB.php';
-  $total_order = mysqli_query($connect, "SELECT * FROM `order`")->num_rows;
+  $total_order = mysqli_query($connect, "SELECT * FROM `order` WHERE idCustomer = $id")->num_rows;
   $order_number = 8;
   $total_page = ceil($total_order / $order_number);
   $page = $_GET['page'];
@@ -17,7 +17,7 @@ function index()
   // phân trang khi có status
   if (isset($_GET['status'])) {
     $status = $_GET['status'];
-    $total_order = mysqli_query($connect, "SELECT * FROM `order` WHERE status = $status")->num_rows;
+    $total_order = mysqli_query($connect, "SELECT * FROM `order` WHERE status = $status AND idCustomer = $id")->num_rows;
     $order_number = 6;
     $page = $_GET['page'];
     $offset = ($page - 1) * $order_number;
@@ -36,7 +36,7 @@ function index()
     $sqlOrderDetail = "SELECT *,products.name as productName, products.img as prod_image, authors.name as authorName, order_detail.amount as amount_order FROM order_detail INNER JOIN products ON order_detail.idProduct = products.idProduct INNER JOIN authors ON authors.idAuthor = products.idAuthor WHERE idOrder = $idOrder";
     $query = mysqli_query($connect, $sqlOrderDetail);
     foreach ($query as $item_order) {
-      $total_price += ((int)$item_order['sold_price'] * (int)$item_order['amount_order']);
+      $total_price += ((float)$item_order['sold_price'] * (float)$item_order['amount_order']);
     }
     $order['data'] = $query;
     $order['order'] = $each;

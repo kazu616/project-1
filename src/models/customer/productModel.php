@@ -8,7 +8,7 @@ function indexData()
     if ($_GET['mode'] == 0 && empty($_GET['idG'])) {
       include_once 'connect/openDB.php';
       $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
-      $products_number = 1;
+      $products_number = 16;
       $total_page = ceil($total_product / $products_number);
       $page = $_GET['page'];
       $offset = ($page - 1) * $products_number;
@@ -141,7 +141,11 @@ function indexData()
       return $data;
     }
     if ($_GET['mode'] == "search" && empty($_GET['idG'])) {
-      $search = $_POST['search'];
+      if (isset($_POST['search'])) {
+        $search = $_POST['search'];
+      } else if (isset($_GET['key'])) {
+        $search = $_GET['key'];
+      }
       include_once 'connect/openDB.php';
       $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
       $products_number = 16;
@@ -161,7 +165,7 @@ function indexData()
       $data['search'] = $search;
       return $data;
     }
-    if ($_GET['mode'] = 'search_desc') {
+    if ($_GET['mode'] == 'search_desc') {
       $search = $_GET['key'];
       include_once 'connect/openDB.php';
       $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;
@@ -182,7 +186,7 @@ function indexData()
       $data['search'] = $search;
       return $data;
     }
-    if ($_GET['mode'] = 'search_asc') {
+    if ($_GET['mode'] == 'search_asc') {
       $search = $_GET['key'];
       include_once 'connect/openDB.php';
       $total_product = mysqli_query($connect, "SELECT * FROM products")->num_rows;

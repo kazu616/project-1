@@ -124,10 +124,15 @@ function order_detail()
     if ($order->num_rows == 0) {
         header('Location:?controller=error_404');
     }
-    $infor = mysqli_fetch_assoc($order);
+    $total_price = 0;
+    while ($row = mysqli_fetch_assoc($order)) {
+        $total_price += $row['sold_price'] * $row['total_amount'];
+    }
+    $infor = mysqli_fetch_assoc(mysqli_query($connect, $sql));
     $data_DB = mysqli_fetch_all(mysqli_query($connect, $sql), MYSQLI_ASSOC);
     include_once 'connect/closeDB.php';
     $data = array();
+    $data['total_price'] = $total_price;
     $data['DB'] = $data_DB;
     $data['info'] = $infor;
     return $data;

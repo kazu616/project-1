@@ -16,19 +16,33 @@ function checkLogin()
 }
 
 switch ($action) {
-  case '': {
+  case '':
+    if (checkLogin()) {
+      header('Location:index.php?controller=productCustomer');
+    } else {
       include_once 'views/customer/login.php';
     }
     break;
-  case 'login': {
+  case 'login':
+    if (checkLogin()) {
+      header('Location:index.php?controller=productCustomer');
+    } else {
       include_once 'views/customer/login.php';
     }
+
     break;
-  case 'signup': {
+  case 'signup':
+    if (checkLogin()) {
+      header('Location:index.php?controller=productCustomer');
+    } else {
       include_once 'views/customer/Signup.php';
     }
+
     break;
-  case 'loginAccess': {
+  case 'loginAccess':
+    if (checkLogin()) {
+      header('Location:index.php?controller=productCustomer');
+    } else {
       include_once 'models/customer/userModel.php';
       if ($test == 2) {
         echo '<script language="javascript">';
@@ -38,14 +52,23 @@ switch ($action) {
       } elseif ($test == 1) {
         header('Location:index.php?controller=productCustomer');
       }
-      break;
     }
-  case 'signupAccess': {
+
+    break;
+  case 'signupAccess':
+    if (checkLogin()) {
+      header('Location:index.php?controller=productCustomer');
+    } else {
       include_once 'models/customer/userModel.php';
     }
+
     break;
   case 'logout':
-    include_once 'models/customer/userModel.php';
-    header('Location:index.php?controller=user&action=signup');
+    if (checkLogin()) {
+      include_once 'models/customer/userModel.php';
+      header('Location:index.php?controller=user&action=login');
+    } else {
+      header('Location:index.php?controller=user');
+    }
     break;
 }

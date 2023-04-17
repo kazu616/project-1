@@ -50,30 +50,31 @@
             <div class="flex flex-col gap-2 mb-10">
                 <span class="text-lg text-black uppercase"><?= "Name:  " . $data['info']['name_customer'] ?></span>
                 <span class="text-lg text-[#968E8E] uppercase"><?= "Phone:  " . $data['info']['phone_number']  ?></span>
-                <span class="text-lg uppercase text-[#968e8e]"><?= "Address:  " . $data['info']['address_customer']  ?></span>
+                <span
+                    class="text-lg uppercase text-[#968e8e]"><?= "Address:  " . $data['info']['address_customer']  ?></span>
             </div>
             <?php foreach ($data['DB'] as $value) { ?>
-                <div class="border-b border-[#A8A5A5] flex justify-between items-center mb-5 relative">
-                    <div class="flex gap-x-5">
-                        <div class=" w-[148px] max-h-[208px]">
-                            <img src="imgs/<?= $value['img'] ?>" class="object-cover w-full h-full" alt="">
-                        </div>
-                        <div class="pt-10 text-center">
-                            <h3 class="text-xl uppercase"><?= $value['name'] ?></h3>
-                            <p class="text-sm text-[#888888] "><?= $value['nameAuthor'] ?></p>
-                        </div>
+            <div class="border-b border-[#A8A5A5] flex justify-between items-center mb-5 relative">
+                <div class="flex gap-x-5">
+                    <div class=" w-[148px] max-h-[208px]">
+                        <img src="imgs/<?= $value['img'] ?>" class="object-cover w-full h-full" alt="">
                     </div>
-                    <div class="flex flex-col pb-1 mr-10 text-lg text-left text-black uppercase gap-y-1 font-extralight">
-                        <div class="flex items-center justify-between">
-                            <p>Amount:</p>
-                            <span class="text-xl font-secondary text-[#888888]"><?= $value['total_amount'] ?></span>
-                        </div>
-                        <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
-                            <p>Price:</p>
-                            <span class="text-2xl text-red-700 font-secondary"><?= "$ " . $value['sold_price'] ?></span>
-                        </div>
+                    <div class="pt-10 text-center">
+                        <h3 class="text-xl uppercase"><?= $value['name'] ?></h3>
+                        <p class="text-sm text-[#888888] "><?= $value['nameAuthor'] ?></p>
                     </div>
                 </div>
+                <div class="flex flex-col pb-1 mr-10 text-lg text-left text-black uppercase gap-y-1 font-extralight">
+                    <div class="flex items-center justify-between">
+                        <p>Amount:</p>
+                        <span class="text-xl font-secondary text-[#888888]"><?= $value['total_amount'] ?></span>
+                    </div>
+                    <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
+                        <p>Price:</p>
+                        <span class="text-2xl text-red-700 font-secondary"><?= "$ " . $value['sold_price'] ?></span>
+                    </div>
+                </div>
+            </div>
             <?php } ?>
             <div class="flex justify-between mt-10">
                 <span class="text-lg capitalize text-black/60 ">Created Day:
@@ -82,7 +83,7 @@
                 <div class="flex flex-col uppercase gap-y-3 min-w-[250px] text-lg">
                     <div class="flex justify-between">
                         <p class="font-extralight">Total:</p>
-                        <span class="text-2xl text-red-700 font-secondary"><?= "$ " . $value["sold_price"] * $value['total_amount'] ?></span>
+                        <span class="text-2xl text-red-700 font-secondary"><?= "$ " . $data['total_price'] ?></span>
                     </div>
                     <div class="flex justify-between">
                         <p class="font-extralight">Payment:</p>
@@ -94,7 +95,7 @@
                     </div>
                     <div class="flex justify-between">
                         <p class="font-extralight">Total price:</p>
-                        <span class="text-2xl text-red-700 font-secondary"><?= "$ " . $value["sold_price"] * $value['total_amount'] ?></span>
+                        <span class="text-2xl text-red-700 font-secondary"><?= "$ " . $data['total_price'] ?></span>
                     </div>
                 </div>
             </div>

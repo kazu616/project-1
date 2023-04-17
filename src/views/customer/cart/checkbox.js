@@ -16,12 +16,10 @@ window.onload = function () {
             });
             // Log the checkedId_product array to console
             console.log(checkedId_product);
-
             // Calculate the total value of the checked boxes
-
             let totalValue = 0;
             Array.from(checkedBoxes).forEach(function (checkedBox) {
-                totalValue += parseInt(checkedBox.value);
+                totalValue += parseFloat(checkedBox.value);
             });
 
             // Show the total value of the checked boxes in a result div
@@ -67,7 +65,7 @@ window.onload = function () {
         const checkedBoxes = document.querySelectorAll(".check:checked");
         let totalValue = 0;
         Array.from(checkedBoxes).forEach(function (checkedBox) {
-            totalValue += parseInt(checkedBox.value);
+            totalValue += parseFloat(checkedBox.value);
         });
 
         // Show the total value of all checked boxes in a result div

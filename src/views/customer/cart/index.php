@@ -26,7 +26,7 @@
                 <?php foreach ($carts['cart'] as $product_id => $value) {  ?>
                     <div id="<?= $product_id ?>" class="flex items-center item pb-5 gap-x-20 border-b border-[#a8a1a1] mt-10 mb-10">
                         <div class="inf_offline">
-                            <input type="checkbox" name="<?= $product_id ?>" value="<?= number_format($value['totalPrice'], 2, '.', ',') ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer check" />
+                            <input type="checkbox" name="<?= $product_id ?>" value="<?= $value['totalPrice'] ?>" class="z-10 w-6 h-6 bg-[#D9D9D9] cursor-pointer check" />
                         </div>
                         <a href="?controller=productCustomer&action=single_product&id=<?= $product_id ?>">
                             <div class="flex gap-x-5">

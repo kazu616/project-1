@@ -146,9 +146,14 @@
                         <div class="flex justify-between pl-4 pr-4 mt-2">
                             <p class="text-[22px] font-semibold text-left capitalize text-[#ff0202]">
                                 $<?= $product['price'] ?></p>
-                            <?php if ($product['amount'] > 0) {
-                                    echo '<a id="link_add" href="?controller=cart&action=add_to_cart&page=' . $_GET['page'] . '&id=' . $product['idProduct'] . '&mode=3" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer ">Add To Cart <i class="fa-solid fa-cart-shopping"></i></a>';
-                                } else echo '<p class="text-gray-600 font-semibold pt-1 ">Out of stock</p>'; ?>
+                            <?php
+                                if ($product['amount'] > 0) {
+                                    $link = '?controller=cart&action=add_to_cart' . (isset($_GET['mode']) && $_GET['mode'] == "search" ? "&key=" . $data['search'] : '') . (isset($_GET['idG']) && !empty($_GET['idG']) ? "&idG=" . $_GET['idG'] : '') . '&mode=' . $_GET['mode'] . '&page=' . $_GET['page'] . '&id=' . $product['idProduct'] . '&modeA=3';
+                                    echo '<a id="link_add" href="' . $link . '" class="add_to_cart_ShopPage hover:text-[#ffae00] transition-all duration-300 cursor-pointer">Add To Cart <i class="fa-solid fa-cart-shopping"></i></a>';
+                                } else {
+                                    echo '<p class="text-gray-600 font-semibold pt-1">Out of stock</p>';
+                                }
+                                ?>
                         </div>
                     </div>
                 </div>

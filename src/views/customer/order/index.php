@@ -20,44 +20,40 @@
                 <div class="flex flex-col gap-2 mb-10">
                     <span class="text-lg uppercase text-black"><?= "Name:  " . $listPr['inf_customer']['name'] ?></span>
                     <input type="hidden" name="name" value="<?= $listPr['inf_customer']['name'] ?>" />
-                    <span
-                        class="text-lg text-[#968E8E] uppercase"><?= "Phone:  " . $listPr['inf_customer']['phoneNumber'] ?></span>
+                    <span class="text-lg text-[#968E8E] uppercase"><?= "Phone:  " . $listPr['inf_customer']['phoneNumber'] ?></span>
                     <input type="hidden" name="phoneNumber" value="<?= $listPr['inf_customer']['phoneNumber'] ?>" />
-                    <span
-                        class="text-lg uppercase text-[#968e8e]"><?= "Address:  " . $listPr['inf_customer']['address'] ?></span>
+                    <span class="text-lg uppercase text-[#968e8e]"><?= "Address:  " . $listPr['inf_customer']['address'] ?></span>
                     <input type="hidden" name="address" value="<?= $listPr['inf_customer']['address'] ?>" />
                 </div>
                 <?php foreach ($listPr['listPr'] as $id => $value) { ?>
-                <div class="border-b border-[#A8A5A5] flex justify-between items-center mb-5 relative">
-                    <div class="flex gap-x-5">
-                        <div class=" w-[148px] max-h-[208px]">
-                            <img src="imgs/<?= $value['img'] ?>" class="object-cover w-full h-full" alt="">
+                    <div class="border-b border-[#A8A5A5] flex justify-between items-center mb-5 relative">
+                        <div class="flex gap-x-5">
+                            <div class=" w-[148px] max-h-[208px]">
+                                <img src="imgs/<?= $value['img'] ?>" class="object-cover w-full h-full" alt="">
+                            </div>
+                            <div class="pt-10 text-center">
+                                <h3 class="text-xl uppercase"><?= $value['product_name'] ?></h3>
+                                <p class="text-sm text-[#888888] "><?= $value['author'] ?></p>
+                            </div>
                         </div>
-                        <div class="pt-10 text-center">
-                            <h3 class="text-xl uppercase"><?= $value['product_name'] ?></h3>
-                            <p class="text-sm text-[#888888] "><?= $value['author'] ?></p>
+                        <div class="flex flex-col pb-1 mr-10 gap-y-1 text-lg font-extralight text-left uppercase text-black">
+                            <div class="flex justify-between items-center">
+                                <p>Amount:</p>
+                                <span class="text-xl font-secondary text-[#888888]"><?= $value['amount'] ?></span>
+                            </div>
+                            <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
+                                <p>Price:</p>
+                                <span class="text-2xl font-secondary text-red-700"><?= "$ " . $value['price'] ?></span>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        class="flex flex-col pb-1 mr-10 gap-y-1 text-lg font-extralight text-left uppercase text-black">
-                        <div class="flex justify-between items-center">
-                            <p>Amount:</p>
-                            <span class="text-xl font-secondary text-[#888888]"><?= $value['amount'] ?></span>
-                        </div>
-                        <div class="text-[18px] uppercase w-[180px] flex justify-between items-center">
-                            <p>Price:</p>
-                            <span class="text-2xl font-secondary text-red-700"><?= "$ " . $value['price'] ?></span>
-                        </div>
-                    </div>
-                </div>
                 <?php } ?>
                 <div class="flex justify-between mt-10">
                     <span class="text-lg capitalize text-black/60 ">Created Day: <?= date('d/m/Y') ?></span>
                     <div class="flex flex-col uppercase gap-y-3 min-w-[250px] text-lg">
                         <div class="flex justify-between">
                             <p class="font-extralight">Total:</p>
-                            <span
-                                class="text-2xl text-red-700 font-secondary"><?= "$ " . $listPr['totalPrice'] ?></span>
+                            <span class="text-2xl text-red-700 font-secondary"><?= $listPr['totalPrice'] ?></span>
                         </div>
                         <div class="flex justify-between">
                             <p class="font-extralight">Payment:</p>
@@ -69,14 +65,12 @@
                         </div>
                         <div class="flex justify-between">
                             <p class="font-extralight">Total price:</p>
-                            <span
-                                class="text-2xl text-red-700 font-secondary"><?= "$ " . $listPr['totalPrice'] ?></span>
+                            <span class="text-2xl text-red-700 font-secondary"><?= $listPr['totalPrice'] ?></span>
                         </div>
                     </div>
                 </div>
         </div>
-        <input value="Order confirmation" type="submit"
-            class="p-[10px] relative left-[23rem] top-5 px-56 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105  hover:bg-[#fd6666] hover:border-white  ease-in-out hover:text-white rounded-[50px] bg-[#f5b7b7] border border-black mx-auto cursor-pointer" />
+        <input value="Order confirmation" type="submit" class="p-[10px] relative left-[23rem] top-5 px-56 transition-all duration-500 hover:shadow-lg hover:-translate-y-1 hover:scale-105  hover:bg-[#fd6666] hover:border-white  ease-in-out hover:text-white rounded-[50px] bg-[#f5b7b7] border border-black mx-auto cursor-pointer" />
         </form>
     </div>
     <?php include 'views/layouts/footer.php' ?>

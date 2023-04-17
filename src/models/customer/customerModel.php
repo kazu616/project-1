@@ -23,7 +23,7 @@ function getProducts($limit = 10)
 function getAllProducts()
 {
   include 'connect/openDB.php';
-  $sql = "SELECT * FROM products WHERE amount > 0";
+  $sql = "SELECT *, products.name as name_prod,authors.name as name_author, products.img as img_product FROM products INNER JOIN authors ON authors.idAuthor = products.idAuthor WHERE amount > 0";
   $products = mysqli_query($connect, $sql);
   include 'connect/closeDB.php';
   return $products;
@@ -31,11 +31,11 @@ function getAllProducts()
 
 function getProductByCategory()
 {
-  $sql = "SELECT * FROM products WHERE amount > 0 LIMIT 8";
+  $sql = "SELECT *, products.name as name_prod,authors.name as name_author, products.img as img_product FROM products INNER JOIN authors ON authors.idAuthor = products.idAuthor WHERE amount > 0 LIMIT 8";
   include 'connect/openDB.php';
   if (isset($_GET['genre'])) {
     $genre = $_GET['genre'];
-    $sql = "SELECT * FROM products WHERE amount > 0 AND idGenre = $genre LIMIT 8";
+    $sql = "SELECT *, products.name as name_prod,authors.name as name_author products.img as img_product FROM products INNER JOIN authors ON authors.idAuthor = products.idAuthor WHERE amount > 0 AND idGenre = $genre LIMIT 8";
   }
   $products = mysqli_query($connect, $sql);
   include 'connect/closeDB.php';

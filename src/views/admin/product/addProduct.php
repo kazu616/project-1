@@ -10,7 +10,8 @@
             <h3 class="title-table">
                 Add Product
             </h3>
-            <form method="POST" class="form-basic" autocomplete="off" enctype="multipart/form-data" action="index.php?controller=productAdmin&action=add">
+            <form method="POST" class="form-basic" autocomplete="off" enctype="multipart/form-data"
+                action="index.php?controller=productAdmin&action=add">
                 <div class="form-field">
                     <input type="text" name="name" required class="form-input" placeholder=" " />
                     <label class="form-label">Name</label>
@@ -26,6 +27,7 @@
                 <div class="form-field">
                     <input type="date" id="release_date_input" class="form-input" name="issuingDate" placeholder=" " />
                     <label class="form-label">Issuing Date</label>
+                    <span id="message" class="text-red-600 text-xs"></span>
                 </div>
                 <div class="form-field">
                     <select name="genre" required>
@@ -33,9 +35,9 @@
                         <?php
                         foreach ($array_genre_author['genres'] as $genre) {
                         ?>
-                            <option value="<?= $genre['idGenre'] ?>">
-                                <?= $genre['name'] ?>
-                            </option>
+                        <option value="<?= $genre['idGenre'] ?>">
+                            <?= $genre['name'] ?>
+                        </option>
                         <?php
                         }
                         ?>
@@ -47,16 +49,17 @@
                         <?php
                         foreach ($array_genre_author['authors'] as $author) {
                         ?>
-                            <option value="<?= $author['idAuthor'] ?>">
-                                <?= $author['name'] ?>
-                            </option>
+                        <option value="<?= $author['idAuthor'] ?>">
+                            <?= $author['name'] ?>
+                        </option>
                         <?php
                         }
                         ?>
                     </select>
                 </div>
                 <div class="form-field">
-                    <textarea type="text" required class="!pt-4 form-input" style="height: 150px;" name="description" placeholder=" "></textarea>
+                    <textarea type="text" required class="!pt-4 form-input" style="height: 150px;" name="description"
+                        placeholder=" "></textarea>
                     <label class="form-label">Description</label>
                 </div>
                 <div></div>
@@ -67,7 +70,7 @@
                 </div>
                 <div></div>
                 <button name="sbm" type="submit">
-                    Add Account
+                    Add book
                 </button>
             </form>
         </div>

@@ -33,7 +33,7 @@ add_to_cart.addEventListener("click", (event) => {
     event.preventDefault();
     if (parseInt(total_amount.textContent.trim()) > 0) {
         window.location.href =
-            "?controller=cart&action=add_to_cart&mode=1&id=" +
+            "?controller=cart&action=add_to_cart&modeA=1&id=" +
             idPr +
             "&amount=" +
             inputAmount.value;
@@ -43,7 +43,7 @@ buy_now.addEventListener("click", (event) => {
     event.preventDefault();
     if (parseInt(total_amount.textContent.trim()) > 0) {
         window.location.href =
-            "?controller=cart&action=add_to_cart&mode=2&id=" +
+            "?controller=cart&action=add_to_cart&modeA=1&id=" +
             idPr +
             "&amount=" +
             inputAmount.value;
